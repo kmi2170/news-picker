@@ -7,22 +7,28 @@ import { makeStyles, Theme } from '@material-ui/core/styles';
 import { LangType } from '../api/type_settngs';
 
 const useStyles = makeStyles((theme: Theme) => ({
-  button: { borderRadius: '15px', textTransform: 'capitalize' },
+  button: {
+    borderRadius: '15px',
+    textTransform: 'capitalize',
+    marginRight: '0.10rem',
+  },
 }));
 
 const buttons = [
   { id: 1, lang: 'en', name: 'English' },
-  { id: 2, lang: 'jp', name: 'Japanese' },
+  { id: 2, lang: 'ja', name: 'Japanese' },
 ];
 
 interface ButtonsLanguageProp {
   setLang: (lang: LangType) => void;
   defaultLang: string;
+  setIsLoading: (isLoading: boolean) => void;
 }
 
 const ButtonsLanguage: React.FC<ButtonsLanguageProp> = ({
   setLang,
   defaultLang,
+  setIsLoading,
 }) => {
   const classes = useStyles();
   const { query } = useRouter();
@@ -31,13 +37,14 @@ const ButtonsLanguage: React.FC<ButtonsLanguageProp> = ({
     buttons.map((button) => button.lang === defaultLang)
   );
 
-  const clickHandlerLang = (language: LangType) => {
-    setButtonsState(buttons.map((button) => button.lang === language));
-    setLang(language);
+  const clickHandlerLang = (lang: LangType) => {
+    setButtonsState(buttons.map((button) => button.lang === lang));
+    setLang(lang);
+    setIsLoading(true);
 
     router.push({
       pathname: '/',
-      query: { ...query, language: language },
+      query: { ...query, lang },
     });
   };
 
@@ -48,6 +55,7 @@ const ButtonsLanguage: React.FC<ButtonsLanguageProp> = ({
           key={id}
           variant={buttonsState[index] ? 'contained' : 'outlined'}
           color="secondary"
+          size="small"
           onClick={() => clickHandlerLang(lang as LangType)}
           className={classes.button}
         >

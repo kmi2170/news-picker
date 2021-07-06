@@ -9,7 +9,18 @@ const Footer = () => {
       <Grid container>
         <Grid item xs={12}>
           <Typography variant="body2">
-            Copyrihgt &copy; kmi {year}. All rights reserved.
+            Copyrihgt &copy; kmi {year}. All rights reserved. | This site is
+            powerd by{' '}
+            {
+              <a
+                href="https://newscatcherapi.com/"
+                rel="noreferrer"
+                target="_blank"
+              >
+                NewsCatcher
+              </a>
+            }
+            .
           </Typography>
         </Grid>
       </Grid>

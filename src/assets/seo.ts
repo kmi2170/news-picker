@@ -1,13 +1,13 @@
 export const config = {
-  title: 'Latest News Picker',
+  title: 'News Picker',
   author: 'Kmi, Web developer/programmer',
   // author: {
   //   name: 'Kmi',
   //   summary: 'Web developer/programmer',
   // },
   description:
-    'Latest top 10 news, by category and/or language, serch by keywards',
-  keywords: 'Latest News, React.js, Next.js, Material-UI,',
+    'Latest top 10 news, by topic and/or language, serch by keywards',
+  keywords: 'News, React.js, Next.js, Material-UI,',
   social: {
     twitter: '',
   },

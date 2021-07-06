@@ -7,7 +7,11 @@ import { makeStyles, Theme } from '@material-ui/core/styles';
 import { CategoryType } from '../api/type_settngs';
 
 const useStyles = makeStyles((theme: Theme) => ({
-  button: { borderRadius: '15px', textTransform: 'capitalize' },
+  button: {
+    borderRadius: '15px',
+    textTransform: 'capitalize',
+    marginRight: '0.10rem',
+  },
 }));
 
 const buttons = [
@@ -42,7 +46,7 @@ const ButtonsLanguage: React.FC<ButtonsLanguageProp> = ({
 
     router.push({
       pathname: '/',
-      query: { ...query, category: category },
+      query: { ...query, category },
     });
   };
 
@@ -53,6 +57,7 @@ const ButtonsLanguage: React.FC<ButtonsLanguageProp> = ({
           key={id}
           variant={buttonsState[index] ? 'contained' : 'outlined'}
           color="primary"
+          size="small"
           onClick={() => clickHandlerLang(category as CategoryType)}
           className={classes.button}
         >

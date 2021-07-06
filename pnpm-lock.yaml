@@ -2,6 +2,8 @@ dependencies:
   '@material-ui/core': 4.11.4_7a759d72fcbc11ce03c9de110c21df82
   '@material-ui/icons': 4.11.2_5e14cec25e1ceef8d08e6ab1e0c4cb05
   axios: 0.21.1
+  clsx: 1.1.1
+  moment: 2.29.1
   next: 11.0.0_2dbe935e140170ce01c975771f1adcbd
   package.json: 2.0.1
   react: 17.0.2
@@ -2337,6 +2339,10 @@ packages:
   /minimist/1.2.5:
     resolution:
       integrity: sha512-FM9nNUYrRBAELZQT3xeZQ7fmMOBg6nWNmJKTcgsJeaLstP/UODVpGsr5OhXhhXg6f+qtJ8uiZ+PUxkDWcgIXLw==
+  /moment/2.29.1:
+    dev: false
+    resolution:
+      integrity: sha512-kHmoybcPV8Sqy59DwNDY3Jefr64lK/by/da0ViFcuA4DH0vQg5Q6Ze5VimxkfQNSC+Mls/Kx53s7TjP1RhFEDQ==
   /ms/2.0.0:
     resolution:
       integrity: sha1-VgiurfwAvmwpAd9fmGF4jeDVl8g=
@@ -3866,8 +3872,10 @@ specifiers:
   '@types/node': ^15.12.4
   '@types/react': ^17.0.11
   axios: ^0.21.1
+  clsx: ^1.1.1
   eslint: 7.29.0
   eslint-config-next: 11.0.0
+  moment: ^2.29.1
   next: 11.0.0
   package.json: ^2.0.1
   react: 17.0.2

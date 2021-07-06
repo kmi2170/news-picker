@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import router, { useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import { GetServerSideProps } from 'next';
 
-import axios from 'axios';
+import axios, { AxiosRequestConfig } from 'axios';
 
 import { Grow, Container, Grid, Typography, Button } from '@material-ui/core';
 import { makeStyles, Theme } from '@material-ui/core/styles';
@@ -10,20 +10,21 @@ import { makeStyles, Theme } from '@material-ui/core/styles';
 import SEO from '../components/SEO';
 import ButtonsLanguage from '../components/ButtonsLanguage';
 import ButtonsCategory from '../components/ButtonsCategory';
+import NewsCards from '../components/NewsCards';
 import Footer from '../components/Footer';
+import Preview from '../components/Preview';
 
 import { LangType, CategoryType, IData } from '../api/type_settngs';
 
-const baseUrl = `https://newsdata.io/api/1/news`;
-
-const fetcher = async (url: string) => {
-  try {
-    const { data } = await axios(url);
-    return data;
-  } catch (error) {
-    console.error();
-  }
-};
+// const baseUrl = `https://newsdata.io/api/1/news`;
+// const fetcher = async (url: string) => {
+//   try {
+//     const { data } = await axios(url);
+//     return data;
+//   } catch (error) {
+//     console.error();
+//   }
+// };
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -33,50 +34,46 @@ const useStyles = makeStyles((theme: Theme) => ({
 
     minHeight: '100vh',
   },
+  buttonsLang: {
+    marginTop: '1.0rem',
+  },
+  buttonsCategory: {
+    marginTop: '0.5rem',
+    marginBottom: '1.0rem',
+  },
 }));
 
-const Home: React.FC<IData> = ({ data }) => {
+interface HomeProps {
+  data: any;
+  error: string | null;
+}
+// const Home: React.FC = () => {
+const Home: React.FC<HomeProps> = ({ data, error }) => {
   const classes = useStyles();
   const { query } = useRouter();
+  console.log(query);
 
-  const defaultLang = 'en';
+  const defaultLang = (query.lang as LangType) || 'en';
+
   const [lang, setLang] = useState<LangType>(defaultLang);
 
-  const defaultCategory = 'top';
+  const defaultCategory = 'news';
   const [category, setCategory] = useState<CategoryType>(defaultCategory);
 
-  const [news, setNews] = useState<IData>(undefined);
-  // const [location, setLocation] = useState<string>('');
+  const [news, setNews] = useState(undefined);
+
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     setNews(data);
+    setIsLoading(false);
   }, [data]);
 
-  // const clickHandlerLang = () => {
-  //   setLang(lang === 'en' ? 'jp' : 'en');
-
-  //   router.push(
-  //     {
-  //       pathname: '/',
-  //       query: { ...query, language: lang },
-  //     }
-  //     // undefined,
-  //     // { shallow: true }
-  //   );
-  // };
-
-  const clickHandlerCategory = (category: CategoryType) => {
-    setCategory(category);
-
-    router.push(
-      {
-        pathname: '/',
-        query: { ...query, category: category },
-      }
-      // undefined,
-      // { shallow: true }
-    );
-  };
+  if (error) {
+    <Typography variant="h5" color="error">
+      Error: Something went wrong! Please Try again later.
+    </Typography>;
+  }
 
   // console.log(data);
   return (
@@ -84,40 +81,28 @@ const Home: React.FC<IData> = ({ data }) => {
       <SEO />
       <Container>
         <Typography variant="h3" component="h1">
-          Latest News Picker
+          News Picker
         </Typography>
-        <ButtonsLanguage setLang={setLang} defaultLang={defaultLang} />
-        <ButtonsCategory
-          setCategory={setCategory}
-          defaultCategory={defaultCategory}
-        />
-        {/* top business science technology sports health entertainment 
-        <div>
-          <Button
-            variant="outlined"
-            onClick={() => clickHandlerCategory('top')}
-          >
-            top
-          </Button>
-          <Button
-            variant="outlined"
-            onClick={() => clickHandlerCategory('science')}
-          >
-            science
-          </Button>
-          <Button
-            variant="outlined"
-            onClick={() => clickHandlerCategory('sports')}
-          >
-            sports
-          </Button>
+
+        <div className={classes.buttonsLang}>
+          <ButtonsLanguage
+            setLang={setLang}
+            defaultLang={defaultLang}
+            setIsLoading={setIsLoading}
+          />
         </div>
-      */}
-        <Grid container spacing={0}>
-          <Grid item xs={12}>
-            <pre>{JSON.stringify(news, null, 4)}</pre>
-          </Grid>
-        </Grid>
+        <div className={classes.buttonsCategory}>
+          <ButtonsCategory
+            setCategory={setCategory}
+            defaultCategory={defaultCategory}
+          />
+        </div>
+
+        <NewsCards news={news} isLoading={isLoading} />
+        {/* 
+        <Preview data={news} />
+        */}
+
         <Footer />
       </Container>
     </div>
@@ -126,27 +111,50 @@ const Home: React.FC<IData> = ({ data }) => {
 
 export default Home;
 
+// const options: AxiosRequestConfig = {
+//   method: 'GET',
+//   url: 'https://free-news.p.rapidapi.com/v1/search',
+//   params: { q: 'news', lang: 'ja' },
+//   headers: {
+//     'x-rapidapi-key': process.env.x_rapidapi_key,
+//     'x-rapidapi-host': process.env.x_rapidapi_host,
+//   },
+// };
+//
+
+type ParamsType = { q: string; lang: string };
+
+const axiosOptions = (params: ParamsType) => ({
+  method: 'GET',
+  url: 'https://free-news.p.rapidapi.com/v1/search',
+  params: params,
+  headers: {
+    'x-rapidapi-key': process.env.x_rapidapi_key,
+    'x-rapidapi-host': process.env.x_rapidapi_host,
+  },
+});
+
+const fetchFunc = async (options: AxiosRequestConfig) => {
+  try {
+    const { data } = await axios.request(options);
+    return { data, error: null };
+  } catch (error) {
+    console.log(error);
+    return { data: undefined, error };
+  }
+};
+
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
-  const { language, category } = query;
+  const { q, lang } = query;
 
-  const apikey = process.env.NEWS_DATA_API_KEY;
-  const urlWithApiKey = `${baseUrl}?apikey=${apikey}`;
+  const params = { q: q || 'news', lang: lang || 'en' };
+  // const params = { q: q ? q : 'news', lang: lang ? lang : 'en' };
+  const options = axiosOptions(params as ParamsType);
 
-  const urlWithLang = `${urlWithApiKey}&language=${
-    language === 'jp' ? 'jp' : 'en'
-  }`;
+  const { data, error } = await fetchFunc(options as AxiosRequestConfig);
 
-  const urlWithQuery = category
-    ? `${urlWithLang}&category=${category}`
-    : `${urlWithLang}&category=top`;
+  // console.log(data);
+  // console.log(error);
 
-  console.log(urlWithQuery);
-
-  const data = await fetcher(urlWithQuery);
-
-  return {
-    props: {
-      data,
-    },
-  };
+  return { props: { data, error } };
 };
