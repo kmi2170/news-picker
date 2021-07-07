@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Grid,
   Typography,
@@ -63,33 +63,54 @@ const Navbar: React.FC<ButtonsLanguageProp> = ({
 }) => {
   const classes = useStyles();
 
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState<boolean>(true);
+  const [searchInput, setSearchInput] = useState<string>('');
 
   const handleExpandClick = () => {
     setIsOpen((prev) => !prev);
+  };
+
+  const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setSearchInput(e.target.value);
+
+  const handleSearchInputClear = (e) => {
+    setSearchInput('');
+    // e.target.value = '';
+  };
+
+  const handleSearchInputSubmit = () => {
+    console.log('submit');
   };
 
   return (
     <AppBar position="sticky" className={classes.appBar}>
       <Toolbar variant="dense">
         <Grid container alignItems="center">
-          <Grid item xs={12} sm={3} md={3}>
+          <Grid item xs={12} sm={4} md={3}>
             <Typography variant="h4" component="h1" className={classes.text}>
               News Picker
             </Typography>
           </Grid>
-          <Grid item xs={12} sm={9} md={7}>
+
+          <Grid item xs={12} sm={8} md={7}>
             <div className={classes.wrapperSearch}>
-              <IconButton>
-                <Search className={classes.icon} />
+              <IconButton onClick={handleSearchInputSubmit}>
+                <Search
+                  className={classes.icon}
+                  // onClick={handleSearchInputSubmit}
+                />
               </IconButton>
               <TextField
-                // id="outlined-basic"
-                variant="outlined"
-                size="small"
                 fullWidth
+                type="text"
+                variant="standard"
+                size="small"
+                value={searchInput}
+                placeholder="Search by keyword"
+                // value={handleSearchInput}
+                onChange={handleSearchInput}
               />
-              <IconButton>
+              <IconButton onClick={handleSearchInputClear}>
                 <Cancel className={classes.icon} />
               </IconButton>
             </div>
@@ -105,9 +126,11 @@ const Navbar: React.FC<ButtonsLanguageProp> = ({
               </Tooltip>
             </div>
           </Grid>
+
           <Grid item md={2} />
         </Grid>
       </Toolbar>
+
       <div hidden={!isOpen}>
         <Toolbar>
           <ButtonsLanguage
