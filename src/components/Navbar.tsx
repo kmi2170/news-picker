@@ -8,6 +8,7 @@ import {
   IconButton,
   ButtonBase,
   Tooltip,
+  InputBase,
 } from '@material-ui/core';
 import {
   ExpandMore,
@@ -18,6 +19,8 @@ import {
 } from '@material-ui/icons';
 import { grey } from '@material-ui/core/colors';
 import { makeStyles, Theme } from '@material-ui/core/styles';
+
+import Searchbar from './Searchbar';
 
 import ButtonsLanguage, {
   ButtonsLanguageProp,
@@ -33,14 +36,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontWeight: 500,
     color: 'black',
   },
-  wrapperSearch: {
-    marginTop: 5,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    border: `1px solid ${grey[400]}`,
-    borderRadius: 30,
-  },
   icon: {
     color: grey[600],
   },
@@ -48,11 +43,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  iconWrapper: {
-    '&:hover': {
-      cursor: 'pointer',
-    },
   },
 }));
 
@@ -64,22 +54,9 @@ const Navbar: React.FC<ButtonsLanguageProp> = ({
   const classes = useStyles();
 
   const [isOpen, setIsOpen] = useState<boolean>(true);
-  const [searchInput, setSearchInput] = useState<string>('');
 
   const handleExpandClick = () => {
     setIsOpen((prev) => !prev);
-  };
-
-  const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) =>
-    setSearchInput(e.target.value);
-
-  const handleSearchInputClear = (e) => {
-    setSearchInput('');
-    // e.target.value = '';
-  };
-
-  const handleSearchInputSubmit = () => {
-    console.log('submit');
   };
 
   return (
@@ -93,27 +70,8 @@ const Navbar: React.FC<ButtonsLanguageProp> = ({
           </Grid>
 
           <Grid item xs={12} sm={8} md={7}>
-            <div className={classes.wrapperSearch}>
-              <IconButton onClick={handleSearchInputSubmit}>
-                <Search
-                  className={classes.icon}
-                  // onClick={handleSearchInputSubmit}
-                />
-              </IconButton>
-              <TextField
-                fullWidth
-                type="text"
-                variant="standard"
-                size="small"
-                value={searchInput}
-                placeholder="Search by keyword"
-                // value={handleSearchInput}
-                onChange={handleSearchInput}
-              />
-              <IconButton onClick={handleSearchInputClear}>
-                <Cancel className={classes.icon} />
-              </IconButton>
-            </div>
+            <Searchbar />
+
             <div className={classes.expand}>
               <Tooltip title={isOpen ? 'Close Panel' : 'Open Panel'}>
                 <ButtonBase onClick={handleExpandClick}>
