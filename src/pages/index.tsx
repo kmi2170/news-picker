@@ -51,7 +51,6 @@ interface HomeProps {
 const Home: React.FC<HomeProps> = ({ data, error }) => {
   const classes = useStyles();
   const { query } = useRouter();
-  console.log(query);
 
   const defaultLang = (query.lang as LangType) || 'en';
 

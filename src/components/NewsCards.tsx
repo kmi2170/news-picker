@@ -9,6 +9,10 @@ import { IData, IArticle } from '../api/type_settngs';
 
 const useStyles = makeStyles((theme: Theme) => ({
   text: {},
+  loading: {
+    padding: '1rem',
+    height: '100vh',
+  },
 }));
 
 interface NewsCardsProps {
@@ -19,18 +23,24 @@ interface NewsCardsProps {
 const NewsCards: React.FC<NewsCardsProps> = ({ news, isLoading }) => {
   const classes = useStyles();
 
-  if (isLoading) <Loading />;
+  // if (isLoading) <Loading />;
 
   return (
-    <main>
-      <Grid container spacing={3}>
-        {news?.articles?.map((article: IArticle) => (
-          <Grid item key={article._id}>
-            <NewsCard article={article} />
-          </Grid>
-        ))}
-      </Grid>
-    </main>
+    <article>
+      {isLoading ? (
+        <div className={classes.loading}>
+          <Loading />
+        </div>
+      ) : (
+        <Grid container spacing={3}>
+          {news?.articles?.map((article: IArticle) => (
+            <Grid item key={article._id}>
+              <NewsCard article={article} />
+            </Grid>
+          ))}
+        </Grid>
+      )}
+    </article>
   );
 };
 
