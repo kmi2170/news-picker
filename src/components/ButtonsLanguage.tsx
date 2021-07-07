@@ -19,7 +19,7 @@ const buttons = [
   { id: 2, lang: 'ja', name: 'Japanese' },
 ];
 
-interface ButtonsLanguageProp {
+export interface ButtonsLanguageProp {
   setLang: (lang: LangType) => void;
   defaultLang: string;
   setIsLoading: (isLoading: boolean) => void;

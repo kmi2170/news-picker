@@ -8,6 +8,7 @@ import { Grow, Container, Grid, Typography, Button } from '@material-ui/core';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 
 import SEO from '../components/SEO';
+import Navbar from '../components/Navbar';
 import ButtonsLanguage from '../components/ButtonsLanguage';
 import ButtonsCategory from '../components/ButtonsCategory';
 import NewsCards from '../components/NewsCards';
@@ -34,9 +35,9 @@ const useStyles = makeStyles((theme: Theme) => ({
 
     minHeight: '100vh',
   },
-  buttonsLang: {
-    marginTop: '1.0rem',
-  },
+  // buttonsLang: {
+  //   marginTop: '1.0rem',
+  // },
   buttonsCategory: {
     marginTop: '0.5rem',
     marginBottom: '1.0rem',
@@ -78,11 +79,13 @@ const Home: React.FC<HomeProps> = ({ data, error }) => {
   return (
     <div className={classes.root}>
       <SEO />
+      <Navbar
+        setLang={setLang}
+        defaultLang={defaultLang}
+        setIsLoading={setIsLoading}
+      />
       <Container>
-        <Typography variant="h3" component="h1">
-          News Picker
-        </Typography>
-
+        {/* 
         <div className={classes.buttonsLang}>
           <ButtonsLanguage
             setLang={setLang}
@@ -90,6 +93,7 @@ const Home: React.FC<HomeProps> = ({ data, error }) => {
             setIsLoading={setIsLoading}
           />
         </div>
+      */}
         <div className={classes.buttonsCategory}>
           <ButtonsCategory
             setCategory={setCategory}

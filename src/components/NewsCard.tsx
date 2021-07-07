@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     bottom: 35,
     position: 'relative',
     border: '1px solid red',
-    zIndex: 2000,
+    // zIndex: 1010,
     marginBottom: -35,
   },
 }));

@@ -37,6 +37,7 @@ let theme = createMuiTheme({
       'Raleway',
       'sans-serif',
       // 'Roboto Condensed',
+      'Tourney',
       'Rubik',
       'Oswald',
       'Viaoda Libre',
