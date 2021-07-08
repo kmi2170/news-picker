@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import router, { useRouter } from 'next/router';
+
 import { Grid, IconButton, InputBase } from '@material-ui/core';
 import { Search, Cancel, Clear } from '@material-ui/icons';
 import { grey } from '@material-ui/core/colors';
@@ -24,6 +26,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const Searchbar: React.FC = () => {
   const classes = useStyles();
+  const { query } = useRouter();
 
   const [searchInput, setSearchInput] = useState<string>('');
 
@@ -37,6 +40,11 @@ const Searchbar: React.FC = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log('submit', searchInput);
+
+    router.push({
+      pathname: '/',
+      query: { ...query, q: searchInput },
+    });
   };
 
   return (

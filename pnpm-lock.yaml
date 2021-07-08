@@ -1,6 +1,7 @@
 dependencies:
   '@material-ui/core': 4.11.4_7a759d72fcbc11ce03c9de110c21df82
   '@material-ui/icons': 4.11.2_5e14cec25e1ceef8d08e6ab1e0c4cb05
+  '@material-ui/lab': 4.0.0-alpha.57_5e14cec25e1ceef8d08e6ab1e0c4cb05
   axios: 0.21.1
   clsx: 1.1.1
   moment: 2.29.1
@@ -151,6 +152,30 @@ packages:
         optional: true
     resolution:
       integrity: sha512-fQNsKX2TxBmqIGJCSi3tGTO/gZ+eJgWmMJkgDiOfyNaunNaxcklJQFaFogYcFl0qFuaEz1qaXYXboa/bUXVSOQ==
+  /@material-ui/lab/4.0.0-alpha.57_5e14cec25e1ceef8d08e6ab1e0c4cb05:
+    dependencies:
+      '@babel/runtime': 7.14.6
+      '@material-ui/core': 4.11.4_7a759d72fcbc11ce03c9de110c21df82
+      '@material-ui/utils': 4.11.2_react-dom@17.0.2+react@17.0.2
+      '@types/react': 17.0.11
+      clsx: 1.1.1
+      prop-types: 15.7.2
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
+      react-is: 17.0.2
+    dev: false
+    engines:
+      node: '>=8.0.0'
+    peerDependencies:
+      '@material-ui/core': ^4.9.10
+      '@types/react': ^16.8.6 || ^17.0.0
+      react: ^16.8.0 || ^17.0.0
+      react-dom: ^16.8.0 || ^17.0.0
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+    resolution:
+      integrity: sha512-qo/IuIQOmEKtzmRD2E4Aa6DB4A87kmY6h0uYhjUmrrgmEAgbbw9etXpWPVXuRK6AGIQCjFzV6WO2i21m1R4FCw==
   /@material-ui/styles/4.11.4_7a759d72fcbc11ce03c9de110c21df82:
     dependencies:
       '@babel/runtime': 7.14.6
@@ -3869,6 +3894,7 @@ packages:
 specifiers:
   '@material-ui/core': ^4.11.4
   '@material-ui/icons': ^4.11.2
+  '@material-ui/lab': 4.0.0-alpha.57
   '@types/node': ^15.12.4
   '@types/react': ^17.0.11
   axios: ^0.21.1

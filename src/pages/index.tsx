@@ -106,6 +106,7 @@ const Home: React.FC<HomeProps> = ({ data, error }) => {
         <Preview data={news} />
         */}
 
+        <div style={{ marginTop: '2rem' }}></div>
         <Footer />
       </Container>
     </div>
@@ -148,9 +149,9 @@ const fetchFunc = async (options: AxiosRequestConfig) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
-  const { q, lang } = query;
+  const { q, lang, page } = query;
 
-  const params = { q: q || 'news', lang: lang || 'en' };
+  const params = { q: q || 'news', lang: lang || 'en', page: page || 1 };
   // const params = { q: q ? q : 'news', lang: lang ? lang : 'en' };
   const options = axiosOptions(params as ParamsType);
 
