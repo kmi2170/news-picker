@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import router, { useRouter } from 'next/router';
 
 import { Typography, Button } from '@material-ui/core';
@@ -15,31 +15,29 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const buttons = [
-  { id: 1, lang: 'en', name: 'English' },
-  { id: 2, lang: 'ja', name: 'Japanese' },
+  { id: 1, code: 'en', name: 'English' },
+  { id: 2, code: 'ja', name: 'Japanese' },
 ];
 
 export interface ButtonsLanguageProp {
+  lang: string;
   setLang: (lang: LangType) => void;
-  defaultLang: string;
   setIsLoading: (isLoading: boolean) => void;
+  setCookieFunc: (name: string, value: string) => void;
 }
 
 const ButtonsLanguage: React.FC<ButtonsLanguageProp> = ({
+  lang,
   setLang,
-  defaultLang,
   setIsLoading,
+  setCookieFunc,
 }) => {
   const classes = useStyles();
   const { query } = useRouter();
 
-  const [buttonsState, setButtonsState] = useState<boolean[]>(
-    buttons.map((button) => button.lang === defaultLang)
-  );
-
   const clickHandlerLang = (lang: LangType) => {
-    setButtonsState(buttons.map((button) => button.lang === lang));
     setLang(lang);
+    setCookieFunc('lang', lang);
     setIsLoading(true);
 
     router.push({
@@ -50,13 +48,14 @@ const ButtonsLanguage: React.FC<ButtonsLanguageProp> = ({
 
   return (
     <div>
-      {buttons.map(({ id, lang, name }, index) => (
+      {buttons.map(({ id, code, name }) => (
         <Button
           key={id}
-          variant={buttonsState[index] ? 'contained' : 'outlined'}
+          //variant={buttonsState[index] ? 'contained' : 'outlined'}
+          variant={code === lang ? 'contained' : 'outlined'}
           color="secondary"
           size="small"
-          onClick={() => clickHandlerLang(lang as LangType)}
+          onClick={() => clickHandlerLang(code as LangType)}
           className={classes.button}
         >
           {name}

@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
+import router, { useRouter } from 'next/router';
 import { GetServerSideProps } from 'next';
 
+import { useCookies } from 'react-cookie';
 import axios, { AxiosRequestConfig } from 'axios';
 
 import { Grow, Container, Grid, Typography, Button } from '@material-ui/core';
@@ -52,10 +53,13 @@ interface HomeProps {
 const Home: React.FC<HomeProps> = ({ data, error }) => {
   const classes = useStyles();
   const { query } = useRouter();
+  const [cookies, setCookie] = useCookies(['user']);
+  console.log(cookies);
 
   const defaultLang = (query.lang as LangType) || 'en';
 
   const [lang, setLang] = useState<LangType>(defaultLang);
+  // const [lang, setLang] = useState<LangType | undefined>(undefined);
 
   const defaultCategory = 'news';
   const [category, setCategory] = useState<CategoryType>(defaultCategory);
@@ -63,6 +67,28 @@ const Home: React.FC<HomeProps> = ({ data, error }) => {
   const [news, setNews] = useState(undefined);
 
   const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  const cookiesOptions = {
+    path: '/',
+    maxAge: 2600000,
+    sameSite: true,
+  };
+
+  const setCookieFunc = (name: string, value: string) =>
+    setCookie(name, value, cookiesOptions);
+
+  useEffect(() => {
+    console.log('lang', lang);
+    if (cookies.lang) {
+      setLang(cookies.lang);
+
+      router.push({
+        pathname: '/',
+        query: { ...query, lang: cookies.lang },
+      });
+    }
+    // } else { setLang(defaultLang }
+  }, []);
 
   useEffect(() => {
     setNews(data);
@@ -80,20 +106,12 @@ const Home: React.FC<HomeProps> = ({ data, error }) => {
     <div className={classes.root}>
       <SEO />
       <Navbar
+        lang={lang}
         setLang={setLang}
-        defaultLang={defaultLang}
         setIsLoading={setIsLoading}
+        setCookieFunc={setCookieFunc}
       />
       <Container>
-        {/* 
-        <div className={classes.buttonsLang}>
-          <ButtonsLanguage
-            setLang={setLang}
-            defaultLang={defaultLang}
-            setIsLoading={setIsLoading}
-          />
-        </div>
-      */}
         <div className={classes.buttonsCategory}>
           <ButtonsCategory
             setCategory={setCategory}

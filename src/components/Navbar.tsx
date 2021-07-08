@@ -47,9 +47,10 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const Navbar: React.FC<ButtonsLanguageProp> = ({
+  lang,
   setLang,
-  defaultLang,
   setIsLoading,
+  setCookieFunc,
 }) => {
   const classes = useStyles();
 
@@ -92,9 +93,10 @@ const Navbar: React.FC<ButtonsLanguageProp> = ({
       <div hidden={!isOpen}>
         <Toolbar>
           <ButtonsLanguage
+            lang={lang}
             setLang={setLang}
-            defaultLang={defaultLang}
             setIsLoading={setIsLoading}
+            setCookieFunc={setCookieFunc}
           />
         </Toolbar>
       </div>
