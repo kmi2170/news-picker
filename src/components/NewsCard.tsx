@@ -8,6 +8,7 @@ import {
   Typography,
   IconButton,
   Grid,
+  ButtonBase,
 } from '@material-ui/core';
 import { grey } from '@material-ui/core/colors';
 import { makeStyles, Theme } from '@material-ui/core/styles';
@@ -38,6 +39,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     alignItems: 'center',
   },
   summary: {
+    marginTop: '1rem',
     height: 80,
     overflow: 'hidden',
     border: '1px solid blue',
@@ -56,6 +58,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     // zIndex: 1010,
     marginBottom: -35,
   },
+  buttonBase: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
 }));
 
 interface NewsCardProps {
@@ -70,6 +76,11 @@ const NesCard: React.FC<NewsCardProps> = ({ article }) => {
 
   const [showMore, setShowMore] = useState(false);
 
+  const localTime = (d: string) => {
+    const n = new Date(d + ' UTC');
+    return n.toISOString().toLocaleString();
+  };
+
   const handleExpandClick = () => {
     if (showMore) {
       // articleRef?.current?.scrollIntoView({ behavior: 'smooth' });
@@ -79,16 +90,22 @@ const NesCard: React.FC<NewsCardProps> = ({ article }) => {
     setShowMore((prev) => !prev);
   };
 
+  const handleClick = (url: string) => {
+    window.open(url, '_blank', 'noreferrer');
+  };
+
   return (
     <Card ref={articleRef} className={classes.root}>
-      <CardMedia
-        component="img"
-        alt={title}
-        height="100"
-        width="345"
-        image={media}
-        title={title}
-      />
+      <ButtonBase onClick={() => handleClick(link)}>
+        <CardMedia
+          component="img"
+          alt={title}
+          height="100"
+          width="345"
+          image={media}
+          title={title}
+        />
+      </ButtonBase>
       {/* 
         <div className={classes.imgPlace}>
           <Typography gutterBottom variant="h5" component="div">
@@ -103,10 +120,11 @@ const NesCard: React.FC<NewsCardProps> = ({ article }) => {
           paddingBottom: 0,
         }}
       >
-        <Typography variant="h6" className={classes.text}>
-          {title}
-        </Typography>
-
+        <ButtonBase onClick={() => handleClick(link)}>
+          <Typography variant="h6" className={classes.text}>
+            {title}
+          </Typography>
+        </ButtonBase>
         <div style={{ display: 'flex', justifyContent: 'center' }}>
           {showMore && (
             <IconButton onClick={handleExpandClick}>
@@ -133,7 +151,7 @@ const NesCard: React.FC<NewsCardProps> = ({ article }) => {
 
           <Grid item xs={4}>
             <Typography variant="subtitle2" color="textSecondary" align="right">
-              {moment(published_date).fromNow()}
+              {moment(localTime(published_date)).fromNow()}
             </Typography>
           </Grid>
         </Grid>

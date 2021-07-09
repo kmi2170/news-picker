@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+// import { useState, useEffect } from 'react';
 import router, { useRouter } from 'next/router';
 
 import { Typography, Button } from '@material-ui/core';
@@ -51,7 +51,6 @@ const ButtonsLanguage: React.FC<ButtonsLanguageProp> = ({
       {buttons.map(({ id, code, name }) => (
         <Button
           key={id}
-          //variant={buttonsState[index] ? 'contained' : 'outlined'}
           variant={code === lang ? 'contained' : 'outlined'}
           color="secondary"
           size="small"

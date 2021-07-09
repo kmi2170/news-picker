@@ -5,7 +5,7 @@ import { GetServerSideProps } from 'next';
 import { useCookies } from 'react-cookie';
 import axios, { AxiosRequestConfig } from 'axios';
 
-import { Grow, Container, Grid, Typography, Button } from '@material-ui/core';
+import { Grow, Container, Grid, Typography } from '@material-ui/core';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 
 import SEO from '../components/SEO';
@@ -54,17 +54,16 @@ const Home: React.FC<HomeProps> = ({ data, error }) => {
   const classes = useStyles();
   const { query } = useRouter();
   const [cookies, setCookie] = useCookies(['user']);
-  console.log(cookies);
 
   const defaultLang = (query.lang as LangType) || 'en';
-
   const [lang, setLang] = useState<LangType>(defaultLang);
-  // const [lang, setLang] = useState<LangType | undefined>(undefined);
 
   const defaultCategory = 'news';
   const [category, setCategory] = useState<CategoryType>(defaultCategory);
 
   const [news, setNews] = useState(undefined);
+
+  const [favorites, setFavorites] = useState<string[]>([]);
 
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -78,7 +77,6 @@ const Home: React.FC<HomeProps> = ({ data, error }) => {
     setCookie(name, value, cookiesOptions);
 
   useEffect(() => {
-    console.log('lang', lang);
     if (cookies.lang) {
       setLang(cookies.lang);
 
@@ -87,7 +85,10 @@ const Home: React.FC<HomeProps> = ({ data, error }) => {
         query: { ...query, lang: cookies.lang },
       });
     }
-    // } else { setLang(defaultLang }
+
+    if (cookies.favorites && cookies.favorites.length) {
+      setFavorites(cookies.favorites);
+    }
   }, []);
 
   useEffect(() => {
@@ -109,6 +110,8 @@ const Home: React.FC<HomeProps> = ({ data, error }) => {
         lang={lang}
         setLang={setLang}
         setIsLoading={setIsLoading}
+        favorites={favorites}
+        setFavorites={setFavorites}
         setCookieFunc={setCookieFunc}
       />
       <Container>

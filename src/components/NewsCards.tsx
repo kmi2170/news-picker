@@ -7,6 +7,7 @@ import Loading from '../components/Loading';
 import Pagination from '../components/Pagination';
 
 import { IData, IArticle } from '../api/type_settngs';
+import { sortData } from '../utils/sort';
 
 const useStyles = makeStyles((theme: Theme) => ({
   text: { fontFamily: 'Roboto Condensed' },
@@ -20,6 +21,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     justifyContent: 'center',
   },
 }));
+
+const sortedArticle = (article: IArticle[], name: string) => {
+  return sortData(article, name);
+};
 
 interface NewsCardsProps {
   news: IData;
@@ -50,11 +55,14 @@ const NewsCards: React.FC<NewsCardsProps> = ({ news, isLoading }) => {
           </div>
 
           <Grid container spacing={3}>
-            {news?.articles?.map((article: IArticle) => (
-              <Grid item key={article._id} xs={12} sm={6} md={4}>
-                <NewsCard article={article} />
-              </Grid>
-            ))}
+            {news?.articles &&
+              sortedArticle(news.articles, 'published_date').map(
+                (article: IArticle) => (
+                  <Grid item key={article._id} xs={12} sm={6} md={4}>
+                    <NewsCard article={article} />
+                  </Grid>
+                )
+              )}
           </Grid>
 
           <div className={classes.paginationWrapper}>

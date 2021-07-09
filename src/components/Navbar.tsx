@@ -1,31 +1,23 @@
 import React, { useState, useEffect } from 'react';
+import router, { useRouter } from 'next/router';
+
 import {
   Grid,
   Typography,
   AppBar,
   Toolbar,
-  TextField,
-  IconButton,
   ButtonBase,
   Tooltip,
-  InputBase,
+  Button,
 } from '@material-ui/core';
-import {
-  ExpandMore,
-  ExpandLess,
-  Search,
-  Cancel,
-  Clear,
-} from '@material-ui/icons';
+import { ExpandMore, ExpandLess } from '@material-ui/icons';
 import { grey } from '@material-ui/core/colors';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 
 import Searchbar from './Searchbar';
-
-import ButtonsLanguage, {
-  ButtonsLanguageProp,
-} from '../components/ButtonsLanguage';
-import ButtonsCategory from '../components/ButtonsCategory';
+import ButtonsLanguage, { ButtonsLanguageProp } from './ButtonsLanguage';
+import Favorites from './Favorites';
+import ButtonsCategory from './ButtonsCategory.tsx';
 
 const useStyles = makeStyles((theme: Theme) => ({
   appBar: {
@@ -44,20 +36,42 @@ const useStyles = makeStyles((theme: Theme) => ({
     justifyContent: 'center',
     alignItems: 'center',
   },
+
+  resetButton: {
+    borderRadius: '15px',
+    textTransform: 'capitalize',
+    marginLeft: '4rem',
+  },
 }));
 
-const Navbar: React.FC<ButtonsLanguageProp> = ({
+interface NavbarProps extends ButtonsLanguageProp {
+  favorites: string[];
+  setFavorites: (favorites: string[]) => void;
+  setCookieFunc: (name: string, value: string) => void;
+}
+
+const Navbar: React.FC<NavbarProps> = ({
   lang,
   setLang,
   setIsLoading,
+  favorites,
+  setFavorites,
   setCookieFunc,
 }) => {
   const classes = useStyles();
+  const { query } = useRouter();
 
   const [isOpen, setIsOpen] = useState<boolean>(true);
 
   const handleExpandClick = () => {
     setIsOpen((prev) => !prev);
+  };
+
+  const handleReset = () => {
+    router.push({
+      pathname: '/',
+      query: { ...query, q: 'news' },
+    });
   };
 
   return (
@@ -96,6 +110,21 @@ const Navbar: React.FC<ButtonsLanguageProp> = ({
             lang={lang}
             setLang={setLang}
             setIsLoading={setIsLoading}
+            setCookieFunc={setCookieFunc}
+          />
+          <Button
+            variant="contained"
+            size="small"
+            className={classes.resetButton}
+            onClick={handleReset}
+          >
+            Reset Query
+          </Button>
+        </Toolbar>
+        <Toolbar>
+          <Favorites
+            favorites={favorites}
+            setFavorites={setFavorites}
             setCookieFunc={setCookieFunc}
           />
         </Toolbar>
