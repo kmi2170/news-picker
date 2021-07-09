@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import router, { useRouter } from 'next/router';
 
-import { Grid, Button, Typography, Chip } from '@material-ui/core';
+import { Grid, Button, Typography, Chip, Tooltip } from '@material-ui/core';
 
 import { makeStyles, Theme } from '@material-ui/core/styles';
 
@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   chips: {
     display: 'flex',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     flexWrap: 'wrap',
     '& > *': {
       margin: theme.spacing(0.5),
@@ -49,29 +49,35 @@ const Favorite: React.FC<FavoriteProps> = ({
   };
 
   const handleDelete = (q: string) => {
-    const newFavorites = favorites.filter((favorite) => favorite !== q);
-    setFavorites(newFavorites);
-    setCookieFunc('favorites', JSON.stringify(newFavorites));
+    const res = confirm(`Delete this query, ${q}?`);
+
+    if (res) {
+      const newFavorites = favorites.filter((favorite) => favorite !== q);
+      setFavorites(newFavorites);
+      setCookieFunc('favorites', JSON.stringify(newFavorites));
+    }
   };
 
   return (
     <Grid container justify="center" alignItems="center">
-      <Grid item xs={1}>
-        <Button
-          variant="outlined"
-          color="default"
-          onClick={addFavorite}
-          className={classes.button}
-        >
-          Favorite!
-        </Button>
+      <Grid item xs={2}>
+        <Tooltip title="Register current query as your favorite!">
+          <Button
+            variant="outlined"
+            color="default"
+            onClick={addFavorite}
+            className={classes.button}
+          >
+            Favorite!
+          </Button>
+        </Tooltip>
       </Grid>
       {/* 
       <Typography variant="h5" className={classes.text}>
         Favorites Queries:
       </Typography>
       */}
-      <Grid item xs={11}>
+      <Grid item xs={10}>
         <div className={classes.chips}>
           {favorites.map((favorite, i) => (
             <Chip

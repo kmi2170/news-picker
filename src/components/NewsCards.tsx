@@ -35,6 +35,7 @@ const NewsCards: React.FC<NewsCardsProps> = ({ news, isLoading }) => {
   const classes = useStyles();
 
   // const { total_hits, page, total_pages, page_size } = news;
+  console.log(news);
 
   return (
     <article>
@@ -45,9 +46,9 @@ const NewsCards: React.FC<NewsCardsProps> = ({ news, isLoading }) => {
       ) : (
         <>
           <Typography variant="subtitle1" className={classes.text}>
-            {news?.total_hits === 0
-              ? 'Found 0 article'
-              : `Found ${news.total_hits} articles`}
+            {news?.status === 'ok'
+              ? `Found ${news.total_hits} articles`
+              : news.status}
           </Typography>
 
           <div className={classes.paginationWrapper}>
