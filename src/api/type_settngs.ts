@@ -38,14 +38,14 @@ export interface IData {
   };
 }
 
-// export type CategoryType =
-//   | 'top'
-//   | 'business'
-//   | 'science'
-//   | 'technology'
-//   | 'sports'
-//   | 'health'
-//   | 'entertainment';
+export type CategoryType =
+  | 'top'
+  | 'business'
+  | 'science'
+  | 'technology'
+  | 'sports'
+  | 'health'
+  | 'entertainment';
 
 // export interface IResult {
 //   title: string | null;

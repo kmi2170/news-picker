@@ -10,13 +10,13 @@ import { makeStyles, Theme } from '@material-ui/core/styles';
 
 import SEO from '../components/SEO';
 import Navbar from '../components/Navbar';
-import ButtonsLanguage from '../components/ButtonsLanguage';
-import ButtonsCategory from '../components/ButtonsCategory';
+// import ButtonsLanguage from '../components/ButtonsLanguage';
+// import ButtonsCategory from '../components/ButtonsCategory';
 import NewsCards from '../components/NewsCards';
 import Footer from '../components/Footer';
-import Preview from '../components/Preview';
+// import Preview from '../components/Preview';
 
-import { LangType, CategoryType, IData } from '../api/type_settngs';
+import { LangType, IData } from '../api/type_settngs';
 
 // const baseUrl = `https://newsdata.io/api/1/news`;
 // const fetcher = async (url: string) => {
@@ -58,8 +58,8 @@ const Home: React.FC<HomeProps> = ({ data, error }) => {
   const defaultLang = (query.lang as LangType) || 'en';
   const [lang, setLang] = useState<LangType>(defaultLang);
 
-  const defaultCategory = 'news';
-  const [category, setCategory] = useState<CategoryType>(defaultCategory);
+  // const defaultCategory = 'news';
+  // const [category, setCategory] = useState<CategoryType>(defaultCategory);
 
   const [news, setNews] = useState(undefined);
 

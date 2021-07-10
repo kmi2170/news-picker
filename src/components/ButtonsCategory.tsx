@@ -50,22 +50,24 @@ const ButtonsLanguage: React.FC<ButtonsLanguageProp> = ({
     });
   };
 
-  return (
-    <div>
-      {buttons.map(({ id, category, name }, index) => (
-        <Button
-          key={id}
-          variant={buttonsState[index] ? 'contained' : 'outlined'}
-          color="primary"
-          size="small"
-          onClick={() => clickHandlerLang(category as CategoryType)}
-          className={classes.button}
-        >
-          {name}
-        </Button>
-      ))}
-    </div>
-  );
+  return <div>ButtonsCategory</div>;
+
+  // return (
+  //   <div>
+  //     {buttons.map(({ id, category, name }, index) => (
+  //       <Button
+  //         key={id}
+  //         variant={buttonsState[index] ? 'contained' : 'outlined'}
+  //         color="primary"
+  //         size="small"
+  //         onClick={() => clickHandlerLang(category as CategoryType)}
+  //         className={classes.button}
+  //       >
+  //         {name}
+  //       </Button>
+  //     ))}
+  //   </div>
+  // );
 };
 
 export default ButtonsLanguage;

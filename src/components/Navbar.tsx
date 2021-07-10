@@ -17,7 +17,7 @@ import { makeStyles, Theme } from '@material-ui/core/styles';
 import Searchbar from './Searchbar';
 import ButtonsLanguage, { ButtonsLanguageProp } from './ButtonsLanguage';
 import Favorites from './Favorites';
-import ButtonsCategory from './ButtonsCategory.tsx';
+// import ButtonsCategory from './ButtonsCategory';
 
 const useStyles = makeStyles((theme: Theme) => ({
   appBar: {
