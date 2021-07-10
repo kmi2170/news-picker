@@ -166,9 +166,9 @@ const axiosOptions = (params: ParamsType) => ({
   url: 'https://free-news.p.rapidapi.com/v1/search',
   params,
   headers: {
-    // 'x-rapidapi-key': 'pub_4656b4274d9f1251d24b5e6b76a711d4296',
-    'x-rapidapi-key': process.env.NEXT_PUBLIC_RAPID_API_KEY,
+    'x-rapidapi-key': 'pub_4656b4274d9f1251d24b5e6b76a711d4296',
     'x-rapidapi-host': 'free-news.p.rapidapi.com',
+    // 'x-rapidapi-key': process.env.NEXT_PUBLIC_RAPID_API_KEY,
     // 'x-rapidapi-host': process.env.NEXT_PUBLIC_RAPID_API_HOST
   },
 });
