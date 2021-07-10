@@ -162,6 +162,7 @@ const axiosOptions = (params: ParamsType) => ({
   headers: {
     'x-rapidapi-key': process.env.x_rapidapi_key,
     'x-rapidapi-host': process.env.x_rapidapi_host,
+    'access-control-allow-origin': 'https://news-picker-kmi2170.vercel.app/',
   },
 });
 
