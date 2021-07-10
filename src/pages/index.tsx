@@ -102,7 +102,12 @@ const Home: React.FC<HomeProps> = ({ data, error }) => {
     </Typography>;
   }
 
-  // console.log(data);
+  console.log('data', data);
+  console.log('news', news);
+  console.log('error', error);
+  console.log('query', query);
+  console.log('cookies', cookies);
+
   return (
     <div className={classes.root}>
       <SEO />
@@ -162,7 +167,7 @@ const axiosOptions = (params: ParamsType) => ({
   headers: {
     'x-rapidapi-key': process.env.x_rapidapi_key,
     'x-rapidapi-host': process.env.x_rapidapi_host,
-    'access-control-allow-origin': 'https://news-picker-kmi2170.vercel.app/',
+    //    'access-control-allow-origin': 'https://news-picker-kmi2170.vercel.app/',
   },
 });
 
