@@ -115,14 +115,20 @@ const Home: React.FC<HomeProps> = ({ data, error }) => {
         setCookieFunc={setCookieFunc}
       />
       <Container>
+        {/* 
         <div className={classes.buttonsCategory}>
           <ButtonsCategory
             setCategory={setCategory}
             defaultCategory={defaultCategory}
           />
         </div>
+      */}
 
-        <NewsCards news={news} isLoading={isLoading} />
+        <NewsCards
+          news={news}
+          isLoading={isLoading}
+          setIsLoading={setIsLoading}
+        />
         {/* 
         <Preview data={news} />
         */}

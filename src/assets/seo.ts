@@ -6,8 +6,8 @@ export const config = {
   //   summary: 'Web developer/programmer',
   // },
   description:
-    'Latest top 10 news, by topic and/or language, serch by keywards',
-  keywords: 'News, React.js, Next.js, Material-UI,',
+    'Catch the latest news, in English/Japanese. Can search articles by keywords. Can register your current search query as your favorite, and call them later (cookie must be enabled).',
+  keywords: 'Latest News, React.js, Next.js, Material-UI, FreeNews',
   social: {
     twitter: '',
   },

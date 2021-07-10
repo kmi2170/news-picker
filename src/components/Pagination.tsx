@@ -15,11 +15,13 @@ const useStyles = makeStyles((theme) =>
 );
 
 interface PaginationComponentProps {
+  setIsLoading: (isLoading: boolean) => void;
   currentPage: number;
   totalPages: number;
 }
 
 const PaginationComponent: React.FC<PaginationComponentProps> = ({
+  setIsLoading,
   currentPage,
   totalPages,
 }) => {
@@ -31,6 +33,7 @@ const PaginationComponent: React.FC<PaginationComponentProps> = ({
   const handleClick = (_, page: number) => {
     console.log(page);
     setPage(page);
+    setIsLoading(true);
 
     router.push({
       pathname: '/',

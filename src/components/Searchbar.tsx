@@ -51,7 +51,7 @@ const Searchbar: React.FC = () => {
     <div className={classes.searchContainer}>
       <form onSubmit={handleSubmit}>
         <Grid container alignItems="center">
-          <Grid item xs={1}>
+          <Grid item xs={2}>
             <IconButton
               // onClick={handleSubmit}
               type="submit"
@@ -60,7 +60,7 @@ const Searchbar: React.FC = () => {
               <Search className={classes.icon} />
             </IconButton>
           </Grid>
-          <Grid item xs={10}>
+          <Grid item xs={8}>
             <InputBase
               fullWidth
               type="text"
@@ -70,7 +70,7 @@ const Searchbar: React.FC = () => {
               className={classes.input}
             />
           </Grid>
-          <Grid item xs={1}>
+          <Grid item xs={2}>
             <IconButton onClick={handleClear} className={classes.iconWrapper}>
               <Cancel className={classes.icon} />
             </IconButton>

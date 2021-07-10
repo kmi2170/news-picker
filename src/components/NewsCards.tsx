@@ -1,5 +1,6 @@
 // import { useState, useEffect } from 'react';
 import { Grid, Typography } from '@material-ui/core';
+import Skeleton from '@material-ui/lab/Skeleton';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 
 import NewsCard from './NewsCard';
@@ -10,7 +11,7 @@ import { IData, IArticle } from '../api/type_settngs';
 import { sortData } from '../utils/sort';
 
 const useStyles = makeStyles((theme: Theme) => ({
-  text: { fontFamily: 'Roboto Condensed' },
+  display: { fontFamily: 'Roboto Condensed', marginTop: '0.5rem' },
   loading: {
     padding: '1rem',
     height: '100vh',
@@ -29,9 +30,14 @@ const sortedArticle = (article: IArticle[], name: string) => {
 interface NewsCardsProps {
   news: IData;
   isLoading: boolean;
+  setIsLoading: (isLoading: boolean) => void;
 }
 
-const NewsCards: React.FC<NewsCardsProps> = ({ news, isLoading }) => {
+const NewsCards: React.FC<NewsCardsProps> = ({
+  news,
+  isLoading,
+  setIsLoading,
+}) => {
   const classes = useStyles();
 
   // const { total_hits, page, total_pages, page_size } = news;
@@ -39,20 +45,24 @@ const NewsCards: React.FC<NewsCardsProps> = ({ news, isLoading }) => {
 
   return (
     <article>
-      {isLoading ? (
+      {false ? (
         <div className={classes.loading}>
           <Loading />
         </div>
       ) : (
         <>
-          <Typography variant="subtitle1" className={classes.text}>
+          <Typography variant="subtitle1" className={classes.display}>
             {news?.status === 'ok'
               ? `Found ${news.total_hits} articles`
-              : news.status}
+              : news?.status}
           </Typography>
 
           <div className={classes.paginationWrapper}>
-            <Pagination currentPage={news.page} totalPages={news.total_pages} />
+            <Pagination
+              setIsLoading={setIsLoading}
+              currentPage={news?.page}
+              totalPages={news?.total_pages}
+            />
           </div>
 
           <Grid container spacing={3}>
@@ -60,14 +70,24 @@ const NewsCards: React.FC<NewsCardsProps> = ({ news, isLoading }) => {
               sortedArticle(news.articles, 'published_date').map(
                 (article: IArticle) => (
                   <Grid item key={article._id} xs={12} sm={6} md={4}>
-                    <NewsCard article={article} />
+                    {isLoading ? (
+                      <Skeleton>
+                        <NewsCard article={article} />
+                      </Skeleton>
+                    ) : (
+                      <NewsCard article={article} />
+                    )}
                   </Grid>
                 )
               )}
           </Grid>
 
           <div className={classes.paginationWrapper}>
-            <Pagination currentPage={news.page} totalPages={news.total_pages} />
+            <Pagination
+              setIsLoading={setIsLoading}
+              currentPage={news?.page}
+              totalPages={news?.total_pages}
+            />
           </div>
         </>
       )}

@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   chips: {
     display: 'flex',
-    justifyContent: 'flex-start',
+    justifyContent: 'start',
     flexWrap: 'wrap',
     '& > *': {
       margin: theme.spacing(0.5),
@@ -60,7 +60,7 @@ const Favorite: React.FC<FavoriteProps> = ({
 
   return (
     <Grid container justify="center" alignItems="center">
-      <Grid item xs={2}>
+      <Grid item xs={3}>
         <Tooltip title="Register current query as your favorite!">
           <Button
             variant="outlined"
@@ -77,7 +77,7 @@ const Favorite: React.FC<FavoriteProps> = ({
         Favorites Queries:
       </Typography>
       */}
-      <Grid item xs={10}>
+      <Grid item xs={9}>
         <div className={classes.chips}>
           {favorites.map((favorite, i) => (
             <Chip
