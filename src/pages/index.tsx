@@ -163,11 +163,10 @@ type ParamsType = { q: string; lang: string };
 const axiosOptions = (params: ParamsType) => ({
   method: 'GET',
   url: 'https://free-news.p.rapidapi.com/v1/search',
-  params: params,
+  params,
   headers: {
-    'x-rapidapi-key': process.env.x_rapidapi_key,
-    'x-rapidapi-host': process.env.x_rapidapi_host,
-    //    'access-control-allow-origin': 'https://news-picker-kmi2170.vercel.app/',
+    'x-rapidapi-key': process.env.NEXT_PUBLIC_RAPID_API_KEY,
+    'x-rapidapi-host': process.env.NEXT_PUBLIC_RAPID_API_HOST,
   },
 });
 
