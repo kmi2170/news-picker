@@ -107,7 +107,7 @@ const Home: React.FC<HomeProps> = ({ data, error }) => {
   console.log('error', error);
   console.log('query', query);
   console.log('cookies', cookies);
-  console.log(process.env.NEXT_PUBLIC_RAPID_API_KEY);
+  console.log('API_KEY', process.env.NEXT_PUBLIC_RAPID_API_KEY);
 
   return (
     <div className={classes.root}>
