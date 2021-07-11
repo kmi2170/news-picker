@@ -102,13 +102,13 @@ const Home: React.FC<HomeProps> = ({ data, error }) => {
     </Typography>;
   }
 
-  console.log('data', data);
-  console.log('news', news);
+  // console.log('data', data);
+  // console.log('news', news);
   console.log('error', error);
   console.log('query', query);
-  console.log('cookies', cookies);
-  console.log('API_KEY', process.env.NEXT_PUBLIC_RAPID_API_KEY);
-  console.log('typeof API_KEY', typeof process.env.NEXT_PUBLIC_RAPID_API_KEY);
+  // console.log('cookies', cookies);
+  // console.log('API_KEY', process.env.NEXT_PUBLIC_RAPID_API_KEY);
+  // console.log('typeof API_KEY', typeof process.env.NEXT_PUBLIC_RAPID_API_KEY);
 
   return (
     <div className={classes.root}>
