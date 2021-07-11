@@ -118,13 +118,7 @@ const NesCard: React.FC<NewsCardProps> = ({ article }) => {
           </Typography>
         </div>
       */}
-        <CardContent
-          style={{
-            border: '1px solid green',
-            // marginBottom: -30,
-            paddingBottom: 0,
-          }}
-        >
+        <CardContent>
           <ButtonBase onClick={() => handleClick(link)}>
             <Typography variant="h6" className={classes.text}>
               {title}
