@@ -108,6 +108,7 @@ const Home: React.FC<HomeProps> = ({ data, error }) => {
   console.log('query', query);
   console.log('cookies', cookies);
   console.log('API_KEY', process.env.NEXT_PUBLIC_RAPID_API_KEY);
+  console.log('typeof API_KEY', typeof process.env.NEXT_PUBLIC_RAPID_API_KEY);
 
   return (
     <div className={classes.root}>
@@ -161,17 +162,24 @@ export default Home;
 
 type ParamsType = { q: string; lang: string };
 
-const axiosOptions = (params: ParamsType) => ({
-  method: 'GET',
-  url: 'https://free-news.p.rapidapi.com/v1/search',
-  params,
-  headers: {
-    'x-rapidapi-key': 'e55c60efe5msh73070d6e421d34bp11cc43jsn5f182a073484',
-    'x-rapidapi-host': 'free-news.p.rapidapi.com',
-    // 'x-rapidapi-key': process.env.NEXT_PUBLIC_RAPID_API_KEY,
-    // 'x-rapidapi-host': process.env.NEXT_PUBLIC_RAPID_API_HOST
-  },
-});
+const axiosOptions = (params: ParamsType) => {
+  const API_KEY = process.env.NEXT_PUBLIC_RAPID_API_KEY;
+  const API_HOST = process.env.NEXT_PUBLIC_RAPID_API_HOST;
+
+  return {
+    method: 'GET',
+    url: 'https://free-news.p.rapidapi.com/v1/search',
+    params,
+    headers: {
+      // 'x-rapidapi-key': 'e55c60efe5msh73070d6e421d34bp11cc43jsn5f182a073484',
+      //'x-rapidapi-host': 'free-news.p.rapidapi.com',
+      'x-rapidapi-key': API_KEY,
+      'x-rapidapi-host': API_HOST,
+      // 'x-rapidapi-key': process.env.NEXT_PUBLIC_RAPID_API_KEY,
+      // 'x-rapidapi-host': process.env.NEXT_PUBLIC_RAPID_API_HOST
+    },
+  };
+};
 
 const fetchFunc = async (options: AxiosRequestConfig) => {
   try {
@@ -186,7 +194,11 @@ const fetchFunc = async (options: AxiosRequestConfig) => {
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const { q, lang, page } = query;
 
-  const params = { q: q || 'news', lang: lang || 'en', page: page || 1 };
+  const params = {
+    q: q || 'news',
+    lang: lang || 'en',
+    page: page || 1,
+  };
   // const params = { q: q ? q : 'news', lang: lang ? lang : 'en' };
   const options = axiosOptions(params as ParamsType);
 

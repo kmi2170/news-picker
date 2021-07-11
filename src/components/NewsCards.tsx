@@ -65,7 +65,7 @@ const NewsCards: React.FC<NewsCardsProps> = ({
             />
           </div>
 
-          <Grid container spacing={3}>
+          <Grid container justify="space-between" spacing={2}>
             {news?.articles &&
               sortedArticle(news.articles, 'published_date').map(
                 (article: IArticle) => (

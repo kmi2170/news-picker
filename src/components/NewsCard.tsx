@@ -20,6 +20,10 @@ import moment from 'moment';
 import { IArticle } from '../api/type_settngs';
 
 const useStyles = makeStyles((theme: Theme) => ({
+  cardWrapper: {
+    display: 'flex',
+    justifyContent: 'center',
+  },
   root: {
     width: 345,
     minHeight: 200,
@@ -42,7 +46,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginTop: '1rem',
     height: 80,
     overflow: 'hidden',
-    border: '1px solid blue',
+    // border: '1px solid blue',
   },
   summaryExpand: {
     width: '100%',
@@ -54,7 +58,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       'linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 1))',
     bottom: 35,
     position: 'relative',
-    border: '1px solid red',
+    // border: '1px solid red',
     // zIndex: 1010,
     marginBottom: -35,
   },
@@ -95,68 +99,74 @@ const NesCard: React.FC<NewsCardProps> = ({ article }) => {
   };
 
   return (
-    <Card ref={articleRef} className={classes.root}>
-      <ButtonBase onClick={() => handleClick(link)}>
-        <CardMedia
-          component="img"
-          alt={title}
-          height="100"
-          width="345"
-          image={media}
-          title={title}
-        />
-      </ButtonBase>
-      {/* 
+    <div className={classes.cardWrapper}>
+      <Card ref={articleRef} className={classes.root}>
+        <ButtonBase onClick={() => handleClick(link)}>
+          <CardMedia
+            component="img"
+            alt={title}
+            height="100"
+            width="345"
+            image={media}
+            title={title}
+          />
+        </ButtonBase>
+        {/* 
         <div className={classes.imgPlace}>
           <Typography gutterBottom variant="h5" component="div">
             NEWS
           </Typography>
         </div>
       */}
-      <CardContent
-        style={{
-          border: '1px solid green',
-          // marginBottom: -30,
-          paddingBottom: 0,
-        }}
-      >
-        <ButtonBase onClick={() => handleClick(link)}>
-          <Typography variant="h6" className={classes.text}>
-            {title}
-          </Typography>
-        </ButtonBase>
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
-          {showMore && (
-            <IconButton onClick={handleExpandClick}>
-              <ExpandLess />
-            </IconButton>
-          )}
-        </div>
-
-        <div className={showMore ? classes.summaryExpand : classes.summary}>
-          <Typography variant="body1" className={clsx(classes.text)}>
-            {summary}
-          </Typography>
-        </div>
-        <div className={classes.overlay} hidden={showMore} />
-
-        <Grid container justify="center" alignItems="center">
-          <Grid item xs={4}></Grid>
-
-          <Grid item xs={4}>
-            <IconButton onClick={handleExpandClick}>
-              {showMore ? <ExpandLess /> : <ExpandMore />}
-            </IconButton>
-          </Grid>
-
-          <Grid item xs={4}>
-            <Typography variant="subtitle2" color="textSecondary" align="right">
-              {moment(localTime(published_date)).fromNow()}
+        <CardContent
+          style={{
+            border: '1px solid green',
+            // marginBottom: -30,
+            paddingBottom: 0,
+          }}
+        >
+          <ButtonBase onClick={() => handleClick(link)}>
+            <Typography variant="h6" className={classes.text}>
+              {title}
             </Typography>
+          </ButtonBase>
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            {showMore && (
+              <IconButton onClick={handleExpandClick}>
+                <ExpandLess />
+              </IconButton>
+            )}
+          </div>
+
+          <div className={showMore ? classes.summaryExpand : classes.summary}>
+            <Typography variant="body1" className={clsx(classes.text)}>
+              {summary}
+            </Typography>
+          </div>
+          <div className={classes.overlay} hidden={showMore} />
+
+          <Grid container justify="center" alignItems="center">
+            <Grid item xs={4}></Grid>
+
+            <Grid item xs={4}>
+              <IconButton onClick={handleExpandClick}>
+                {showMore ? <ExpandLess /> : <ExpandMore />}
+              </IconButton>
+            </Grid>
+
+            <Grid item xs={4}>
+              <Typography
+                variant="subtitle2"
+                color="textSecondary"
+                align="right"
+              >
+                {moment(localTime(published_date)).fromNow()}
+              </Typography>
+            </Grid>
           </Grid>
-        </Grid>
-      </CardContent>
-    </Card>
+        </CardContent>
+      </Card>
+    </div>
   );
 };
 

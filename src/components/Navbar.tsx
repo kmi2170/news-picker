@@ -112,14 +112,16 @@ const Navbar: React.FC<NavbarProps> = ({
             setIsLoading={setIsLoading}
             setCookieFunc={setCookieFunc}
           />
-          <Button
-            variant="contained"
-            size="small"
-            className={classes.resetButton}
-            onClick={handleReset}
-          >
-            Reset Query
-          </Button>
+          <Tooltip title="Reset Query">
+            <Button
+              variant="contained"
+              size="small"
+              className={classes.resetButton}
+              onClick={handleReset}
+            >
+              Reset
+            </Button>
+          </Tooltip>
         </Toolbar>
         <Toolbar>
           <Favorites
