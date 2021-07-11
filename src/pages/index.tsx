@@ -160,26 +160,26 @@ export default Home;
 // };
 //
 
-type ParamsType = { q: string; lang: string };
+// type ParamsType = { q: string; lang: string };
 
-const axiosOptions = (params: ParamsType) => {
-  const API_KEY = process.env.NEXT_PUBLIC_RAPID_API_KEY;
-  const API_HOST = process.env.NEXT_PUBLIC_RAPID_API_HOST;
+//const axiosOptions = (params: ParamsType) => {
+//  const API_KEY = process.env.NEXT_PUBLIC_RAPID_API_KEY;
+//  const API_HOST = process.env.NEXT_PUBLIC_RAPID_API_HOST;
 
-  return {
-    method: 'GET',
-    url: 'https://free-news.p.rapidapi.com/v1/search',
-    params,
-    headers: {
-      // 'x-rapidapi-key': 'e55c60efe5msh73070d6e421d34bp11cc43jsn5f182a073484',
-      //'x-rapidapi-host': 'free-news.p.rapidapi.com',
-      'x-rapidapi-key': API_KEY,
-      'x-rapidapi-host': API_HOST,
-      // 'x-rapidapi-key': process.env.NEXT_PUBLIC_RAPID_API_KEY,
-      // 'x-rapidapi-host': process.env.NEXT_PUBLIC_RAPID_API_HOST
-    },
-  };
-};
+//  return {
+//    method: 'GET',
+//    url: 'https://free-news.p.rapidapi.com/v1/search',
+//    params,
+//    headers: {
+//      // 'x-rapidapi-key': 'e55c60efe5msh73070d6e421d34bp11cc43jsn5f182a073484',
+//      //'x-rapidapi-host': 'free-news.p.rapidapi.com',
+//      'x-rapidapi-key': API_KEY,
+//      'x-rapidapi-host': API_HOST,
+//      // 'x-rapidapi-key': process.env.NEXT_PUBLIC_RAPID_API_KEY,
+//      // 'x-rapidapi-host': process.env.NEXT_PUBLIC_RAPID_API_HOST
+//    },
+//  };
+//};
 
 const fetchFunc = async (options: AxiosRequestConfig) => {
   try {
@@ -199,8 +199,18 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
     lang: lang || 'en',
     page: page || 1,
   };
-  // const params = { q: q ? q : 'news', lang: lang ? lang : 'en' };
-  const options = axiosOptions(params as ParamsType);
+
+  //const options = axiosOptions(params as ParamsType);
+
+  const options = {
+    method: 'GET',
+    url: 'https://free-news.p.rapidapi.com/v1/search',
+    params,
+    headers: {
+      'x-rapidapi-key': process.env.NEXT_PUBLIC_RAPID_API_KEY,
+      'x-rapidapi-host': process.env.NEXT_PUBLIC_RAPID_API_HOST,
+    },
+  };
 
   const { data, error } = await fetchFunc(options as AxiosRequestConfig);
 
