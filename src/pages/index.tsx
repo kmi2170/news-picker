@@ -208,7 +208,8 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
     params,
     headers: {
       'x-rapidapi-key': process.env.NEXT_PUBLIC_RAPID_API_KEY,
-      'x-rapidapi-host': process.env.NEXT_PUBLIC_RAPID_API_HOST,
+      // 'x-rapidapi-host': process.env.NEXT_PUBLIC_RAPID_API_HOST,
+      'x-rapidapi-host': 'free-news.p.rapidapi.com',
     },
   };
 
