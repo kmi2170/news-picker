@@ -149,24 +149,9 @@ const Home: React.FC<HomeProps> = ({ data, error }) => {
 
 export default Home;
 
-// const options: AxiosRequestConfig = {
-//   method: 'GET',
-//   url: 'https://free-news.p.rapidapi.com/v1/search',
-//   params: { q: 'news', lang: 'ja' },
-//   headers: {
-//     'x-rapidapi-key': process.env.x_rapidapi_key,
-//     'x-rapidapi-host': process.env.x_rapidapi_host,
-//   },
-// };
-//
-
 // type ParamsType = { q: string; lang: string };
 
 //const axiosOptions = (params: ParamsType) => {
-//  const API_KEY = process.env.NEXT_PUBLIC_RAPID_API_KEY;
-//  const API_HOST = process.env.NEXT_PUBLIC_RAPID_API_HOST;
-
-//  return {
 //    method: 'GET',
 //    url: 'https://free-news.p.rapidapi.com/v1/search',
 //    params,
@@ -179,7 +164,6 @@ export default Home;
 //      // 'x-rapidapi-host': process.env.NEXT_PUBLIC_RAPID_API_HOST
 //    },
 //  };
-//};
 
 const fetchFunc = async (options: AxiosRequestConfig) => {
   try {
@@ -207,9 +191,10 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
     url: 'https://free-news.p.rapidapi.com/v1/search',
     params,
     headers: {
-      'x-rapidapi-key': process.env.NEXT_PUBLIC_RAPID_API_KEY,
-      // 'x-rapidapi-host': process.env.NEXT_PUBLIC_RAPID_API_HOST,
+      'x-rapidapi-key': 'e55c60efe5msh73070d6e421d34bp11cc43jsn5f182a073484',
       'x-rapidapi-host': 'free-news.p.rapidapi.com',
+      // 'x-rapidapi-key': process.env.NEXT_PUBLIC_RAPID_API_KEY,
+      // 'x-rapidapi-host': process.env.NEXT_PUBLIC_RAPID_API_HOST,
     },
   };
 

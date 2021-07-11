@@ -21,10 +21,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     '&:hover': {
       cursor: 'pointer',
     },
-    paddingRight: '1.0rem',
-    [theme.breakpoints.down('sm')]: {
-      paddingRight: '2.0rem',
-    },
+    // paddingRight: '1.0rem',
+    // [theme.breakpoints.down('sm')]: {
+    //   paddingRight: '2.0rem',
+    // },
   },
 }));
 
@@ -54,6 +54,27 @@ const Searchbar: React.FC = () => {
   return (
     <div className={classes.searchContainer}>
       <form onSubmit={handleSubmit}>
+        <div style={{ display: 'flex' }}>
+          <IconButton
+            // onClick={handleSubmit}
+            type="submit"
+            className={classes.iconWrapper}
+          >
+            <Search className={classes.icon} />
+          </IconButton>
+          <InputBase
+            fullWidth
+            type="text"
+            value={searchInput}
+            placeholder="Search by keyword"
+            onChange={handleInput}
+            className={classes.input}
+          />
+          <IconButton onClick={handleClear} className={classes.iconWrapper}>
+            <Cancel className={classes.icon} />
+          </IconButton>
+        </div>
+        {/* 
         <Grid container alignItems="center">
           <Grid item xs={2} sm={1} md={1}>
             <IconButton
@@ -80,6 +101,7 @@ const Searchbar: React.FC = () => {
             </IconButton>
           </Grid>
         </Grid>
+      */}
       </form>
     </div>
   );
