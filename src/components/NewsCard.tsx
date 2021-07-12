@@ -4,11 +4,11 @@ import {
   Card,
   CardContent,
   CardMedia,
-  CardActions,
   Typography,
   IconButton,
   Grid,
   ButtonBase,
+  Tooltip,
 } from '@material-ui/core';
 import { grey } from '@material-ui/core/colors';
 import { makeStyles, Theme } from '@material-ui/core/styles';
@@ -28,7 +28,15 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: 345,
     minHeight: 200,
   },
-  text: {
+  textTitle: {
+    ///fontFamily: 'Noto Sans JP',
+    fontFamily: 'Roboto Condensed',
+    fontWeight: 400,
+    '&:hover': {
+      background: grey[1100],
+    },
+  },
+  textSummary: {
     ///fontFamily: 'Noto Sans JP',
     fontFamily: 'Roboto Condensed',
     fontWeight: 400,
@@ -70,9 +78,10 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 interface NewsCardProps {
   article: IArticle;
+  lang: string;
 }
 
-const NesCard: React.FC<NewsCardProps> = ({ article }) => {
+const NesCard: React.FC<NewsCardProps> = ({ article, lang }) => {
   const classes = useStyles();
   const articleRef = useRef<HTMLHeadElement>();
 
@@ -94,23 +103,21 @@ const NesCard: React.FC<NewsCardProps> = ({ article }) => {
     setShowMore((prev) => !prev);
   };
 
-  const handleClick = (url: string) => {
-    window.open(url, '_blank', 'noreferrer');
+  const handleClick = () => {
+    window.open(link, '_blank', 'noreferrer');
   };
 
   return (
     <div className={classes.cardWrapper}>
       <Card ref={articleRef} className={classes.root}>
-        <ButtonBase onClick={() => handleClick(link)}>
-          <CardMedia
-            component="img"
-            alt={title}
-            height="100"
-            width="345"
-            image={media}
-            title={title}
-          />
-        </ButtonBase>
+        <CardMedia
+          component="img"
+          alt={title}
+          height="100"
+          width="345"
+          image={media}
+          title={title}
+        />
         {/* 
         <div className={classes.imgPlace}>
           <Typography gutterBottom variant="h5" component="div">
@@ -119,11 +126,13 @@ const NesCard: React.FC<NewsCardProps> = ({ article }) => {
         </div>
       */}
         <CardContent>
-          <ButtonBase onClick={() => handleClick(link)}>
-            <Typography variant="h6" className={classes.text}>
-              {title}
-            </Typography>
-          </ButtonBase>
+          <Tooltip title={lang === 'ja' ? '元の記事へ' : 'View Source'}>
+            <ButtonBase onClick={handleClick}>
+              <Typography variant="h6" className={classes.textTitle}>
+                {title}
+              </Typography>
+            </ButtonBase>
+          </Tooltip>
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             {showMore && (
               <IconButton onClick={handleExpandClick}>
@@ -133,19 +142,32 @@ const NesCard: React.FC<NewsCardProps> = ({ article }) => {
           </div>
 
           <div className={showMore ? classes.summaryExpand : classes.summary}>
-            <Typography variant="body1" className={clsx(classes.text)}>
+            <Typography variant="body1" className={clsx(classes.textSummary)}>
               {summary}
             </Typography>
           </div>
           <div className={classes.overlay} hidden={showMore} />
 
           <Grid container justify="center" alignItems="center">
-            <Grid item xs={4}></Grid>
+            <Grid item xs={4}>
+              {showMore && (
+                <ButtonBase onClick={handleClick}>
+                  <Typography variant="subtitle2" color="primary" align="left">
+                    {lang === 'ja' ? '元の記事へ' : 'View Source'}
+                  </Typography>
+                </ButtonBase>
+              )}
+            </Grid>
 
             <Grid item xs={4}>
-              <IconButton onClick={handleExpandClick}>
-                {showMore ? <ExpandLess /> : <ExpandMore />}
-              </IconButton>
+              <div style={{ display: 'flex', justifyContent: 'center' }}>
+                <IconButton
+                  onClick={handleExpandClick}
+                  style={{ display: 'flex', justifyContent: 'center' }}
+                >
+                  {showMore ? <ExpandLess /> : <ExpandMore />}
+                </IconButton>
+              </div>
             </Grid>
 
             <Grid item xs={4}>

@@ -29,12 +29,14 @@ const sortedArticle = (article: IArticle[], name: string) => {
 
 interface NewsCardsProps {
   news: IData;
+  lang: string;
   isLoading: boolean;
   setIsLoading: (isLoading: boolean) => void;
 }
 
 const NewsCards: React.FC<NewsCardsProps> = ({
   news,
+  lang,
   isLoading,
   setIsLoading,
 }) => {
@@ -72,10 +74,10 @@ const NewsCards: React.FC<NewsCardsProps> = ({
                   <Grid item key={article._id} xs={12} sm={6} md={4}>
                     {isLoading ? (
                       <Skeleton>
-                        <NewsCard article={article} />
+                        <NewsCard article={article} lang={lang} />
                       </Skeleton>
                     ) : (
-                      <NewsCard article={article} />
+                      <NewsCard article={article} lang={lang} />
                     )}
                   </Grid>
                 )

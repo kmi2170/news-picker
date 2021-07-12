@@ -133,6 +133,7 @@ const Home: React.FC<HomeProps> = ({ data, error }) => {
 
         <NewsCards
           news={news}
+          lang={lang}
           isLoading={isLoading}
           setIsLoading={setIsLoading}
         />
