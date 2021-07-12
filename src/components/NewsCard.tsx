@@ -18,6 +18,7 @@ import clsx from 'clsx';
 import moment from 'moment';
 
 import { IArticle } from '../api/type_settngs';
+import { utcToLocalTime } from '../utils/utcToLocalTime';
 
 const useStyles = makeStyles((theme: Theme) => ({
   cardWrapper: {
@@ -88,11 +89,6 @@ const NesCard: React.FC<NewsCardProps> = ({ article, lang }) => {
   const { title, published_date, link, summary, media } = article;
 
   const [showMore, setShowMore] = useState(false);
-
-  const localTime = (d: string) => {
-    const n = new Date(d + ' UTC');
-    return n.toISOString().toLocaleString();
-  };
 
   const handleExpandClick = () => {
     if (showMore) {
@@ -176,7 +172,7 @@ const NesCard: React.FC<NewsCardProps> = ({ article, lang }) => {
                 color="textSecondary"
                 align="right"
               >
-                {moment(localTime(published_date)).fromNow()}
+                {moment(utcToLocalTime(published_date)).fromNow()}
               </Typography>
             </Grid>
           </Grid>

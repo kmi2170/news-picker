@@ -42,9 +42,6 @@ const NewsCards: React.FC<NewsCardsProps> = ({
 }) => {
   const classes = useStyles();
 
-  // const { total_hits, page, total_pages, page_size } = news;
-  console.log(news);
-
   return (
     <article>
       {false ? (
