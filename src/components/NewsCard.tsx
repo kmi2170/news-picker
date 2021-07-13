@@ -109,7 +109,7 @@ const NesCard: React.FC<NewsCardProps> = ({ article, lang }) => {
         <CardMedia
           component="img"
           alt={title}
-          height="100"
+          height="175"
           width="345"
           image={media}
           title={title}
@@ -121,7 +121,11 @@ const NesCard: React.FC<NewsCardProps> = ({ article, lang }) => {
           </Typography>
         </div>
       */}
-        <CardContent>
+        <CardContent
+          style={{
+            paddingBottom: 0,
+          }}
+        >
           <Tooltip title={lang === 'ja' ? '元の記事へ' : 'View Source'}>
             <ButtonBase onClick={handleClick}>
               <Typography variant="h6" className={classes.textTitle}>
