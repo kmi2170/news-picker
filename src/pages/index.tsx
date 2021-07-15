@@ -10,8 +10,6 @@ import { makeStyles, Theme } from '@material-ui/core/styles';
 
 import SEO from '../components/SEO';
 import Navbar from '../components/Navbar';
-// import ButtonsLanguage from '../components/ButtonsLanguage';
-// import ButtonsCategory from '../components/ButtonsCategory';
 import NewsCards from '../components/NewsCards';
 import Footer from '../components/Footer';
 // import Preview from '../components/Preview';
@@ -192,10 +190,10 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
     url: 'https://free-news.p.rapidapi.com/v1/search',
     params,
     headers: {
-      // 'x-rapidapi-key': 'e55c60efe5msh73070d6e421d34bp11cc43jsn5f182a073484',
-      // 'x-rapidapi-host': 'free-news.p.rapidapi.com',
-      'x-rapidapi-key': `${process.env.NEXT_PUBLIC_RAPID_API_KEY}`,
-      'x-rapidapi-host': `${process.env.NEXT_PUBLIC_RAPID_API_HOST}`,
+      'x-rapidapi-key': 'e55c60efe5msh73070d6e421d34bp11cc43jsn5f182a073484',
+      'x-rapidapi-host': 'free-news.p.rapidapi.com',
+      // 'x-rapidapi-key': `${process.env.NEXT_PUBLIC_RAPID_API_KEY}`,
+      // 'x-rapidapi-host': `${process.env.NEXT_PUBLIC_RAPID_API_HOST}`,
       // 'x-rapidapi-key': process.env.NEXT_PUBLIC_RAPID_API_KEY,
       // 'x-rapidapi-host': process.env.NEXT_PUBLIC_RAPID_API_HOST,
     },

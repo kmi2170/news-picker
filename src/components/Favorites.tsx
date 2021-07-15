@@ -61,7 +61,7 @@ const Favorite: React.FC<FavoriteProps> = ({
   return (
     <Grid container justify="center" alignItems="center">
       <Grid item xs={3}>
-        <Tooltip title="Register current query as your favorite!">
+        <Tooltip title="Register the current query (cookie required)">
           <Button
             variant="outlined"
             color="default"

@@ -28,7 +28,7 @@ const PaginationComponent: React.FC<PaginationComponentProps> = ({
   const classes = useStyles();
   const { query } = useRouter();
 
-  const [page, setPage] = useState<number>(currentPage);
+  const [page, setPage] = useState<number>(currentPage || 1);
 
   const handleClick = (_, page: number) => {
     console.log(page);
