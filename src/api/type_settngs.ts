@@ -38,14 +38,18 @@ export interface IData {
   };
 }
 
-export type CategoryType =
-  | 'top'
+export type TopicType =
+  | 'news'
+  | 'sport'
+  | 'tech'
+  | 'world'
+  | 'finance'
+  | 'politics'
   | 'business'
-  | 'science'
-  | 'technology'
-  | 'sports'
-  | 'health'
-  | 'entertainment';
+  | 'economics'
+  | 'entertainment'
+  | 'beauty'
+  | 'gaming';
 
 // export interface IResult {
 //   title: string | null;

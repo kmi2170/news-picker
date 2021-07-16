@@ -16,8 +16,9 @@ import { makeStyles, Theme } from '@material-ui/core/styles';
 
 import Searchbar from './Searchbar';
 import ButtonsLanguage, { ButtonsLanguageProp } from './ButtonsLanguage';
+import ButtonsTopic from './ButtonsTopic';
 import Favorites from './Favorites';
-// import ButtonsCategory from './ButtonsCategory';
+import DateFromTo from './DateFromTo';
 
 const useStyles = makeStyles((theme: Theme) => ({
   appBar: {
@@ -99,36 +100,50 @@ const Navbar: React.FC<NavbarProps> = ({
               </Tooltip>
             </div>
           </Grid>
-
           <Grid item md={2} />
         </Grid>
       </Toolbar>
 
       <div hidden={!isOpen}>
         <Toolbar>
-          <ButtonsLanguage
-            lang={lang}
-            setLang={setLang}
-            setIsLoading={setIsLoading}
-            setCookieFunc={setCookieFunc}
-          />
-          <Tooltip title="Reset Query">
-            <Button
-              variant="contained"
-              size="small"
-              className={classes.resetButton}
-              onClick={handleReset}
-            >
-              Reset
-            </Button>
-          </Tooltip>
-        </Toolbar>
-        <Toolbar>
-          <Favorites
-            favorites={favorites}
-            setFavorites={setFavorites}
-            setCookieFunc={setCookieFunc}
-          />
+          <Grid container justify="flex-start" alignItems="center" spacing={1}>
+            <Grid item xs={12}>
+              <ButtonsLanguage
+                lang={lang}
+                setLang={setLang}
+                setIsLoading={setIsLoading}
+                setCookieFunc={setCookieFunc}
+              />
+              <Tooltip title="Reset Query">
+                <Button
+                  variant="contained"
+                  size="small"
+                  className={classes.resetButton}
+                  onClick={handleReset}
+                >
+                  Reset
+                </Button>
+              </Tooltip>
+            </Grid>
+            <Grid item xs={12}>
+              <ButtonsTopic
+                lang={lang}
+                // setLang={setLang}
+                setIsLoading={setIsLoading}
+                setCookieFunc={setCookieFunc}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <Favorites
+                favorites={favorites}
+                setFavorites={setFavorites}
+                setCookieFunc={setCookieFunc}
+              />
+            </Grid>
+          </Grid>
+          <DateFromTo />
+          {/*
+           */}
         </Toolbar>
       </div>
     </AppBar>

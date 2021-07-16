@@ -4,7 +4,7 @@ import router, { useRouter } from 'next/router';
 import { Typography, Button } from '@material-ui/core';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 
-import { CategoryType } from '../api/type_settngs';
+import { TopicType } from '../api/type_settngs';
 
 const useStyles = makeStyles((theme: Theme) => ({
   button: {
@@ -15,59 +15,69 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const buttons = [
-  { id: 1, category: 'top', name: 'top' },
-  { id: 2, category: 'business', name: 'business' },
-  { id: 3, category: 'science', name: 'science' },
-  { id: 4, category: 'technology', name: 'technology' },
-  { id: 5, category: 'sports', name: 'sports' },
-  { id: 6, category: 'health', name: 'health' },
-  { id: 7, category: 'entertainment', name: 'entertainment' },
+  { id: 1, code: 'news', name: { en: 'News', ja: '総合' } },
+  { id: 2, code: 'world', name: { en: 'World', ja: 'ワールド' } },
+  { id: 3, code: 'finance', name: { en: 'Finance', ja: 'ファイナンス' } },
+  { id: 4, code: 'economics', name: { en: 'Economics', ja: '経済' } },
+  { id: 5, code: 'politics', name: { en: 'Politics', ja: '政治' } },
+  { id: 6, code: 'business', name: { en: 'Business', ja: 'ビジネス' } },
+  { id: 7, code: 'sport', name: { en: 'Sports', ja: 'スポーツ' } },
+  { id: 8, code: 'tech', name: { en: 'Tech', ja: 'テック' } },
+  {
+    id: 9,
+    code: 'entertainment',
+    name: { en: 'Entertainment', ja: 'エンタメ' },
+  },
+  { id: 10, code: 'beauty', name: { en: 'Beauty', ja: '美容' } },
+  { id: 11, code: 'gaming', name: { en: 'Gaming', ja: 'ゲーム' } },
 ];
 
-interface ButtonsLanguageProp {
-  setCategory: (category: CategoryType) => void;
-  defaultCategory: string;
+export interface ButtonsTopicProp {
+  lang: string;
+  // setLang: (lang: LangType) => void;
+  setIsLoading: (isLoading: boolean) => void;
+  setCookieFunc: (name: string, value: string) => void;
 }
 
-const ButtonsLanguage: React.FC<ButtonsLanguageProp> = ({
-  setCategory,
-  defaultCategory,
+const ButtonsTopic: React.FC<ButtonsTopicProp> = ({
+  lang,
+  // setLang,
+  setIsLoading,
+  setCookieFunc,
 }) => {
   const classes = useStyles();
   const { query } = useRouter();
 
-  const [buttonsState, setButtonsState] = useState<boolean[]>(
-    buttons.map((button) => button.category === defaultCategory)
-  );
+  const [topic, setTopic] = useState('news');
 
-  const clickHandlerLang = (category: CategoryType) => {
-    setButtonsState(buttons.map((button) => button.category === category));
-    setCategory(category);
+  const clickHandlerLang = (topic: TopicType) => {
+    // setLang(lang);
+    // setCookieFunc('lang', lang);
+    setTopic(topic);
+    setIsLoading(true);
 
     router.push({
       pathname: '/',
-      query: { ...query, category },
+      query: { ...query, topic },
     });
   };
 
-  return <div>ButtonsCategory</div>;
-
-  // return (
-  //   <div>
-  //     {buttons.map(({ id, category, name }, index) => (
-  //       <Button
-  //         key={id}
-  //         variant={buttonsState[index] ? 'contained' : 'outlined'}
-  //         color="primary"
-  //         size="small"
-  //         onClick={() => clickHandlerLang(category as CategoryType)}
-  //         className={classes.button}
-  //       >
-  //         {name}
-  //       </Button>
-  //     ))}
-  //   </div>
-  // );
+  return (
+    <>
+      {buttons.map(({ id, code, name }) => (
+        <Button
+          key={id}
+          variant={code === topic ? 'contained' : 'outlined'}
+          color="primary"
+          size="small"
+          onClick={() => clickHandlerLang(code as TopicType)}
+          className={classes.button}
+        >
+          {name[lang]}
+        </Button>
+      ))}
+    </>
+  );
 };
 
-export default ButtonsLanguage;
+export default ButtonsTopic;

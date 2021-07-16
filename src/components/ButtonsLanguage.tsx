@@ -47,7 +47,7 @@ const ButtonsLanguage: React.FC<ButtonsLanguageProp> = ({
   };
 
   return (
-    <div>
+    <>
       {buttons.map(({ id, code, name }) => (
         <Button
           key={id}
@@ -60,7 +60,7 @@ const ButtonsLanguage: React.FC<ButtonsLanguageProp> = ({
           {name}
         </Button>
       ))}
-    </div>
+    </>
   );
 };
 

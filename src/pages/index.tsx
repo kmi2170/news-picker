@@ -101,7 +101,7 @@ const Home: React.FC<HomeProps> = ({ data, error }) => {
   }
 
   // console.log('data', data);
-  // console.log('news', news);
+  console.log('news', news);
   console.log('error', error);
   console.log('query', query);
   // console.log('cookies', cookies);
@@ -175,15 +175,14 @@ const fetchFunc = async (options: AxiosRequestConfig) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
-  const { q, lang, page } = query;
+  const { q, lang, page, topic } = query;
 
   const params = {
     q: q || 'news',
-    lang: lang || 'en',
-    page: page || 1,
+    lang: lang,
+    page: page,
+    topic,
   };
-
-  //const options = axiosOptions(params as ParamsType);
 
   const options = {
     method: 'GET',
@@ -200,9 +199,6 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   };
 
   const { data, error } = await fetchFunc(options as AxiosRequestConfig);
-
-  // console.log(data);
-  // console.log(error);
 
   return { props: { data, error } };
 };

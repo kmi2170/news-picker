@@ -176,7 +176,8 @@ const NesCard: React.FC<NewsCardProps> = ({ article, lang }) => {
                 color="textSecondary"
                 align="right"
               >
-                {moment(utcToLocalTime(published_date)).fromNow()}
+                {moment.utc(published_date).fromNow()}
+                {/* {moment(utcToLocalTime(published_date)).fromNow()} */}
               </Typography>
             </Grid>
           </Grid>
