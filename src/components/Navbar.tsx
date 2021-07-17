@@ -18,7 +18,7 @@ import Searchbar from './Searchbar';
 import ButtonsLanguage, { ButtonsLanguageProp } from './ButtonsLanguage';
 import ButtonsTopic from './ButtonsTopic';
 import Favorites from './Favorites';
-import DateFromTo from './DateFromTo';
+import AdvanceSearch from './AdvanceSearch';
 
 const useStyles = makeStyles((theme: Theme) => ({
   appBar: {
@@ -63,15 +63,20 @@ const Navbar: React.FC<NavbarProps> = ({
   const { query } = useRouter();
 
   const [isOpen, setIsOpen] = useState<boolean>(true);
+  const [isOpenAO, setIsOpenAO] = useState<boolean>(false);
 
   const handleExpandClick = () => {
     setIsOpen((prev) => !prev);
   };
 
+  const handleExpandClickAO = () => {
+    setIsOpenAO((prev) => !prev);
+  };
+
   const handleReset = () => {
     router.push({
       pathname: '/',
-      query: { ...query, q: 'news' },
+      query: { q: 'news', lang },
     });
   };
 
@@ -141,9 +146,26 @@ const Navbar: React.FC<NavbarProps> = ({
               />
             </Grid>
           </Grid>
-          <DateFromTo />
-          {/*
-           */}
+        </Toolbar>
+      </div>
+
+      <div className={classes.expand}>
+        <Tooltip title={isOpenAO ? 'Close More Options' : 'Open More Options'}>
+          <ButtonBase onClick={handleExpandClickAO}>
+            {isOpenAO ? (
+              <ExpandLess className={classes.icon} />
+            ) : (
+              <ExpandMore className={classes.icon} />
+            )}
+          </ButtonBase>
+        </Tooltip>
+      </div>
+
+      <div hidden={!isOpenAO}>
+        <Toolbar>
+          <div style={{ justifyContent: 'center', alignItems: 'center' }}>
+            <AdvanceSearch lang={lang} />
+          </div>
         </Toolbar>
       </div>
     </AppBar>

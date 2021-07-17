@@ -12,20 +12,31 @@ import {
 
 const useStyles = makeStyles((theme: Theme) => ({
   text: {},
+  dateWrapper: {
+    width: '9rem',
+  },
 }));
 
-const DateFromTo: React.FC = () => {
-  const classes = useStyles();
+interface DateFromToProps {
+  dateFrom: Date | null;
+  setDateFrom: (date: Date | null) => void;
+  dateTo: Date | null;
+  setDateTo: (date: Date | null) => void;
+}
 
-  const [dateFrom, setDateFrom] = useState<Date | null>(new Date());
-  const [dateTo, setDateTo] = useState<Date | null>(new Date());
+const DateFromTo: React.FC<DateFromToProps> = ({
+  dateFrom,
+  setDateFrom,
+  dateTo,
+  setDateTo,
+}) => {
+  const classes = useStyles();
 
   const minDate = new Date();
   minDate.setMonth(minDate.getMonth() - 1);
 
   const handleDateFromChange = (date: Date | null) => {
     setDateFrom(date);
-    setDateTo(date);
     console.log('data from', date);
   };
 
@@ -37,38 +48,46 @@ const DateFromTo: React.FC = () => {
   return (
     <div>
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
-        <Grid container justify="space-around">
-          <KeyboardDatePicker
-            disableToolbar
-            variant="inline"
-            format="MM/dd/yyyy"
-            margin="normal"
-            id="date-picker-from"
-            label="Date From"
-            value={dateFrom}
-            onChange={handleDateFromChange}
-            KeyboardButtonProps={{
-              'aria-label': 'change date',
-            }}
-            disableFuture
-            minDate={minDate}
-          />
-          <KeyboardDatePicker
-            disableToolbar
-            variant="inline"
-            format="MM/dd/yyyy"
-            margin="normal"
-            id="date-picker-to"
-            label="Date To"
-            value={dateTo}
-            onChange={handleDateToChange}
-            KeyboardButtonProps={{
-              'aria-label': 'change date',
-            }}
-            disableFuture
-            minDate={minDate}
-            maxDate={dateFrom}
-          />
+        <Grid container justify="center" alignItems="center">
+          <Grid item xs={6}>
+            <div className={classes.dateWrapper}>
+              <KeyboardDatePicker
+                disableToolbar
+                variant="inline"
+                format="MM/dd/yyyy"
+                margin="dense"
+                id="date-picker-from"
+                label="Date From"
+                value={dateFrom}
+                onChange={handleDateFromChange}
+                KeyboardButtonProps={{
+                  'aria-label': 'change date',
+                }}
+                disableFuture
+                minDate={minDate}
+                maxDate={dateTo}
+              />
+            </div>
+          </Grid>
+          <Grid item xs={6}>
+            <div className={classes.dateWrapper}>
+              <KeyboardDatePicker
+                disableToolbar
+                variant="inline"
+                format="MM/dd/yyyy"
+                margin="dense"
+                id="date-picker-to"
+                label="Date To"
+                value={dateTo}
+                onChange={handleDateToChange}
+                KeyboardButtonProps={{
+                  'aria-label': 'change date',
+                }}
+                disableFuture
+                minDate={minDate}
+              />
+            </div>
+          </Grid>
         </Grid>
       </MuiPickersUtilsProvider>
     </div>

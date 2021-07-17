@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const buttons = [
+export const topicButtons = [
   { id: 1, code: 'news', name: { en: 'News', ja: '総合' } },
   { id: 2, code: 'world', name: { en: 'World', ja: 'ワールド' } },
   { id: 3, code: 'finance', name: { en: 'Finance', ja: 'ファイナンス' } },
@@ -64,7 +64,7 @@ const ButtonsTopic: React.FC<ButtonsTopicProp> = ({
 
   return (
     <>
-      {buttons.map(({ id, code, name }) => (
+      {topicButtons.map(({ id, code, name }) => (
         <Button
           key={id}
           variant={code === topic ? 'contained' : 'outlined'}
