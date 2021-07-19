@@ -13,7 +13,7 @@ const LoadingSkelton = () => {
               alignItems: 'center',
             }}
           >
-            <Skeleton variant="rect" width={345} height={175} />
+            <Skeleton variant="rect" width={345} height={200} />
             <Skeleton
               variant="rect"
               width={345}

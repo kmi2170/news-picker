@@ -96,6 +96,7 @@ const Navbar: React.FC<NavbarProps> = ({
     setDateFrom(initDateFrom);
     setDateTo(new Date());
     setSearchInput('');
+    setIsLoading(true);
 
     router.push({
       pathname: '/',
