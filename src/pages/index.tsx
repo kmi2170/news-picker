@@ -5,7 +5,7 @@ import { GetServerSideProps } from 'next';
 import { useCookies } from 'react-cookie';
 import axios, { AxiosRequestConfig } from 'axios';
 
-import { Grow, Container, Grid, Typography } from '@material-ui/core';
+import { Container, Typography } from '@material-ui/core';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 
 import SEO from '../components/SEO';

@@ -10,7 +10,7 @@ import { CookiesProvider } from 'react-cookie';
 // import { ReactQueryDevtools } from 'react-query/devtools';
 
 import { ThemeProvider } from '@material-ui/core/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
+import { CssBaseline } from '@material-ui/core';
 import theme from '../theme/theme';
 
 import '../styles/globals.css';

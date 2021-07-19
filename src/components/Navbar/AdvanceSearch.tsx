@@ -1,15 +1,7 @@
-import { useState, useEffect } from 'react';
 import router, { useRouter } from 'next/router';
-import format from 'date-fns/format';
-import moment from 'moment';
+// import format from 'date-fns/format';
 
-import {
-  Grid,
-  Typography,
-  TextField,
-  MenuItem,
-  Button,
-} from '@material-ui/core';
+import { Grid, TextField, Button } from '@material-ui/core';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import teal from '@material-ui/core/colors/teal';
 
@@ -33,7 +25,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 interface AdvanceSearchProps {
   lang: string;
   sources: string | null;
-  setSources: (sources: string | null) => void;
+  setSources: (sources: string) => void;
   dateFrom: Date | null;
   setDateFrom: (dateFrom: Date | null) => void;
   dateTo: Date | null;
@@ -73,36 +65,6 @@ const AdvanceSearch: React.FC<AdvanceSearchProps> = ({
   return (
     <>
       <form onSubmit={handleSubmit} autoComplete="off">
-        {/* 
-        <TextField
-          required
-          label="Keywords"
-          type="text"
-          placeholder=""
-          margin="dense"
-          InputLabelProps={{ shrink: true }}
-          fullWidth
-          value={keywords}
-          onChange={(e) => setKeywords(e.target.value)}
-          // className={classes.input}
-        />
-        <TextField
-          select
-          label="Topic"
-          value={topic}
-          defaultValue={topic}
-          onChange={(e) => setTopic(e.target.value)}
-          // helperText="Please select topic"
-          // InputLabelProps={{ shrink: true }}
-        >
-          {topicButtons.map((topicButton) => (
-            <MenuItem key={topicButton.id} value={topicButton.code}>
-              {topicButton.name[lang]}
-            </MenuItem>
-          ))}
-        </TextField>
-        */}
-
         <Grid
           container
           justifyContent="space-between"

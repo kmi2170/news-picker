@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
 import router, { useRouter } from 'next/router';
 
 import {
@@ -71,7 +71,7 @@ const Navbar: React.FC<NavbarProps> = ({
 
   const [searchInput, setSearchInput] = useState<string>('');
 
-  const [sources, setSources] = useState<string | null>(null);
+  const [sources, setSources] = useState<string>('');
 
   const initDateFrom = new Date();
   initDateFrom.setDate(initDateFrom.getDate() - 7);
@@ -92,7 +92,7 @@ const Navbar: React.FC<NavbarProps> = ({
 
   const handleReset = () => {
     setTopic(null);
-    setSources(null);
+    setSources('');
     setDateFrom(initDateFrom);
     setDateTo(new Date());
     setSearchInput('');
@@ -144,7 +144,7 @@ const Navbar: React.FC<NavbarProps> = ({
             spacing={1}
           >
             <Grid item xs={12} container>
-              <Grid xs={6}>
+              <Grid item xs={6}>
                 <ButtonsLanguage
                   lang={lang}
                   setLang={setLang}
@@ -152,7 +152,7 @@ const Navbar: React.FC<NavbarProps> = ({
                   setCookieFunc={setCookieFunc}
                 />
               </Grid>
-              <Grid xs={6}>
+              <Grid item xs={6}>
                 <Tooltip title="Reset Keywords, Topic, Date...">
                   <Button
                     variant="contained"

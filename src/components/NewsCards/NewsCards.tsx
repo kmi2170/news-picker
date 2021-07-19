@@ -1,9 +1,10 @@
-// import { useState, useEffect } from 'react';
+// import router, { useRouter } from 'next/router';
+
 import { Grid, Typography } from '@material-ui/core';
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
+import { makeStyles, Theme } from '@material-ui/core/styles';
 
 import NewsCard from './NewsCard';
-import Loading from './Loading';
+// import Loading from './Loading';
 import LoadingSkelton from './LoadingSkelton';
 import Pagination from './Pagination';
 
@@ -41,6 +42,7 @@ const NewsCards: React.FC<NewsCardsProps> = ({
   setIsLoading,
 }) => {
   const classes = useStyles();
+  // const { query } = useRouter();
 
   return (
     <article>

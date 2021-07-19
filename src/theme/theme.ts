@@ -1,5 +1,5 @@
-// import { createMuiTheme } from '@material-ui/core/styles';
-import { unstable_createMuiStrictModeTheme as createMuiTheme } from '@material-ui/core';
+import { createTheme } from '@material-ui/core/styles';
+// import { unstable_createMuiStrictModeTheme as createMuiTheme } from '@material-ui/core';
 import { responsiveFontSizes } from '@material-ui/core/styles';
 
 import createBreakpoints from '@material-ui/core/styles/createBreakpoints';
@@ -14,7 +14,7 @@ const breakpoints = createBreakpoints({});
 //   },
 
 // Create a theme instance.
-let theme = createMuiTheme({
+let theme = createTheme({
   palette: {
     primary: {
       main: '#556cd6',

@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+// import { useState, useEffect } from 'react';
 import router, { useRouter } from 'next/router';
 
-import { Grid, IconButton, InputBase } from '@material-ui/core';
-import { Search, Cancel, Clear } from '@material-ui/icons';
+import { IconButton, InputBase } from '@material-ui/core';
+import { Search, Cancel } from '@material-ui/icons';
 import { grey } from '@material-ui/core/colors';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 

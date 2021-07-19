@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import router, { useRouter } from 'next/router';
 
 import { makeStyles, createStyles } from '@material-ui/core/styles';

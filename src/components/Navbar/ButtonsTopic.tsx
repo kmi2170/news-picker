@@ -27,7 +27,7 @@ export const topicButtons = [
   {
     id: 9,
     code: 'entertainment',
-    name: { en: 'Entertainment', ja: 'エンタメ' },
+    name: { en: 'Entertainment', ja: 'エンターテイメント' },
   },
   { id: 10, code: 'beauty', name: { en: 'Beauty', ja: '美容' } },
   { id: 11, code: 'gaming', name: { en: 'Gaming', ja: 'ゲーム' } },

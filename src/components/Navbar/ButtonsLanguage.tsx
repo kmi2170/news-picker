@@ -1,7 +1,7 @@
 // import { useState, useEffect } from 'react';
 import router, { useRouter } from 'next/router';
 
-import { Typography, Button } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 
 import { LangType } from '../../api/type_settngs';
