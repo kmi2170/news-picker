@@ -38,6 +38,8 @@ interface AdvanceSearchProps {
   setDateFrom: (dateFrom: Date | null) => void;
   dateTo: Date | null;
   setDateTo: (dateFrom: Date | null) => void;
+  searchInput: string;
+  setSearchInput: (searchInput: string) => void;
 }
 
 const AdvanceSearch: React.FC<AdvanceSearchProps> = ({
@@ -48,6 +50,8 @@ const AdvanceSearch: React.FC<AdvanceSearchProps> = ({
   setDateFrom,
   dateTo,
   setDateTo,
+  searchInput,
+  setSearchInput,
 }) => {
   const classes = useStyles();
   const { query } = useRouter();

@@ -69,6 +69,8 @@ const Navbar: React.FC<NavbarProps> = ({
   const classes = useStyles();
   const { query } = useRouter();
 
+  const [searchInput, setSearchInput] = useState<string>('');
+
   const [sources, setSources] = useState<string | null>(null);
 
   const initDateFrom = new Date();
@@ -93,6 +95,7 @@ const Navbar: React.FC<NavbarProps> = ({
     setSources(null);
     setDateFrom(initDateFrom);
     setDateTo(new Date());
+    setSearchInput('');
 
     router.push({
       pathname: '/',
@@ -111,7 +114,10 @@ const Navbar: React.FC<NavbarProps> = ({
           </Grid>
 
           <Grid item xs={12} sm={8} md={7}>
-            <Searchbar />
+            <Searchbar
+              searchInput={searchInput}
+              setSearchInput={setSearchInput}
+            />
           </Grid>
           <Grid item md={2} />
         </Grid>
@@ -136,23 +142,27 @@ const Navbar: React.FC<NavbarProps> = ({
             alignItems="center"
             spacing={1}
           >
-            <Grid item xs={12}>
-              <ButtonsLanguage
-                lang={lang}
-                setLang={setLang}
-                setIsLoading={setIsLoading}
-                setCookieFunc={setCookieFunc}
-              />
-              <Tooltip title="Reset Query">
-                <Button
-                  variant="contained"
-                  size="small"
-                  className={classes.resetButton}
-                  onClick={handleReset}
-                >
-                  Reset
-                </Button>
-              </Tooltip>
+            <Grid item xs={12} container>
+              <Grid xs={6}>
+                <ButtonsLanguage
+                  lang={lang}
+                  setLang={setLang}
+                  setIsLoading={setIsLoading}
+                  setCookieFunc={setCookieFunc}
+                />
+              </Grid>
+              <Grid xs={6}>
+                <Tooltip title="Reset Keywords, Topic, Date...">
+                  <Button
+                    variant="contained"
+                    size="small"
+                    className={classes.resetButton}
+                    onClick={handleReset}
+                  >
+                    Reset
+                  </Button>
+                </Tooltip>
+              </Grid>
             </Grid>
             <Grid item xs={12}>
               <ButtonsTopic
@@ -201,6 +211,8 @@ const Navbar: React.FC<NavbarProps> = ({
             setDateFrom={setDateFrom}
             dateTo={dateTo}
             setDateTo={setDateTo}
+            searchInput={searchInput}
+            setSearchInput={setSearchInput}
           />
         </Toolbar>
       </div>

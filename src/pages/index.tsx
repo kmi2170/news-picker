@@ -101,7 +101,7 @@ const Home: React.FC<HomeProps> = ({ data, error }) => {
 
   console.log('news', news);
   console.log('error', error);
-  console.log('query', query);
+  // console.log('query', query);
   // console.log('cookies', cookies);
 
   return (

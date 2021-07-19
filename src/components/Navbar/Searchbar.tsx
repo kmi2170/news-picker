@@ -28,11 +28,17 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const Searchbar: React.FC = () => {
+interface SearchbarProps {
+  searchInput: string;
+  setSearchInput: (searchInput: string) => void;
+}
+
+const Searchbar: React.FC<SearchbarProps> = ({
+  searchInput,
+  setSearchInput,
+}) => {
   const classes = useStyles();
   const { query } = useRouter();
-
-  const [searchInput, setSearchInput] = useState<string>('');
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) =>
     setSearchInput(e.target.value);
