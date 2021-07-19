@@ -48,14 +48,14 @@ const DateFromTo: React.FC<DateFromToProps> = ({
   return (
     <div>
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
-        <Grid container justify="center" alignItems="center">
+        <Grid container justifyContent="center" alignItems="center">
           <Grid item xs={6}>
             <div className={classes.dateWrapper}>
               <KeyboardDatePicker
                 disableToolbar
                 variant="inline"
                 format="MM/dd/yyyy"
-                margin="dense"
+                margin="none"
                 id="date-picker-from"
                 label="Date From"
                 value={dateFrom}
@@ -75,7 +75,7 @@ const DateFromTo: React.FC<DateFromToProps> = ({
                 disableToolbar
                 variant="inline"
                 format="MM/dd/yyyy"
-                margin="dense"
+                margin="none"
                 id="date-picker-to"
                 label="Date To"
                 value={dateTo}

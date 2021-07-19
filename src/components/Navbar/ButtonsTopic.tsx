@@ -4,13 +4,14 @@ import router, { useRouter } from 'next/router';
 import { Typography, Button } from '@material-ui/core';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 
-import { TopicType } from '../api/type_settngs';
+import { TopicType } from '../../api/type_settngs';
 
 const useStyles = makeStyles((theme: Theme) => ({
   button: {
     borderRadius: '15px',
     textTransform: 'capitalize',
-    marginRight: '0.10rem',
+    marginTop: '0.50rem',
+    marginRight: '0.25rem',
   },
 }));
 
@@ -35,6 +36,8 @@ export const topicButtons = [
 export interface ButtonsTopicProp {
   lang: string;
   // setLang: (lang: LangType) => void;
+  topic: TopicType;
+  setTopic: (topic: TopicType) => void;
   setIsLoading: (isLoading: boolean) => void;
   setCookieFunc: (name: string, value: string) => void;
 }
@@ -42,17 +45,18 @@ export interface ButtonsTopicProp {
 const ButtonsTopic: React.FC<ButtonsTopicProp> = ({
   lang,
   // setLang,
+  topic,
+  setTopic,
   setIsLoading,
   setCookieFunc,
 }) => {
   const classes = useStyles();
   const { query } = useRouter();
 
-  const [topic, setTopic] = useState('news');
-
   const clickHandlerLang = (topic: TopicType) => {
     // setLang(lang);
     // setCookieFunc('lang', lang);
+
     setTopic(topic);
     setIsLoading(true);
 

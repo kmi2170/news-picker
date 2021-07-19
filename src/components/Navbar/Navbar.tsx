@@ -20,6 +20,8 @@ import ButtonsTopic from './ButtonsTopic';
 import Favorites from './Favorites';
 import AdvanceSearch from './AdvanceSearch';
 
+import { TopicType } from '../../api/type_settngs';
+
 const useStyles = makeStyles((theme: Theme) => ({
   appBar: {
     background: 'white',
@@ -36,6 +38,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    margin: '0.3rem',
   },
 
   resetButton: {
@@ -46,6 +49,8 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 interface NavbarProps extends ButtonsLanguageProp {
+  topic: TopicType;
+  setTopic: (topic: TopicType) => void;
   favorites: string[];
   setFavorites: (favorites: string[]) => void;
   setCookieFunc: (name: string, value: string) => void;
@@ -54,6 +59,8 @@ interface NavbarProps extends ButtonsLanguageProp {
 const Navbar: React.FC<NavbarProps> = ({
   lang,
   setLang,
+  topic,
+  setTopic,
   setIsLoading,
   favorites,
   setFavorites,
@@ -62,11 +69,19 @@ const Navbar: React.FC<NavbarProps> = ({
   const classes = useStyles();
   const { query } = useRouter();
 
+  const [sources, setSources] = useState<string | null>(null);
+
+  const initDateFrom = new Date();
+  initDateFrom.setDate(initDateFrom.getDate() - 7);
+  const [dateFrom, setDateFrom] = useState<Date | null>(initDateFrom);
+  const [dateTo, setDateTo] = useState<Date | null>(new Date());
+
   const [isOpen, setIsOpen] = useState<boolean>(true);
   const [isOpenAO, setIsOpenAO] = useState<boolean>(false);
 
   const handleExpandClick = () => {
     setIsOpen((prev) => !prev);
+    setIsOpenAO(false);
   };
 
   const handleExpandClickAO = () => {
@@ -74,6 +89,11 @@ const Navbar: React.FC<NavbarProps> = ({
   };
 
   const handleReset = () => {
+    setTopic(null);
+    setSources(null);
+    setDateFrom(initDateFrom);
+    setDateTo(new Date());
+
     router.push({
       pathname: '/',
       query: { q: 'news', lang },
@@ -92,26 +112,30 @@ const Navbar: React.FC<NavbarProps> = ({
 
           <Grid item xs={12} sm={8} md={7}>
             <Searchbar />
-
-            <div className={classes.expand}>
-              <Tooltip title={isOpen ? 'Close Panel' : 'Open Panel'}>
-                <ButtonBase onClick={handleExpandClick}>
-                  {isOpen ? (
-                    <ExpandLess className={classes.icon} />
-                  ) : (
-                    <ExpandMore className={classes.icon} />
-                  )}
-                </ButtonBase>
-              </Tooltip>
-            </div>
           </Grid>
           <Grid item md={2} />
         </Grid>
       </Toolbar>
+      <div className={classes.expand}>
+        <Tooltip title={isOpen ? 'Close Panel' : 'Open Panel'}>
+          <ButtonBase onClick={handleExpandClick}>
+            {isOpen ? (
+              <ExpandLess className={classes.icon} />
+            ) : (
+              <ExpandMore className={classes.icon} />
+            )}
+          </ButtonBase>
+        </Tooltip>
+      </div>
 
       <div hidden={!isOpen}>
         <Toolbar>
-          <Grid container justify="flex-start" alignItems="center" spacing={1}>
+          <Grid
+            container
+            justifyContent="flex-start"
+            alignItems="center"
+            spacing={1}
+          >
             <Grid item xs={12}>
               <ButtonsLanguage
                 lang={lang}
@@ -134,38 +158,50 @@ const Navbar: React.FC<NavbarProps> = ({
               <ButtonsTopic
                 lang={lang}
                 // setLang={setLang}
+                topic={topic}
+                setTopic={setTopic}
                 setIsLoading={setIsLoading}
                 setCookieFunc={setCookieFunc}
               />
             </Grid>
             <Grid item xs={12}>
-              <Favorites
-                favorites={favorites}
-                setFavorites={setFavorites}
-                setCookieFunc={setCookieFunc}
-              />
+              <div style={{ marginTop: '0.5rem' }}>
+                <Favorites
+                  favorites={favorites}
+                  setFavorites={setFavorites}
+                  setCookieFunc={setCookieFunc}
+                />
+              </div>
             </Grid>
           </Grid>
         </Toolbar>
-      </div>
 
-      <div className={classes.expand}>
-        <Tooltip title={isOpenAO ? 'Close More Options' : 'Open More Options'}>
-          <ButtonBase onClick={handleExpandClickAO}>
-            {isOpenAO ? (
-              <ExpandLess className={classes.icon} />
-            ) : (
-              <ExpandMore className={classes.icon} />
-            )}
-          </ButtonBase>
-        </Tooltip>
+        <div className={classes.expand}>
+          <Tooltip
+            title={isOpenAO ? 'Close More Options' : 'Open More Options'}
+          >
+            <ButtonBase onClick={handleExpandClickAO}>
+              {isOpenAO && isOpen ? (
+                <ExpandLess className={classes.icon} />
+              ) : (
+                <ExpandMore className={classes.icon} />
+              )}
+            </ButtonBase>
+          </Tooltip>
+        </div>
       </div>
 
       <div hidden={!isOpenAO}>
         <Toolbar>
-          <div style={{ justifyContent: 'center', alignItems: 'center' }}>
-            <AdvanceSearch lang={lang} />
-          </div>
+          <AdvanceSearch
+            lang={lang}
+            sources={sources}
+            setSources={setSources}
+            dateFrom={dateFrom}
+            setDateFrom={setDateFrom}
+            dateTo={dateTo}
+            setDateTo={setDateTo}
+          />
         </Toolbar>
       </div>
     </AppBar>

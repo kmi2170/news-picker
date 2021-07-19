@@ -2,14 +2,17 @@ import { useState, useEffect } from 'react';
 import router, { useRouter } from 'next/router';
 
 import { Grid, Button, Typography, Chip, Tooltip } from '@material-ui/core';
-
 import { makeStyles, Theme } from '@material-ui/core/styles';
+import purple from '@material-ui/core/colors/purple';
 
 const useStyles = makeStyles((theme: Theme) => ({
   text: { color: 'black' },
   button: {
     borderRadius: '15px',
     textTransform: 'capitalize',
+    color: '#fff',
+    background: purple[500],
+    // color: theme.palette.info.dark,
   },
   chips: {
     display: 'flex',
@@ -59,12 +62,12 @@ const Favorite: React.FC<FavoriteProps> = ({
   };
 
   return (
-    <Grid container justify="center" alignItems="center">
+    <Grid container justifyContent="center" alignItems="center">
       <Grid item xs={3}>
-        <Tooltip title="Register the current query (cookie required)">
+        <Tooltip title="Register the keywords (cookie required)">
           <Button
-            variant="outlined"
-            color="default"
+            variant="contained"
+            // color="default"
             onClick={addFavorite}
             className={classes.button}
           >

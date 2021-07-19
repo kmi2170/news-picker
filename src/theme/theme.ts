@@ -23,6 +23,10 @@ let theme = createMuiTheme({
       main: '#F53689',
       // main: '#19857b',
     },
+    info: {
+      main: '#2196f3',
+      light: '#2196f3',
+    },
     error: {
       main: red.A400,
     },

@@ -4,13 +4,14 @@ import router, { useRouter } from 'next/router';
 import { Typography, Button } from '@material-ui/core';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 
-import { LangType } from '../api/type_settngs';
+import { LangType } from '../../api/type_settngs';
 
 const useStyles = makeStyles((theme: Theme) => ({
   button: {
     borderRadius: '15px',
     textTransform: 'capitalize',
-    marginRight: '0.10rem',
+    marginRight: '0.25rem',
+    hight: '1rem',
   },
 }));
 

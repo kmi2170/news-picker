@@ -17,8 +17,8 @@ import { ExpandMore, ExpandLess } from '@material-ui/icons';
 import clsx from 'clsx';
 import moment from 'moment';
 
-import { IArticle } from '../api/type_settngs';
-import { utcToLocalTime } from '../utils/utcToLocalTime';
+import { IArticle } from '../../api/type_settngs';
+// import { utcToLocalTime } from '../utils/utcToLocalTime';
 
 const useStyles = makeStyles((theme: Theme) => ({
   cardWrapper: {
@@ -148,7 +148,7 @@ const NesCard: React.FC<NewsCardProps> = ({ article, lang }) => {
           </div>
           <div className={classes.overlay} hidden={showMore} />
 
-          <Grid container justify="center" alignItems="center">
+          <Grid container justifyContent="center" alignItems="center">
             <Grid item xs={4}>
               {showMore && (
                 <ButtonBase onClick={handleClick}>

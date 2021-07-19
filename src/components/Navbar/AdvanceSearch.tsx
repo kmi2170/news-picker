@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import router, { useRouter } from 'next/router';
 import format from 'date-fns/format';
+import moment from 'moment';
 
 import {
   Grid,
@@ -10,62 +11,58 @@ import {
   Button,
 } from '@material-ui/core';
 import { makeStyles, Theme } from '@material-ui/core/styles';
+import teal from '@material-ui/core/colors/teal';
 
 import DateFromTo from './DateFromTo';
-import { topicButtons } from './ButtonsTopic';
+// import { topicButtons } from './ButtonsTopic';
+import { localToUtcString } from '../../utils/localToUTCString';
 
 const useStyles = makeStyles((theme: Theme) => ({
   text: {},
   button: {
     borderRadius: '15px',
     textTransform: 'capitalize',
-    marginTop: '0.5rem',
+    // marginTop: '0.5rem',
+    marginTop: 0,
     marginBottom: '1.0rem',
+    color: '#fff',
+    background: teal[500],
   },
 }));
 
 interface AdvanceSearchProps {
   lang: string;
+  sources: string | null;
+  setSources: (sources: string | null) => void;
+  dateFrom: Date | null;
+  setDateFrom: (dateFrom: Date | null) => void;
+  dateTo: Date | null;
+  setDateTo: (dateFrom: Date | null) => void;
 }
 
-const AdvanceSearch: React.FC<AdvanceSearchProps> = ({ lang }) => {
+const AdvanceSearch: React.FC<AdvanceSearchProps> = ({
+  lang,
+  sources,
+  setSources,
+  dateFrom,
+  setDateFrom,
+  dateTo,
+  setDateTo,
+}) => {
   const classes = useStyles();
   const { query } = useRouter();
 
-  const [keywords, setKeywords] = useState('');
-  const [topic, setTopic] = useState('');
-  const [sources, setSources] = useState(null);
-
-  const initDateFrom = new Date();
-  initDateFrom.setDate(initDateFrom.getDate() - 7);
-  const [dateFrom, setDateFrom] = useState<Date | null>(initDateFrom);
-  const [dateTo, setDateTo] = useState<Date | null>(new Date());
-
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    //console.log(keywords, topic, sources, dateFrom, dateTo);
-    console.log(
-      keywords,
-      topic,
-      sources,
-      format(dateFrom, 'yyyy/MM/dd'),
-      format(dateTo, 'yyyy/MM/dd')
-    );
-    const from = format(dateFrom, 'yyyy/MM/dd');
-    const to = format(dateTo, 'yyyy/MM/dd');
+
+    // const from = format(dateFrom, 'yyyy/MM/dd');
+    // const to = format(dateTo, 'yyyy/MM/dd');
+    const from = localToUtcString(dateFrom);
+    const to = localToUtcString(dateTo);
 
     router.push({
       pathname: '/',
-      query: {
-        ...query,
-        // q: keywords,
-        // lang,
-        // page: 1,
-        // topic,
-        sources,
-        from,
-        to,
-      },
+      query: { ...query, sources, from, to },
     });
   };
 
@@ -102,13 +99,18 @@ const AdvanceSearch: React.FC<AdvanceSearchProps> = ({ lang }) => {
         </TextField>
         */}
 
-        <Grid container justify="center" alignItems="center">
+        <Grid
+          container
+          justifyContent="space-between"
+          alignItems="center"
+          spacing={3}
+        >
           <Grid item xs={12} sm={6}>
             <TextField
               label="Source"
               type="text"
               placeholder="e.g. nytimes.com"
-              margin="dense"
+              margin="none"
               InputLabelProps={{ shrink: true }}
               fullWidth
               value={sources}
@@ -124,7 +126,7 @@ const AdvanceSearch: React.FC<AdvanceSearchProps> = ({ lang }) => {
               setDateTo={setDateTo}
             />
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={12} sm={12}>
             <Button
               type="submit"
               variant="contained"

@@ -9,12 +9,12 @@ import { Grow, Container, Grid, Typography } from '@material-ui/core';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 
 import SEO from '../components/SEO';
-import Navbar from '../components/Navbar';
-import NewsCards from '../components/NewsCards';
+import Navbar from '../components/Navbar/Navbar';
+import NewsCards from '../components/NewsCards/NewsCards';
 import Footer from '../components/Footer';
 // import Preview from '../components/Preview';
 
-import { LangType, IData } from '../api/type_settngs';
+import { LangType, TopicType, IData } from '../api/type_settngs';
 
 // const baseUrl = `https://newsdata.io/api/1/news`;
 // const fetcher = async (url: string) => {
@@ -56,10 +56,9 @@ const Home: React.FC<HomeProps> = ({ data, error }) => {
   const defaultLang = (query.lang as LangType) || 'en';
   const [lang, setLang] = useState<LangType>(defaultLang);
 
-  // const defaultCategory = 'news';
-  // const [category, setCategory] = useState<CategoryType>(defaultCategory);
+  const [news, setNews] = useState<IData | undefined>(undefined);
 
-  const [news, setNews] = useState(undefined);
+  const [topic, setTopic] = useState<TopicType | null>(null);
 
   const [favorites, setFavorites] = useState<string[]>([]);
 
@@ -100,13 +99,10 @@ const Home: React.FC<HomeProps> = ({ data, error }) => {
     </Typography>;
   }
 
-  // console.log('data', data);
   console.log('news', news);
   console.log('error', error);
   console.log('query', query);
   // console.log('cookies', cookies);
-  // console.log('API_KEY', process.env.NEXT_PUBLIC_RAPID_API_KEY);
-  // console.log('typeof API_KEY', typeof process.env.NEXT_PUBLIC_RAPID_API_KEY);
 
   return (
     <div className={classes.root}>
@@ -114,21 +110,15 @@ const Home: React.FC<HomeProps> = ({ data, error }) => {
       <Navbar
         lang={lang}
         setLang={setLang}
+        topic={topic}
+        setTopic={setTopic}
         setIsLoading={setIsLoading}
         favorites={favorites}
         setFavorites={setFavorites}
         setCookieFunc={setCookieFunc}
       />
-      <Container>
-        {/* 
-        <div className={classes.buttonsCategory}>
-          <ButtonsCategory
-            setCategory={setCategory}
-            defaultCategory={defaultCategory}
-          />
-        </div>
-      */}
 
+      <Container>
         <NewsCards
           news={news}
           lang={lang}
@@ -175,14 +165,11 @@ const fetchFunc = async (options: AxiosRequestConfig) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
-  const { q, lang, page, topic } = query;
+  const { q, lang, page, topic, sources, from, to } = query;
 
-  const params = {
-    q: q || 'news',
-    lang: lang,
-    page: page,
-    topic,
-  };
+  const params = sources
+    ? { q: q || 'news', lang, page, topic, from, to, sources }
+    : { q: q || 'news', lang, page, topic, from, to };
 
   const options = {
     method: 'GET',
@@ -191,14 +178,16 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
     headers: {
       'x-rapidapi-key': 'e55c60efe5msh73070d6e421d34bp11cc43jsn5f182a073484',
       'x-rapidapi-host': 'free-news.p.rapidapi.com',
-      // 'x-rapidapi-key': `${process.env.NEXT_PUBLIC_RAPID_API_KEY}`,
-      // 'x-rapidapi-host': `${process.env.NEXT_PUBLIC_RAPID_API_HOST}`,
       // 'x-rapidapi-key': process.env.NEXT_PUBLIC_RAPID_API_KEY,
       // 'x-rapidapi-host': process.env.NEXT_PUBLIC_RAPID_API_HOST,
     },
   };
 
   const { data, error } = await fetchFunc(options as AxiosRequestConfig);
+
+  // console.log(data);
+  // console.log(error);
+  // console.log(params);
 
   return { props: { data, error } };
 };
