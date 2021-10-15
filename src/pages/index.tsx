@@ -54,7 +54,7 @@ interface HomeProps {
 const Home: React.FC<HomeProps> = ({ data }) => {
   const classes = useStyles();
   const { query } = useRouter();
-  const [cookies, setCookie] = useCookies(["user"]);
+  const [cookies, setCookie] = useCookies(["lang", "favorites"]);
 
   const defaultLang = (query.lang as LangType) || "en";
   const [lang, setLang] = useState<LangType>(defaultLang);
