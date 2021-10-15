@@ -1,4 +1,4 @@
-import { Grid, Typography } from '@material-ui/core';
+import { Grid, Typography } from "@material-ui/core";
 
 const Footer = () => {
   const dt = new Date();
@@ -9,7 +9,7 @@ const Footer = () => {
       <Grid container>
         <Grid item xs={12}>
           <Typography variant="body2">
-            Copyrihgt &copy; kmi {year}. All rights reserved. | Powerd by{' '}
+            Copyrihgt &copy; kmi {year}. All rights reserved. | Powerd by{" "}
             {
               <a
                 href="https://newscatcherapi.com/"
