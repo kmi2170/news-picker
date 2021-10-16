@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginBottom: "1.0rem",
   },
   error: {
-    padding: "1rem 0",
+    padding: "3rem 0",
   },
 }));
 
@@ -130,8 +130,14 @@ const Home: React.FC<HomeProps> = ({ data }) => {
             setIsLoading={setIsLoading}
           />
         ) : (
-          <Typography variant="h6" color="error" className={classes.error}>
-            Error: Something went wrong in the server. Please Try again later.
+          <Typography
+            variant="h6"
+            // color="error"
+            align="center"
+            className={classes.error}
+          >
+            Service is temporally unavailable due to the server problem. Please
+            try again later.
           </Typography>
         )}
         {/* 
@@ -195,7 +201,8 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
     },
   };
 
-  const { data } = await fetchFunc(options as AxiosRequestConfig);
+  const data = null;
+  // const { data } = await fetchFunc(options as AxiosRequestConfig);
   // const { data, error } = await fetchFunc(options as AxiosRequestConfig);
 
   // console.log(data);
