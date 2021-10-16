@@ -201,8 +201,8 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
     },
   };
 
-  const data = null;
-  // const { data } = await fetchFunc(options as AxiosRequestConfig);
+  // const data = null;
+  const { data } = await fetchFunc(options as AxiosRequestConfig);
   // const { data, error } = await fetchFunc(options as AxiosRequestConfig);
 
   // console.log(data);
