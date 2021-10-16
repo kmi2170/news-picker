@@ -74,7 +74,7 @@ const Home: React.FC<HomeProps> = ({ data }) => {
     sameSite: true,
   };
 
-  const setCookieFunc = (name: string, value: string) =>
+  const setCookieFunc = (name: "lang" | "favorites", value: string) =>
     setCookie(name, value, cookiesOptions);
 
   useEffect(() => {
