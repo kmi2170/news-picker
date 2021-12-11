@@ -1,6 +1,15 @@
-export type LangType = 'en' | 'ja';
+export type LangType = "en" | "ja";
 
-export interface IArticle {
+export type QueryType = {
+  q: string;
+  lang: LangType;
+  topic?: TopicType;
+  from?: Date | null;
+  to?: Date | null;
+  sources?: string;
+};
+
+export type ArticleDataType = {
   title: string | null;
   author: string | null;
   published_date: string | null;
@@ -19,15 +28,15 @@ export interface IArticle {
   twitter_account: string | null;
   _score: number | null;
   _id: string | null;
-}
+};
 
-export interface IData {
+export type NewsDataType = {
   status: string;
   total_hits: number;
   page: number;
   total_pages: number;
   page_size: number;
-  articles: IArticle[];
+  articles: ArticleDataType[];
   user_input: {
     q?: string;
     lang?: string;
@@ -36,37 +45,17 @@ export interface IData {
     page?: number;
     size?: number;
   };
-}
+};
 
 export type TopicType =
-  | 'news'
-  | 'sport'
-  | 'tech'
-  | 'world'
-  | 'finance'
-  | 'politics'
-  | 'business'
-  | 'economics'
-  | 'entertainment'
-  | 'beauty'
-  | 'gaming';
-
-// export interface IResult {
-//   title: string | null;
-//   link: string | null;
-//   keywords: string[] | null;
-//   creator: string[] | null;
-//   video_url: string | null;
-//   description: string;
-//   content: string | null;
-//   pubDate: string | null;
-//   image_url: string | null;
-//   source_id: string | null;
-// }
-
-// export interface IData {
-//   status: string;
-//   totalResults: number;
-//   results: IResult[];
-//   nextPage: number;
-// }
+  | "news"
+  | "sport"
+  | "tech"
+  | "world"
+  | "finance"
+  | "politics"
+  | "business"
+  | "economics"
+  | "entertainment"
+  | "beauty"
+  | "gaming";

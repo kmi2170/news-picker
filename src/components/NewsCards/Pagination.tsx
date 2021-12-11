@@ -1,13 +1,13 @@
-import { useState } from 'react';
-import router, { useRouter } from 'next/router';
+import { useState } from "react";
+import router, { useRouter } from "next/router";
 
-import { makeStyles, createStyles } from '@material-ui/core/styles';
-import Pagination from '@material-ui/lab/Pagination';
+import { makeStyles, createStyles } from "@material-ui/core/styles";
+import Pagination from "@material-ui/lab/Pagination";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
     root: {
-      '& > *': {
+      "& > *": {
         marginTop: theme.spacing(2),
       },
     },
@@ -15,13 +15,13 @@ const useStyles = makeStyles((theme) =>
 );
 
 interface PaginationComponentProps {
-  setIsLoading: (isLoading: boolean) => void;
+  // setIsLoading: (isLoading: boolean) => void;
   currentPage: number;
   totalPages: number;
 }
 
 const PaginationComponent: React.FC<PaginationComponentProps> = ({
-  setIsLoading,
+  // setIsLoading,
   currentPage,
   totalPages,
 }) => {
@@ -33,10 +33,10 @@ const PaginationComponent: React.FC<PaginationComponentProps> = ({
   const handleClick = (_, page: number) => {
     console.log(page);
     setPage(page);
-    setIsLoading(true);
+    // setIsLoading(true);
 
     router.push({
-      pathname: '/',
+      pathname: "/",
       query: { ...query, page },
     });
   };
