@@ -44,9 +44,6 @@ const AdvanceSearch: React.FC = () => {
   const [dateFrom, setDateFrom] = useState<Date | null>(new Date(initDateFrom));
   const [dateTo, setDateTo] = useState<Date | null>(new Date());
 
-  console.log(`dateFrom`, dateFrom, typeof dateFrom);
-  console.log(`dateTo`, dateTo);
-
   useEffect(() => {
     dispatch(setFrom(localToUTCString(dateFrom)));
     dispatch(setTo(localToUTCString(dateTo)));
@@ -100,10 +97,10 @@ const AdvanceSearch: React.FC = () => {
           </Grid>
           <Grid item xs={12} sm={6}>
             <DateFromTo
-              // dateFrom={dateFrom}
-              // setDateFrom={setDateFrom}
-              // dateTo={dateTo}
-              // setDateTo={setDateTo}
+            // dateFrom={dateFrom}
+            // setDateFrom={setDateFrom}
+            // dateTo={dateTo}
+            // setDateTo={setDateTo}
             />
           </Grid>
           <Grid item xs={12} sm={12}>

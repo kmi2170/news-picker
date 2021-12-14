@@ -2,22 +2,18 @@ import { useEffect } from "react";
 
 import { useCookies } from "react-cookie";
 
-import { Container, Typography } from "@material-ui/core";
-import { makeStyles, Theme } from "@material-ui/core/styles";
+import { Container } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 
 import { useAppSelector, useAppDispatch } from "../app/hooks";
 import { selectNews, setLang, setFavorites } from "../features/newsSlice";
-import { useGetNewsApiQuery } from "../services/newsApi";
-
-import { LangType, TopicType, NewsDataType } from "../api/type_settngs";
 
 import SEO from "../components/SEO";
 import Navbar from "../components/Navbar/Navbar";
 import NewsCards from "../components/NewsCards/NewsCards";
 import Footer from "../components/Footer";
-import Preview from "../components/Preview";
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     flexGrow: 1,
     // backgroundImage:
@@ -39,21 +35,11 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const Home: React.FC = () => {
   const classes = useStyles();
+
+  const { lang, favorites } = useAppSelector(selectNews);
+  const dispatch = useAppDispatch();
+
   const [cookies, setCookie] = useCookies(["lang", "favorites"]);
-
-  const { q, lang, topic, favorites, page, from, to, sources } =
-    useAppSelector(selectNews);
-
-  const { data: news } = useGetNewsApiQuery({
-    q,
-    lang,
-    topic,
-    page,
-    from,
-    to,
-    sources,
-  });
-  console.log("newscards data", news);
 
   const cookiesOptions = {
     path: "/",
@@ -64,11 +50,12 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     if (cookies.lang) {
-      setLang(cookies.lang);
+      dispatch(setLang(cookies.lang));
     }
 
     if (cookies.favorites && cookies.favorites.length) {
-      setFavorites(cookies.favorites);
+      console.log(cookies.favorites);
+      dispatch(setFavorites(cookies.favorites));
     }
   }, []);
 
@@ -83,17 +70,7 @@ const Home: React.FC = () => {
   return (
     <div className={classes.root}>
       <SEO />
-      <Navbar
-      // lang={lang}
-      // setLang={setLang}
-      // topic={topic}
-      // setTopic={setTopic}
-      // setIsLoading={setIsLoading}
-      // favorites={favorites}
-      // setFavorites={setFavorites}
-      // setCookieFunc={setCookieFunc}
-      />
-
+      <Navbar />
       <Container>
         <NewsCards />
         <Footer />
@@ -103,23 +80,3 @@ const Home: React.FC = () => {
 };
 
 export default Home;
-
-// export const getServerSideProps: GetServerSideProps = async ({ query }) => {
-//   const { q, lang, page, topic, sources, from, to } = query;
-
-//   const params = sources
-//     ? { q: q || "news", lang, page, topic, from, to, sources }
-//     : { q: q || "news", lang, page, topic, from, to };
-
-//   // const data = null;
-//   // const { data } = await fetchFunc(options as AxiosRequestConfig);
-//   // const data = await fetchNews(params);
-//   // console.log(data);
-//   // const { data, error } = await fetchFunc(options as AxiosRequestConfig);
-
-//   // console.log(data);
-//   // console.log(error);
-//   // console.log(params);
-
-//   return { props: { data } };
-// };
