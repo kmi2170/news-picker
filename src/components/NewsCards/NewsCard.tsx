@@ -21,7 +21,7 @@ import { ArticleDataType } from "../../api/type_settngs";
 // import { utcToLocalTime } from '../utils/utcToLocalTime';
 
 const useStyles = makeStyles((theme: Theme) => ({
-  cardWrapper: {
+  cardContainer: {
     display: "flex",
     justifyContent: "center",
   },
@@ -104,7 +104,7 @@ const NesCard: React.FC<NewsCardProps> = ({ article, lang }) => {
   };
 
   return (
-    <div className={classes.cardWrapper}>
+    <div className={classes.cardContainer}>
       <Card ref={articleRef} className={classes.root}>
         <CardMedia
           component="img"

@@ -1,8 +1,8 @@
-import { useState } from "react";
-import router, { useRouter } from "next/router";
-
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import Pagination from "@material-ui/lab/Pagination";
+
+import { selectNews, setPage } from "../../features/newsSlice";
+import { useAppSelector, useAppDispatch } from "../../app/hooks";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -15,30 +15,19 @@ const useStyles = makeStyles((theme) =>
 );
 
 interface PaginationComponentProps {
-  // setIsLoading: (isLoading: boolean) => void;
-  currentPage: number;
   totalPages: number;
 }
 
 const PaginationComponent: React.FC<PaginationComponentProps> = ({
-  // setIsLoading,
-  currentPage,
   totalPages,
 }) => {
   const classes = useStyles();
-  const { query } = useRouter();
 
-  const [page, setPage] = useState<number>(currentPage || 1);
+  const dispatch = useAppDispatch();
+  const { page } = useAppSelector(selectNews);
 
   const handleClick = (_, page: number) => {
-    console.log(page);
-    setPage(page);
-    // setIsLoading(true);
-
-    router.push({
-      pathname: "/",
-      query: { ...query, page },
-    });
+    dispatch(setPage(page));
   };
 
   return (

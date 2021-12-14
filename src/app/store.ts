@@ -10,7 +10,8 @@ export const store = configureStore({
     news: newsSlice,
     [newsApi.reducerPath]: newsApi.reducer,
   },
-  middleware: (gDM) => gDM().concat(newsApi.middleware),
+  middleware: (gDM) =>
+    gDM({ serializableCheck: false }).concat(newsApi.middleware),
 });
 
 setupListeners(store.dispatch);

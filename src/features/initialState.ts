@@ -1,19 +1,37 @@
-import { NewsDataType, LangType, TopicType } from "../api/type_settngs";
+import { LangType, TopicType } from "../api/type_settngs";
+import { localToUTCString } from "../utils/localToUTCString";
+
+const initDateFrom = new Date();
+initDateFrom.setDate(initDateFrom.getDate() - 7);
 
 export const initialState: StateType = {
-  news: null,
+  q: "",
   lang: "en",
-  topic: null,
+  topic: "",
   favorites: [],
-  /* isLoading: false,
-  isError: false, */
+  page: 1,
+  from: localToUTCString(initDateFrom),
+  to: localToUTCString(new Date()),
+  sources: "",
+  isReset: false,
+  searchTerm: "",
+  searchSources: "",
+  pickerDateFrom: initDateFrom,
+  pickerDateTo: new Date(),
 };
 
 export type StateType = {
-  news: NewsDataType;
+  q: string;
   lang: LangType;
-  topic: TopicType | null;
+  topic: TopicType;
   favorites: string[];
-  /* isLoading: boolean;
-  isError: boolean; */
+  page: number;
+  from: string;
+  to: string;
+  sources: string;
+  isReset: boolean;
+  searchTerm: string;
+  searchSources: string;
+  pickerDateFrom: Date;
+  pickerDateTo: Date;
 };

@@ -1,66 +1,80 @@
-import router, { useRouter } from 'next/router';
-// import format from 'date-fns/format';
+import { useState, useEffect, useCallback } from "react";
 
-import { Grid, TextField, Button } from '@material-ui/core';
-import { makeStyles, Theme } from '@material-ui/core/styles';
-import teal from '@material-ui/core/colors/teal';
+import { Grid, TextField, Button } from "@material-ui/core";
+import { makeStyles, Theme } from "@material-ui/core/styles";
+import teal from "@material-ui/core/colors/teal";
 
-import DateFromTo from './DateFromTo';
-// import { topicButtons } from './ButtonsTopic';
-import { localToUtcString } from '../../utils/localToUTCString';
+import { useAppSelector, useAppDispatch } from "../../app/hooks";
+import {
+  selectNews,
+  setFrom,
+  setTo,
+  setTopic,
+  setSources,
+  setSearchSources,
+} from "../../features/newsSlice";
+
+import DateFromTo from "./DateFromTo";
+import { localToUTCString } from "../../utils/localToUTCString";
 
 const useStyles = makeStyles((theme: Theme) => ({
   text: {},
   button: {
-    borderRadius: '15px',
-    textTransform: 'capitalize',
+    borderRadius: "15px",
+    textTransform: "capitalize",
     // marginTop: '0.5rem',
     marginTop: 0,
-    marginBottom: '1.0rem',
-    color: '#fff',
+    marginBottom: "1.0rem",
+    color: "#fff",
     background: teal[500],
   },
 }));
 
-interface AdvanceSearchProps {
-  lang: string;
-  sources: string | null;
-  setSources: (sources: string) => void;
-  dateFrom: Date | null;
-  setDateFrom: (dateFrom: Date | null) => void;
-  dateTo: Date | null;
-  setDateTo: (dateFrom: Date | null) => void;
-  searchInput: string;
-  setSearchInput: (searchInput: string) => void;
-}
-
-const AdvanceSearch: React.FC<AdvanceSearchProps> = ({
-  lang,
-  sources,
-  setSources,
-  dateFrom,
-  setDateFrom,
-  dateTo,
-  setDateTo,
-  searchInput,
-  setSearchInput,
-}) => {
+const AdvanceSearch: React.FC = () => {
   const classes = useStyles();
-  const { query } = useRouter();
+
+  const { searchSources } = useAppSelector(selectNews);
+  const dispatch = useAppDispatch();
+
+  // const [newsSources, setNewsSources] = useState<string>("");
+
+  const initDateFrom = new Date();
+  initDateFrom.setDate(initDateFrom.getDate() - 7);
+
+  const [dateFrom, setDateFrom] = useState<Date | null>(new Date(initDateFrom));
+  const [dateTo, setDateTo] = useState<Date | null>(new Date());
+
+  console.log(`dateFrom`, dateFrom, typeof dateFrom);
+  console.log(`dateTo`, dateTo);
+
+  useEffect(() => {
+    dispatch(setFrom(localToUTCString(dateFrom)));
+    dispatch(setTo(localToUTCString(dateTo)));
+  }, []);
+
+  // useEffect(() => {
+  //   if (isReset) {
+  //     dispatch(setFrom(localToUTCString(dateFrom)));
+  //     dispatch(setTo(localToUTCString(dateTo)));
+  //   }
+  // }, [isReset]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // const from = format(dateFrom, 'yyyy/MM/dd');
-    // const to = format(dateTo, 'yyyy/MM/dd');
-    const from = localToUtcString(dateFrom);
-    const to = localToUtcString(dateTo);
-
-    router.push({
-      pathname: '/',
-      query: { ...query, sources, from, to },
-    });
+    dispatch(setTopic(""));
+    dispatch(setFrom(localToUTCString(dateFrom)));
+    dispatch(setTo(localToUTCString(dateTo)));
+    dispatch(setSources(searchSources));
   };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+    dispatch(setSearchSources(e.target.value));
+
+  // const handleChange = useCallback(
+  //   (e: React.ChangeEvent<HTMLInputElement>) => setNewsSources(e.target.value),
+  //   []
+  // );
 
   return (
     <>
@@ -79,17 +93,17 @@ const AdvanceSearch: React.FC<AdvanceSearchProps> = ({
               margin="none"
               InputLabelProps={{ shrink: true }}
               fullWidth
-              value={sources}
-              onChange={(e) => setSources(e.target.value)}
+              value={searchSources}
+              onChange={handleChange}
               // className={classes.input}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
             <DateFromTo
-              dateFrom={dateFrom}
-              setDateFrom={setDateFrom}
-              dateTo={dateTo}
-              setDateTo={setDateTo}
+              // dateFrom={dateFrom}
+              // setDateFrom={setDateFrom}
+              // dateTo={dateTo}
+              // setDateTo={setDateTo}
             />
           </Grid>
           <Grid item xs={12} sm={12}>

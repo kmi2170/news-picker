@@ -3,10 +3,11 @@ export type LangType = "en" | "ja";
 export type QueryType = {
   q: string;
   lang: LangType;
-  topic?: TopicType;
-  from?: Date | null;
-  to?: Date | null;
-  sources?: string;
+  page: number;
+  topic: TopicType;
+  from: string | null;
+  to: string | null;
+  sources: string;
 };
 
 export type ArticleDataType = {
@@ -48,6 +49,7 @@ export type NewsDataType = {
 };
 
 export type TopicType =
+  | ""
   | "news"
   | "sport"
   | "tech"

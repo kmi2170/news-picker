@@ -10,8 +10,8 @@ export const newsApi = createApi({
   // refetchOnReconnect: true,
   endpoints: (builder) => ({
     getNewsApi: builder.query({
-      query: ({ q, lang, topic, from, to, sources }: QueryType) => {
-        return `news?q=${q}&lang=${lang}&topic=${topic}&from=${from}&to=${to}&sources=${sources}`;
+      query: ({ q, lang, topic, page, from, to, sources }: QueryType) => {
+        return `news?q=${q}&lang=${lang}&topic=${topic}&page=${page}&from=${from}&to=${to}&sources=${sources}`;
       },
     }),
   }),

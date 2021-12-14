@@ -9,7 +9,7 @@ import { useAppSelector } from "../../app/hooks";
 import { selectNews } from "../../features/newsSlice";
 import { useGetNewsApiQuery } from "../../services/newsApi";
 
-import { NewsDataType, ArticleDataType } from "../../api/type_settngs";
+import { ArticleDataType } from "../../api/type_settngs";
 import { sortData } from "../../utils/sort";
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -18,72 +18,79 @@ const useStyles = makeStyles((theme: Theme) => ({
     padding: "1rem",
     height: "100vh",
   },
-  paginationWrapper: {
+  paginationContainer: {
     marginBottom: "1rem",
     display: "flex",
     justifyContent: "center",
   },
+  error: {
+    padding: "3rem 0",
+  },
 }));
 
-// const sortedArticle = (article: ArticleDataType[], sortby: string) => {
-//   return sortData(article, sortby);
-// };
-
-// interface NewsCardsProps {
-//   isLoading: boolean;
-//   setIsLoading: (isLoading: boolean) => void;
-// }
-
-// const NewsCards: React.FC<NewsCardsProps> = ({ isLoading, setIsLoading }) => {
 const NewsCards: React.FC = () => {
   const classes = useStyles();
 
-  const { lang, topic } = useAppSelector(selectNews);
+  const { q, lang, topic, favorites, page, from, to, sources } =
+    useAppSelector(selectNews);
 
-  const q = "news";
-  const { data: news, isFetching } = useGetNewsApiQuery({ q, lang, topic });
-  // console.log("newscards data", data);
+  const {
+    data: news,
+    isFetching,
+    isError,
+  } = useGetNewsApiQuery({
+    q,
+    lang,
+    topic,
+    page,
+    from,
+    to,
+    sources,
+  });
+
+  if (isError)
+    return (
+      <Typography
+        variant="h6"
+        // color="error"
+        align="center"
+        className={classes.error}
+      >
+        Service is temporally unavailable due to the server problem. Please try
+        again later.
+      </Typography>
+    );
 
   return (
     <article>
-      <>
-        <Typography variant="subtitle1" className={classes.display}>
-          {news?.status === "ok"
-            ? `Found ${news.total_hits} articles`
-            : news?.status}
-        </Typography>
+      <Typography variant="subtitle1" className={classes.display}>
+        {news?.status === "ok"
+          ? `Found ${news.total_hits} articles`
+          : news?.status}
+      </Typography>
 
-        <div className={classes.paginationWrapper}>
-          <Pagination
-            // setIsLoading={setIsLoading}
-            currentPage={news?.page}
-            totalPages={news?.total_pages}
-          />
-        </div>
+      <div className={classes.paginationContainer}>
+        <Pagination totalPages={news?.total_pages} />
+      </div>
 
-        {isFetching ? (
-          <LoadingSkelton />
-        ) : (
-          <Grid container justifyContent="space-between" spacing={2}>
-            {news?.articles &&
-              sortData(news.articles, "published_date").map(
-                (article: ArticleDataType) => (
-                  <Grid item key={article._id} xs={12} sm={6} md={4}>
-                    <NewsCard article={article} lang={lang} />
-                  </Grid>
-                )
-              )}
-          </Grid>
-        )}
+      {isFetching ? (
+        <LoadingSkelton />
+      ) : (
+        <Grid container justifyContent="space-between" spacing={2}>
+          {news?.articles &&
+            sortData(news.articles, "published_date").map(
+              (article: ArticleDataType) => (
+                <Grid item key={article._id} xs={12} sm={6} md={4}>
+                  <NewsCard article={article} lang={lang} />
+                </Grid>
+              )
+            )}
+        </Grid>
+      )}
 
-        <div className={classes.paginationWrapper}>
-          <Pagination
-            // setIsLoading={setIsLoading}
-            currentPage={news?.page}
-            totalPages={news?.total_pages}
-          />
-        </div>
-      </>
+      <div className={classes.paginationContainer}>
+        <Pagination totalPages={news?.total_pages} />
+      </div>
     </article>
   );
 };

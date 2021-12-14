@@ -1,46 +1,60 @@
-import { Grid } from '@material-ui/core';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { Grid } from "@material-ui/core";
+import { makeStyles, Theme } from "@material-ui/core/styles";
 
-import 'date-fns';
-import DateFnsUtils from '@date-io/date-fns';
+import "date-fns";
+import DateFnsUtils from "@date-io/date-fns";
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
-} from '@material-ui/pickers';
+} from "@material-ui/pickers";
+
+import { useAppSelector, useAppDispatch } from "../../app/hooks";
+import {
+  selectNews,
+  setPickerDateFrom,
+  setPickerDateTo,
+} from "../../features/newsSlice";
 
 const useStyles = makeStyles((theme: Theme) => ({
   text: {},
-  dateWrapper: {
-    width: '9rem',
+  dateContainer: {
+    width: "9rem",
   },
 }));
 
 interface DateFromToProps {
-  dateFrom: Date | null;
-  setDateFrom: (date: Date | null) => void;
-  dateTo: Date | null;
-  setDateTo: (date: Date | null) => void;
+  // dateFrom: Date | null;
+  // setDateFrom: (date: Date | null) => void;
+  // dateTo: Date | null;
+  // setDateTo: (date: Date | null) => void;
 }
 
-const DateFromTo: React.FC<DateFromToProps> = ({
-  dateFrom,
-  setDateFrom,
-  dateTo,
-  setDateTo,
-}) => {
+const DateFromTo: React.FC<DateFromToProps> = (
+  {
+    // dateFrom,
+    // setDateFrom,
+    // dateTo,
+    // setDateTo,
+  }
+) => {
   const classes = useStyles();
+
+  const { pickerDateFrom, pickerDateTo } = useAppSelector(selectNews);
+  const dispatch = useAppDispatch();
 
   const minDate = new Date();
   minDate.setMonth(minDate.getMonth() - 1);
 
   const handleDateFromChange = (date: Date | null) => {
-    setDateFrom(date);
-    console.log('data from', date);
+    dispatch(setPickerDateFrom(date));
+    // setDateFrom(date);
+    console.log("data from", date);
   };
 
   const handleDateToChange = (date: Date | null) => {
-    setDateTo(date);
-    console.log('data to', date);
+    dispatch(setPickerDateTo(date));
+    // setDateTo(date);
+    console.log("data to", date);
   };
 
   return (
@@ -48,7 +62,7 @@ const DateFromTo: React.FC<DateFromToProps> = ({
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
         <Grid container justifyContent="center" alignItems="center">
           <Grid item xs={6}>
-            <div className={classes.dateWrapper}>
+            <div className={classes.dateContainer}>
               <KeyboardDatePicker
                 disableToolbar
                 variant="inline"
@@ -56,19 +70,19 @@ const DateFromTo: React.FC<DateFromToProps> = ({
                 margin="none"
                 id="date-picker-from"
                 label="Date From"
-                value={dateFrom}
+                value={pickerDateFrom}
                 onChange={handleDateFromChange}
                 KeyboardButtonProps={{
-                  'aria-label': 'change date',
+                  "aria-label": "change date",
                 }}
                 disableFuture
                 minDate={minDate}
-                maxDate={dateTo}
+                maxDate={pickerDateTo}
               />
             </div>
           </Grid>
           <Grid item xs={6}>
-            <div className={classes.dateWrapper}>
+            <div className={classes.dateContainer}>
               <KeyboardDatePicker
                 disableToolbar
                 variant="inline"
@@ -76,10 +90,10 @@ const DateFromTo: React.FC<DateFromToProps> = ({
                 margin="none"
                 id="date-picker-to"
                 label="Date To"
-                value={dateTo}
+                value={pickerDateTo}
                 onChange={handleDateToChange}
                 KeyboardButtonProps={{
-                  'aria-label': 'change date',
+                  "aria-label": "change date",
                 }}
                 disableFuture
                 minDate={minDate}

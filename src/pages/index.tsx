@@ -37,36 +37,23 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-interface HomeProps {
-  data: any;
-  error: string | null;
-}
 const Home: React.FC = () => {
   const classes = useStyles();
   const [cookies, setCookie] = useCookies(["lang", "favorites"]);
 
-  const { lang, topic, favorites } = useAppSelector(selectNews);
+  const { q, lang, topic, favorites, page, from, to, sources } =
+    useAppSelector(selectNews);
 
-  const q = "news";
-  const {
-    data: news,
-    isFetching,
-    isError,
-  } = useGetNewsApiQuery({ q, lang, topic });
+  const { data: news } = useGetNewsApiQuery({
+    q,
+    lang,
+    topic,
+    page,
+    from,
+    to,
+    sources,
+  });
   console.log("newscards data", news);
-  // const news = null;
-
-  // const defaultLang = (query.lang as LangType) || "en";
-  // const [lang, setLang] = useState<LangType>(defaultLang);
-
-  // const [news, setNews] = useState<NewsDataType | undefined>(undefined);
-  // const [error, setError] = useState<boolean>(false);
-
-  // const [topic, setTopic] = useState<TopicType | null>(null);
-
-  // const [favorites, setFavorites] = useState<string[]>([]);
-
-  // const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const cookiesOptions = {
     path: "/",
@@ -75,17 +62,9 @@ const Home: React.FC = () => {
     sameSite: true,
   };
 
-  const setCookieFunc = (name: "lang" | "favorites", value: string) =>
-    setCookie(name, value, cookiesOptions);
-
   useEffect(() => {
     if (cookies.lang) {
       setLang(cookies.lang);
-
-      // router.push({
-      //   pathname: "/",
-      //   query: { ...query, lang: cookies.lang },
-      // });
     }
 
     if (cookies.favorites && cookies.favorites.length) {
@@ -93,52 +72,30 @@ const Home: React.FC = () => {
     }
   }, []);
 
-  // useEffect(() => {
-  //   if (data) {
-  //     setNews(data);
-  //     setIsLoading(false);
-  //   } else {
-  //     setIsLoading(false);
-  //     setError(true);
-  //   }
-  // }, [data]);
+  useEffect(() => {
+    setCookie("lang", lang, cookiesOptions);
+  }, [lang]);
 
-  // console.log("news", news);
-  // console.log("error", error);
-  // console.log('query', query);
-  // console.log('cookies', cookies);
+  useEffect(() => {
+    setCookie("favorites", JSON.stringify(favorites), cookiesOptions);
+  }, [favorites]);
 
   return (
     <div className={classes.root}>
       <SEO />
-      {/*
       <Navbar
-        lang={lang}
-        setLang={setLang}
-        topic={topic}
-        setTopic={setTopic}
-        setIsLoading={setIsLoading}
-        favorites={favorites}
-        setFavorites={setFavorites}
-        setCookieFunc={setCookieFunc}
+      // lang={lang}
+      // setLang={setLang}
+      // topic={topic}
+      // setTopic={setTopic}
+      // setIsLoading={setIsLoading}
+      // favorites={favorites}
+      // setFavorites={setFavorites}
+      // setCookieFunc={setCookieFunc}
       />
-      */}
 
       <Container>
-        {!isError ? (
-          <NewsCards />
-        ) : (
-          <Typography
-            variant="h6"
-            // color="error"
-            align="center"
-            className={classes.error}
-          >
-            Service is temporally unavailable due to the server problem. Please
-            try again later.
-          </Typography>
-        )}
-        <div style={{ marginTop: "2rem" }}></div>
+        <NewsCards />
         <Footer />
       </Container>
     </div>

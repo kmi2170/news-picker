@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import router, { useRouter } from 'next/router';
+import { useState } from "react";
 
 import {
   Grid,
@@ -9,74 +8,68 @@ import {
   ButtonBase,
   Tooltip,
   Button,
-} from '@material-ui/core';
-import { ExpandMore, ExpandLess } from '@material-ui/icons';
-import { grey } from '@material-ui/core/colors';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+} from "@material-ui/core";
+import { ExpandMore, ExpandLess } from "@material-ui/icons";
+import { grey } from "@material-ui/core/colors";
+import { makeStyles, Theme } from "@material-ui/core/styles";
 
-import Searchbar from './Searchbar';
-import ButtonsLanguage, { ButtonsLanguageProp } from './ButtonsLanguage';
-import ButtonsTopic from './ButtonsTopic';
-import Favorites from './Favorites';
-import AdvanceSearch from './AdvanceSearch';
+import Searchbar from "./Searchbar";
+import ButtonsLanguage from "./ButtonsLanguage";
+import ButtonsTopic from "./ButtonsTopic";
+import Favorites from "./Favorites";
+import AdvanceSearch from "./AdvanceSearch";
 
-import { TopicType } from '../../api/type_settngs';
+import { useAppSelector, useAppDispatch } from "../../app/hooks";
+import {
+  selectNews,
+  setQ,
+  setTopic,
+  setSources,
+  setIsReset,
+  reset,
+} from "../../features/newsSlice";
 
 const useStyles = makeStyles((theme: Theme) => ({
   appBar: {
-    background: 'white',
+    background: "white",
   },
   text: {
-    fontFamily: 'Tourney',
+    fontFamily: "Tourney",
     fontWeight: 500,
-    color: 'black',
+    color: "black",
   },
   icon: {
     color: grey[600],
   },
   expand: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    margin: '0.3rem',
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    margin: "0.3rem",
   },
 
   resetButton: {
-    borderRadius: '15px',
-    textTransform: 'capitalize',
-    marginLeft: '4rem',
+    borderRadius: "15px",
+    textTransform: "capitalize",
+    marginLeft: "4rem",
   },
 }));
 
-interface NavbarProps extends ButtonsLanguageProp {
-  topic: TopicType;
-  setTopic: (topic: TopicType) => void;
-  favorites: string[];
-  setFavorites: (favorites: string[]) => void;
-  setCookieFunc: (name: string, value: string) => void;
-}
-
-const Navbar: React.FC<NavbarProps> = ({
-  lang,
-  setLang,
-  topic,
-  setTopic,
-  setIsLoading,
-  favorites,
-  setFavorites,
-  setCookieFunc,
-}) => {
+const Navbar: React.FC = () => {
   const classes = useStyles();
-  const { query } = useRouter();
 
-  const [searchInput, setSearchInput] = useState<string>('');
+  const { favorites } = useAppSelector(selectNews);
+  const dispatch = useAppDispatch();
 
-  const [sources, setSources] = useState<string>('');
+  // const [reset, setReset] = useState<boolean>(false);
+  // const [searchInput, setSearchInput] = useState<string>("");
 
-  const initDateFrom = new Date();
-  initDateFrom.setDate(initDateFrom.getDate() - 7);
-  const [dateFrom, setDateFrom] = useState<Date | null>(initDateFrom);
-  const [dateTo, setDateTo] = useState<Date | null>(new Date());
+  // const [sources, setSources] = useState<string>("");
+
+  // const initDateFrom = new Date();
+  // initDateFrom.setDate(initDateFrom.getDate() - 7);
+  // const [dateFrom, setDateFrom] = useState<Date | null>(initDateFrom);
+  // const [dateTo, setDateTo] = useState<Date | null>(new Date());
 
   const [isOpen, setIsOpen] = useState<boolean>(true);
   const [isOpenAO, setIsOpenAO] = useState<boolean>(false);
@@ -91,17 +84,15 @@ const Navbar: React.FC<NavbarProps> = ({
   };
 
   const handleReset = () => {
-    setTopic(null);
-    setSources('');
-    setDateFrom(initDateFrom);
-    setDateTo(new Date());
-    setSearchInput('');
-    setIsLoading(true);
-
-    router.push({
-      pathname: '/',
-      query: { q: 'news', lang },
-    });
+    setIsReset(true);
+    dispatch(reset());
+    setIsReset(false);
+    // dispatch(setQ(""));
+    // dispatch(setQ(""));
+    // dispatch(setTopic(""));
+    // dispatch(setSources(""));
+    // setDateFrom(initDateFrom);
+    // setDateTo(new Date());
   };
 
   return (
@@ -115,16 +106,13 @@ const Navbar: React.FC<NavbarProps> = ({
           </Grid>
 
           <Grid item xs={12} sm={8} md={7}>
-            <Searchbar
-              searchInput={searchInput}
-              setSearchInput={setSearchInput}
-            />
+            <Searchbar />
           </Grid>
           <Grid item md={2} />
         </Grid>
       </Toolbar>
       <div className={classes.expand}>
-        <Tooltip title={isOpen ? 'Close Panel' : 'Open Panel'}>
+        <Tooltip title={isOpen ? "Close Panel" : "Open Panel"}>
           <ButtonBase onClick={handleExpandClick}>
             {isOpen ? (
               <ExpandLess className={classes.icon} />
@@ -145,12 +133,7 @@ const Navbar: React.FC<NavbarProps> = ({
           >
             <Grid item xs={12} container>
               <Grid item xs={6}>
-                <ButtonsLanguage
-                  lang={lang}
-                  setLang={setLang}
-                  setIsLoading={setIsLoading}
-                  setCookieFunc={setCookieFunc}
-                />
+                <ButtonsLanguage />
               </Grid>
               <Grid item xs={6}>
                 <Tooltip title="Reset Keywords, Topic, Date...">
@@ -166,22 +149,11 @@ const Navbar: React.FC<NavbarProps> = ({
               </Grid>
             </Grid>
             <Grid item xs={12}>
-              <ButtonsTopic
-                lang={lang}
-                // setLang={setLang}
-                topic={topic}
-                setTopic={setTopic}
-                setIsLoading={setIsLoading}
-                setCookieFunc={setCookieFunc}
-              />
+              <ButtonsTopic />
             </Grid>
             <Grid item xs={12}>
-              <div style={{ marginTop: '0.5rem' }}>
-                <Favorites
-                  favorites={favorites}
-                  setFavorites={setFavorites}
-                  setCookieFunc={setCookieFunc}
-                />
+              <div style={{ marginTop: "0.5rem" }}>
+                <Favorites />
               </div>
             </Grid>
           </Grid>
@@ -189,7 +161,7 @@ const Navbar: React.FC<NavbarProps> = ({
 
         <div className={classes.expand}>
           <Tooltip
-            title={isOpenAO ? 'Close More Options' : 'Open More Options'}
+            title={isOpenAO ? "Close More Options" : "Open More Options"}
           >
             <ButtonBase onClick={handleExpandClickAO}>
               {isOpenAO && isOpen ? (
@@ -204,17 +176,7 @@ const Navbar: React.FC<NavbarProps> = ({
 
       <div hidden={!isOpenAO}>
         <Toolbar>
-          <AdvanceSearch
-            lang={lang}
-            sources={sources}
-            setSources={setSources}
-            dateFrom={dateFrom}
-            setDateFrom={setDateFrom}
-            dateTo={dateTo}
-            setDateTo={setDateTo}
-            searchInput={searchInput}
-            setSearchInput={setSearchInput}
-          />
+          <AdvanceSearch />
         </Toolbar>
       </div>
     </AppBar>
