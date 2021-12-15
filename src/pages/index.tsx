@@ -36,6 +36,9 @@ const useStyles = makeStyles(() => ({
 const Home: React.FC = () => {
   const classes = useStyles();
 
+  console.log("api_key", process.env.NEXT_PUBLIC_RAPID_API_KEY);
+  console.log("api_host", process.env.NEXT_PUBLIC_RAPID_API_HOST);
+
   const { lang, favorites } = useAppSelector(selectNews);
   const dispatch = useAppDispatch();
 

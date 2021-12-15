@@ -33,6 +33,8 @@ export const fetchNews = async (
       "x-rapidapi-host": process.env.NEXT_PUBLIC_RAPID_API_HOST,
     },
   };
+  console.log("api_key", process.env.NEXT_PUBLIC_RAPID_API_KEY);
+  console.log("api_host", process.env.NEXT_PUBLIC_RAPID_API_HOST);
 
   try {
     if (q && lang && page && from && to) {
