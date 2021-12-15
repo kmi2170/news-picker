@@ -13,7 +13,6 @@ export const initialState: StateType = {
   from: localToUTCString(initDateFrom),
   to: localToUTCString(new Date()),
   sources: "",
-  isReset: false,
   searchTerm: "",
   searchSources: "",
   pickerDateFrom: initDateFrom,
@@ -29,7 +28,6 @@ export type StateType = {
   from: string;
   to: string;
   sources: string;
-  isReset: boolean;
   searchTerm: string;
   searchSources: string;
   pickerDateFrom: Date;

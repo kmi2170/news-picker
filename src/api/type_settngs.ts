@@ -31,7 +31,21 @@ export type ArticleDataType = {
   _id: string | null;
 };
 
-export type NewsDataType = {
+export type TopicType =
+  | ""
+  | "news"
+  | "sport"
+  | "tech"
+  | "world"
+  | "finance"
+  | "politics"
+  | "business"
+  | "economics"
+  | "entertainment"
+  | "beauty"
+  | "gaming";
+
+/* export type NewsDataType = {
   status: string;
   total_hits: number;
   page: number;
@@ -46,18 +60,4 @@ export type NewsDataType = {
     page?: number;
     size?: number;
   };
-};
-
-export type TopicType =
-  | ""
-  | "news"
-  | "sport"
-  | "tech"
-  | "world"
-  | "finance"
-  | "politics"
-  | "business"
-  | "economics"
-  | "entertainment"
-  | "beauty"
-  | "gaming";
+}; */

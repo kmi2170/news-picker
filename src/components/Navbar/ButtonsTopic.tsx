@@ -1,11 +1,11 @@
 import { Typography, Button } from "@material-ui/core";
-import { makeStyles, Theme } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 
 import { useAppSelector, useAppDispatch } from "../../app/hooks";
 import { selectNews, setTopic } from "../../features/newsSlice";
 import { TopicType } from "../../api/type_settngs";
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles(() => ({
   button: {
     borderRadius: "15px",
     textTransform: "capitalize",

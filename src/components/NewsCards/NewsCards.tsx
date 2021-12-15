@@ -1,5 +1,5 @@
 import { Grid, Typography } from "@material-ui/core";
-import { makeStyles, Theme } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 
 import NewsCard from "./NewsCard";
 import LoadingSkelton from "./LoadingSkelton";
@@ -12,7 +12,7 @@ import { useGetNewsApiQuery } from "../../services/newsApi";
 import { ArticleDataType } from "../../api/type_settngs";
 import { sortData } from "../../utils/sort";
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles(() => ({
   display: { fontFamily: "Roboto Condensed", marginTop: "0.5rem" },
   loading: {
     padding: "1rem",
@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 const NewsCards: React.FC = () => {
   const classes = useStyles();
 
-  const { q, lang, topic, favorites, page, from, to, sources } =
+  const { q, lang, topic, page, from, to, sources } =
     useAppSelector(selectNews);
 
   const {
@@ -48,6 +48,7 @@ const NewsCards: React.FC = () => {
     sources,
   });
 
+  console.log(news);
   if (isError)
     return (
       <Typography

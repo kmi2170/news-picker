@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 
 import { Grid, TextField, Button } from "@material-ui/core";
-import { makeStyles, Theme } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import teal from "@material-ui/core/colors/teal";
 
 import { useAppSelector, useAppDispatch } from "../../app/hooks";
@@ -17,7 +17,7 @@ import {
 import DateFromTo from "./DateFromTo";
 import { localToUTCString } from "../../utils/localToUTCString";
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles(() => ({
   text: {},
   button: {
     borderRadius: "15px",
@@ -33,45 +33,21 @@ const useStyles = makeStyles((theme: Theme) => ({
 const AdvanceSearch: React.FC = () => {
   const classes = useStyles();
 
-  const { searchSources } = useAppSelector(selectNews);
+  const { searchSources, pickerDateFrom, pickerDateTo } =
+    useAppSelector(selectNews);
   const dispatch = useAppDispatch();
-
-  // const [newsSources, setNewsSources] = useState<string>("");
-
-  const initDateFrom = new Date();
-  initDateFrom.setDate(initDateFrom.getDate() - 7);
-
-  const [dateFrom, setDateFrom] = useState<Date | null>(new Date(initDateFrom));
-  const [dateTo, setDateTo] = useState<Date | null>(new Date());
-
-  useEffect(() => {
-    dispatch(setFrom(localToUTCString(dateFrom)));
-    dispatch(setTo(localToUTCString(dateTo)));
-  }, []);
-
-  // useEffect(() => {
-  //   if (isReset) {
-  //     dispatch(setFrom(localToUTCString(dateFrom)));
-  //     dispatch(setTo(localToUTCString(dateTo)));
-  //   }
-  // }, [isReset]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     dispatch(setTopic(""));
-    dispatch(setFrom(localToUTCString(dateFrom)));
-    dispatch(setTo(localToUTCString(dateTo)));
+    dispatch(setFrom(localToUTCString(pickerDateFrom)));
+    dispatch(setTo(localToUTCString(pickerDateTo)));
     dispatch(setSources(searchSources));
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     dispatch(setSearchSources(e.target.value));
-
-  // const handleChange = useCallback(
-  //   (e: React.ChangeEvent<HTMLInputElement>) => setNewsSources(e.target.value),
-  //   []
-  // );
 
   return (
     <>
@@ -96,12 +72,7 @@ const AdvanceSearch: React.FC = () => {
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <DateFromTo
-            // dateFrom={dateFrom}
-            // setDateFrom={setDateFrom}
-            // dateTo={dateTo}
-            // setDateTo={setDateTo}
-            />
+            <DateFromTo />
           </Grid>
           <Grid item xs={12} sm={12}>
             <Button

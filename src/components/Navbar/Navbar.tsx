@@ -20,14 +20,7 @@ import Favorites from "./Favorites";
 import AdvanceSearch from "./AdvanceSearch";
 
 import { useAppSelector, useAppDispatch } from "../../app/hooks";
-import {
-  selectNews,
-  setQ,
-  setTopic,
-  setSources,
-  setIsReset,
-  reset,
-} from "../../features/newsSlice";
+import { selectNews, reset } from "../../features/newsSlice";
 
 const useStyles = makeStyles((theme: Theme) => ({
   appBar: {
@@ -83,17 +76,7 @@ const Navbar: React.FC = () => {
     setIsOpenAO((prev) => !prev);
   };
 
-  const handleReset = () => {
-    setIsReset(true);
-    dispatch(reset());
-    setIsReset(false);
-    // dispatch(setQ(""));
-    // dispatch(setQ(""));
-    // dispatch(setTopic(""));
-    // dispatch(setSources(""));
-    // setDateFrom(initDateFrom);
-    // setDateTo(new Date());
-  };
+  const handleReset = () => dispatch(reset());
 
   return (
     <AppBar position="sticky" className={classes.appBar}>

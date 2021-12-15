@@ -11,7 +11,7 @@ import {
   Tooltip,
 } from "@material-ui/core";
 import { grey } from "@material-ui/core/colors";
-import { makeStyles, Theme } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import { ExpandMore, ExpandLess } from "@material-ui/icons";
 
 import clsx from "clsx";
@@ -20,7 +20,7 @@ import moment from "moment";
 import { ArticleDataType } from "../../api/type_settngs";
 // import { utcToLocalTime } from '../utils/utcToLocalTime';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles(() => ({
   cardContainer: {
     display: "flex",
     justifyContent: "center",
@@ -114,13 +114,6 @@ const NesCard: React.FC<NewsCardProps> = ({ article, lang }) => {
           image={media}
           title={title}
         />
-        {/* 
-        <div className={classes.imgPlace}>
-          <Typography gutterBottom variant="h5" component="div">
-            NEWS
-          </Typography>
-        </div>
-      */}
         <CardContent
           style={{
             paddingBottom: 0,

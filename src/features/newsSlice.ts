@@ -31,9 +31,6 @@ export const newsSlice = createSlice({
     setSources: (state, action: PayloadAction<string>) => {
       state.sources = action.payload;
     },
-    setIsReset: (state, action: PayloadAction<boolean>) => {
-      state.isReset = action.payload;
-    },
     setSearchTerm: (state, action: PayloadAction<string>) => {
       state.searchTerm = action.payload;
     },
@@ -48,20 +45,6 @@ export const newsSlice = createSlice({
     },
     reset: () => initialState,
   },
-  /* extraReducers: (builder) => {
-    builder
-      .addCase(asyncThunkIpLookupLocation.pending, (state) => {
-        state.isLoading = true;
-      })
-      .addCase(asyncThunkIpLookupLocation.fulfilled, (state) => {
-        state.isLoading = false;
-      })
-      .addCase(asyncThunkIpLookupLocation.rejected, (state, error) => {
-        state.isLoading = false;
-        state.isError = true;
-        console.log(error);
-      })
-  }, */
 });
 
 export const selectNews = (state: RootState) => state.news;
@@ -75,7 +58,6 @@ export const {
   setFrom,
   setTo,
   setSources,
-  setIsReset,
   reset,
   setSearchTerm,
   setSearchSources,

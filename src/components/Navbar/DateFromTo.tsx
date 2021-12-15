@@ -1,5 +1,5 @@
 import { Grid } from "@material-ui/core";
-import { makeStyles, Theme } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 
 import "date-fns";
 import DateFnsUtils from "@date-io/date-fns";
@@ -15,28 +15,14 @@ import {
   setPickerDateTo,
 } from "../../features/newsSlice";
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles(() => ({
   text: {},
   dateContainer: {
     width: "9rem",
   },
 }));
 
-interface DateFromToProps {
-  // dateFrom: Date | null;
-  // setDateFrom: (date: Date | null) => void;
-  // dateTo: Date | null;
-  // setDateTo: (date: Date | null) => void;
-}
-
-const DateFromTo: React.FC<DateFromToProps> = (
-  {
-    // dateFrom,
-    // setDateFrom,
-    // dateTo,
-    // setDateTo,
-  }
-) => {
+const DateFromTo: React.FC = () => {
   const classes = useStyles();
 
   const { pickerDateFrom, pickerDateTo } = useAppSelector(selectNews);
@@ -45,16 +31,14 @@ const DateFromTo: React.FC<DateFromToProps> = (
   const minDate = new Date();
   minDate.setMonth(minDate.getMonth() - 1);
 
-  const handleDateFromChange = (date: Date | null) => {
+  const handleDateFromChange = (date: Date) => {
     dispatch(setPickerDateFrom(date));
-    // setDateFrom(date);
-    console.log("data from", date);
+    // console.log("data from", date);
   };
 
-  const handleDateToChange = (date: Date | null) => {
+  const handleDateToChange = (date: Date) => {
     dispatch(setPickerDateTo(date));
-    // setDateTo(date);
-    console.log("data to", date);
+    // console.log("data to", date);
   };
 
   return (

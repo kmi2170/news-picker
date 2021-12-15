@@ -3,12 +3,12 @@ import { useState, useEffect } from "react";
 import { IconButton, InputBase } from "@material-ui/core";
 import { Search, Cancel } from "@material-ui/icons";
 import { grey } from "@material-ui/core/colors";
-import { makeStyles, Theme } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 
 import { useAppSelector, useAppDispatch } from "../../app/hooks";
 import { selectNews, setQ, setSearchTerm } from "../../features/newsSlice";
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles(() => ({
   searchContainer: {
     marginTop: 5,
     // justifyContent: 'space-between',
@@ -36,14 +36,10 @@ const Searchbar: React.FC = () => {
   const { q, searchTerm } = useAppSelector(selectNews);
   const dispatch = useAppDispatch();
 
-  // const [searchInput, setSearchInput] = useState<string>("");
-
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) =>
     dispatch(setSearchTerm(e.target.value));
-  // setSearchInput(e.target.value);
 
   const handleClear = () => {
-    // setSearchInput("");
     dispatch(setSearchTerm(""));
     if (q) dispatch(setQ(""));
   };
@@ -52,7 +48,7 @@ const Searchbar: React.FC = () => {
     e.preventDefault();
 
     dispatch(setQ(searchTerm));
-    console.log("submit", searchTerm);
+    // console.log("submit", searchTerm);
   };
 
   return (
@@ -60,7 +56,6 @@ const Searchbar: React.FC = () => {
       <form onSubmit={handleSubmit}>
         <div style={{ display: "flex" }}>
           <IconButton
-            // onClick={handleSubmit}
             type="submit"
             className={classes.iconContainer}
           >

@@ -1,9 +1,9 @@
-import { createTheme } from '@material-ui/core/styles';
+import { createTheme } from "@material-ui/core/styles";
 // import { unstable_createMuiStrictModeTheme as createMuiTheme } from '@material-ui/core';
-import { responsiveFontSizes } from '@material-ui/core/styles';
+import { responsiveFontSizes } from "@material-ui/core/styles";
 
-import createBreakpoints from '@material-ui/core/styles/createBreakpoints';
-import { red } from '@material-ui/core/colors';
+import createBreakpoints from "@material-ui/core/styles/createBreakpoints";
+import { red } from "@material-ui/core/colors";
 
 const breakpoints = createBreakpoints({});
 
@@ -17,41 +17,31 @@ const breakpoints = createBreakpoints({});
 let theme = createTheme({
   palette: {
     primary: {
-      main: '#556cd6',
+      main: "#556cd6",
     },
     secondary: {
-      main: '#F53689',
+      main: "#F53689",
       // main: '#19857b',
     },
     info: {
-      main: '#2196f3',
-      light: '#2196f3',
+      main: "#2196f3",
+      light: "#2196f3",
     },
     error: {
       main: red.A400,
     },
     background: {
-      default: '#fff',
+      default: "#fff",
     },
   },
   typography: {
     fontFamily: [
-      'Roboto',
-      'Lobster',
-      'Raleway',
-      'sans-serif',
-      // 'Roboto Condensed',
-      'Tourney',
-      'Rubik',
-      'Oswald',
-      'Viaoda Libre',
-    ].join(','),
-    // h4: {
-    //   fontSize: '2.125rem',
-    //   [breakpoints.down('sm')]: {
-    //     fontSize: '1.5rem',
-    //   },
-    // },
+      "Roboto",
+      "Roboto Condensed",
+      "Raleway",
+      "sans-serif",
+      "Tourney",
+    ].join(","),
   },
   overrides: {},
 });

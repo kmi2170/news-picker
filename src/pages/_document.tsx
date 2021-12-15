@@ -1,13 +1,13 @@
-import React from 'react';
+import React from "react";
 import Document, {
   Html,
   Head,
   Main,
   NextScript,
   DocumentContext,
-} from 'next/document';
-import { ServerStyleSheets } from '@material-ui/core/styles';
-import theme from '../theme/theme';
+} from "next/document";
+import { ServerStyleSheets } from "@material-ui/core/styles";
+import theme from "../theme/theme";
 
 export default class MyDocument extends Document {
   render() {
@@ -23,10 +23,6 @@ export default class MyDocument extends Document {
           />
           <link
             href="https://fonts.googleapis.com/css2?family=Raleway&display=swap"
-            rel="stylesheet"
-          />
-          <link
-            href="https://fonts.googleapis.com/css2?family=Oswald&display=swap"
             rel="stylesheet"
           />
           <link
