@@ -1,6 +1,17 @@
 import axios, { AxiosRequestConfig } from "axios";
 
-const x_rapidapi_key = process.env.NEXT_PUBLIC_RAPID_API_KEY;
+const x_rapid_api_key = process.env.NEXT_PUBLIC_RAPID_API_KEY;
+
+const options: AxiosRequestConfig = {
+  method: "GET",
+  url: "https://free-news.p.rapidapi.com/v1/search",
+  timeout: 4500,
+  headers: {
+    // "x-rapidapi-key": "e55c60efe5msh73070d6e421d34bp11cc43jsn5f182a073484",
+    "x-rapidapi-key": x_rapid_api_key,
+    "x-rapidapi-host": "free-news.p.rapidapi.com",
+  },
+};
 
 export const fetchNews = async (
   q: string,
@@ -23,21 +34,11 @@ export const fetchNews = async (
     params = { q, lang, page, from, to };
   }
 
-  const options: AxiosRequestConfig = {
-    method: "GET",
-    url: "https://free-news.p.rapidapi.com/v1/search",
-    timeout: 4500,
-    params,
-    headers: {
-      // "x-rapidapi-key": "e55c60efe5msh73070d6e421d34bp11cc43jsn5f182a073484",
-      "x-rapidapi-key": x_rapidapi_key,
-      "x-rapidapi-host": "free-news.p.rapidapi.com",
-    },
-  };
+  const optionsWithParams = { ...options, params };
 
   try {
     if (q && lang && page && from && to) {
-      const { data } = await axios.request(options);
+      const { data } = await axios.request(optionsWithParams);
       // console.log(data);
       return data;
     }
