@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import axios from "axios";
 
-const url = "https://free-news.p.rapidapi.com/v1/search5";
+const url = "https://free-news.p.rapidapi.com/v1/search";
 
 const headers = {
   "x-rapidapi-key": process.env.NEXT_PUBLIC_RAPID_API_KEY,
