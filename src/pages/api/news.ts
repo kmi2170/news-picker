@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import axios from "axios";
 
-const url = "https://free-news.p.rapidapi.com/v1/search";
+const url = "https://free-news.p.rapidapi.com/v1/search5";
 
 const headers = {
   "x-rapidapi-key": process.env.NEXT_PUBLIC_RAPID_API_KEY,
@@ -9,31 +9,31 @@ const headers = {
 };
 
 export default async function news(req: NextApiRequest, res: NextApiResponse) {
+  const { q, lang, page, from, to, topics, sources } = req.query;
+
+  const baseParams = { q: q ? q : "news", lang, page, from, to };
+
+  let params = {};
+  if (topics && sources) {
+    params = { ...baseParams, topics, sources };
+  } else if (topics) {
+    params = { ...baseParams, topics };
+  } else if (sources) {
+    params = { ...baseParams, sources };
+  } else {
+    params = { ...baseParams };
+  }
+  console.log(params);
+
   try {
-    const { q, lang, page, from, to, topics, sources } = req.query;
-
-    const baseParams = { q: q ? q : "news", lang, page, from, to };
-
-    let params = {};
-    if (topics && sources) {
-      params = { ...baseParams, topics, sources };
-    } else if (topics) {
-      params = { ...baseParams, topics };
-    } else if (sources) {
-      params = { ...baseParams, sources };
-    } else {
-      params = { ...baseParams };
-    }
-    console.log(params);
-
     const { data } = await axios.get(url, { params, headers });
-
-    data.params = params;
-    data.headers = headers;
 
     res.status(200).json(data);
   } catch (error) {
-    console.log(error);
-    res.status(500).json(error);
+    const data = { headers, params, error };
+    // console.log(error);
+    console.log(data);
+    // res.status(500).json(data);
+    res.status(200).json(data);
   }
 }
