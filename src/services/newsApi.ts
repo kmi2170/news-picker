@@ -6,7 +6,7 @@ export const newsApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: "/api" }),
   // keepUnusedDataFor: 30,
   // refetchOnMountOrArgChange: 30,
-  refetchOnFocus: true,
+  // refetchOnFocus: true,
   refetchOnReconnect: true,
   endpoints: (builder) => ({
     getNewsApi: builder.query({
