@@ -32,7 +32,7 @@ export default async function news(req: NextApiRequest, res: NextApiResponse) {
   } catch (error) {
     const data = { headers, params, error };
     // console.log(error);
-    console.log(data);
+    // console.log(data);
     // res.status(500).json(data);
     res.status(200).json(data);
   }
