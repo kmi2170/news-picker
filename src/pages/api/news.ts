@@ -12,7 +12,8 @@ export default async function news(req: NextApiRequest, res: NextApiResponse) {
   try {
     const { q, lang, page, from, to, topics, sources } = req.query;
 
-    const baseParams = { q: q ? q : "news", lang, page, from, to };
+    // const baseParams = { q: q ? q : "news", lang, page, from, to };
+    const baseParams = { q: q ? q : "news", lang, page };
 
     let params = {};
     if (topics && sources) {
@@ -24,6 +25,7 @@ export default async function news(req: NextApiRequest, res: NextApiResponse) {
     } else {
       params = { ...baseParams };
     }
+    console.log(params);
 
     const { data } = await axios.get(url, { params, headers });
 
