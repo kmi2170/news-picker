@@ -23,17 +23,14 @@ export default async function news(req: NextApiRequest, res: NextApiResponse) {
   } else {
     params = { ...baseParams };
   }
-  console.log(params);
 
   try {
     const { data } = await axios.get(url, { params, headers });
 
     res.status(200).json(data);
   } catch (error) {
-    const data = { headers, params, error };
-    // console.log(error);
-    // console.log(data);
-    // res.status(500).json(data);
-    res.status(200).json(data);
+    // const data = { headers, params, error };
+    console.log(error);
+    res.status(error.response.status).json(error);
   }
 }
