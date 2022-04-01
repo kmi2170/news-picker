@@ -1,10 +1,10 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "../app/store";
-import { initialState } from "./initialState";
-import { LangType, TopicType } from "../api/type_settngs";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { RootState } from '../app/store';
+import { initialState } from './initialState';
+import { LangType, TopicType } from '../api/type_settngs';
 
 export const newsSlice = createSlice({
-  name: "news",
+  name: 'news',
   initialState,
   reducers: {
     setQ: (state, action: PayloadAction<string>) => {
@@ -31,9 +31,6 @@ export const newsSlice = createSlice({
     setSources: (state, action: PayloadAction<string>) => {
       state.sources = action.payload;
     },
-    setSearchTerm: (state, action: PayloadAction<string>) => {
-      state.searchTerm = action.payload;
-    },
     setSearchSources: (state, action: PayloadAction<string>) => {
       state.searchSources = action.payload;
     },
@@ -42,6 +39,9 @@ export const newsSlice = createSlice({
     },
     setPickerDateTo: (state, action: PayloadAction<Date>) => {
       state.pickerDateTo = action.payload;
+    },
+    setSearchTerm: (state, action: PayloadAction<string>) => {
+      state.searchTerm = action.payload;
     },
     reset: () => initialState,
   },
@@ -59,10 +59,10 @@ export const {
   setTo,
   setSources,
   reset,
-  setSearchTerm,
   setSearchSources,
   setPickerDateFrom,
   setPickerDateTo,
+  setSearchTerm,
 } = newsSlice.actions;
 
 export default newsSlice.reducer;
