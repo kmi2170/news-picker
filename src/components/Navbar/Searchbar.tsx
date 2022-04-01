@@ -33,8 +33,6 @@ const useStyles = makeStyles(() => ({
 const Searchbar: React.FC = () => {
   const classes = useStyles();
 
-  // const [searchTerm, setSearchTerm] = useState<string>('');
-
   const { q, searchTerm } = useAppSelector(selectNews);
   const dispatch = useAppDispatch();
 
@@ -50,7 +48,6 @@ const Searchbar: React.FC = () => {
     e.preventDefault();
 
     dispatch(setQ(searchTerm));
-    // console.log("submit", searchTerm);
   };
 
   return (
