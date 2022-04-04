@@ -40,9 +40,9 @@ export const newsSlice = createSlice({
     setPickerDateTo: (state, action: PayloadAction<Date>) => {
       state.pickerDateTo = action.payload;
     },
-    setSearchTerm: (state, action: PayloadAction<string>) => {
-      state.searchTerm = action.payload;
-    },
+    // setSearchTerm: (state, action: PayloadAction<string>) => {
+    //   state.searchTerm = action.payload;
+    // },
     reset: () => initialState,
   },
 });
@@ -62,7 +62,7 @@ export const {
   setSearchSources,
   setPickerDateFrom,
   setPickerDateTo,
-  setSearchTerm,
+  // setSearchTerm,
 } = newsSlice.actions;
 
 export default newsSlice.reducer;
