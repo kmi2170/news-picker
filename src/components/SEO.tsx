@@ -1,5 +1,4 @@
-import Head from "next/head";
-import { config } from "../assets/seo";
+import { config } from '../assets/seo';
 
 const SEO = () => {
   const title = config.title;
@@ -9,7 +8,7 @@ const SEO = () => {
   const keywords = config.keywords;
 
   return (
-    <Head>
+    <>
       <title>{`${siteTitle}`}</title>
       <meta name="author" content={author} />
       <meta name="description" content={description} />
@@ -24,7 +23,7 @@ const SEO = () => {
       <meta property="twitter:title" content={title} />
       <meta property="twitter:description" content={description} />
       */}
-    </Head>
+    </>
   );
 };
 

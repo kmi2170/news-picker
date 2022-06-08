@@ -1,17 +1,16 @@
-import { useEffect } from "react";
+import { useEffect } from 'react';
 
-import { useCookies } from "react-cookie";
+import { useCookies } from 'react-cookie';
 
-import { Container } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { Container } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
-import { useAppSelector, useAppDispatch } from "../app/hooks";
-import { selectNews, setLang, setFavorites } from "../features/newsSlice";
+import { useAppSelector, useAppDispatch } from '../app/hooks';
+import { selectNews, setLang, setFavorites } from '../features/newsSlice';
 
-import SEO from "../components/SEO";
-import Navbar from "../components/Navbar/Navbar";
-import NewsCards from "../components/NewsCards/NewsCards";
-import Footer from "../components/Footer";
+import Navbar from '../components/Navbar/Navbar';
+import NewsCards from '../components/NewsCards/NewsCards';
+import Footer from '../components/Footer';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -19,17 +18,17 @@ const useStyles = makeStyles(() => ({
     // backgroundImage:
     //   'linear-gradient(to bottom, rgb(102,255,255,0.15), rgba(218,165,32,0.25))',
 
-    minHeight: "100vh",
+    minHeight: '100vh',
   },
   buttonsLang: {
-    marginTop: "1.0rem",
+    marginTop: '1.0rem',
   },
   buttonsCategory: {
-    marginTop: "0.5rem",
-    marginBottom: "1.0rem",
+    marginTop: '0.5rem',
+    marginBottom: '1.0rem',
   },
   error: {
-    padding: "3rem 0",
+    padding: '3rem 0',
   },
 }));
 
@@ -39,10 +38,10 @@ const Home: React.FC = () => {
   const { lang, favorites } = useAppSelector(selectNews);
   const dispatch = useAppDispatch();
 
-  const [cookies, setCookie] = useCookies(["lang", "favorites"]);
+  const [cookies, setCookie] = useCookies(['lang', 'favorites']);
 
   const cookiesOptions = {
-    path: "/",
+    path: '/',
     maxAge: 31536000, // 1 year
     // maxAge: 2600000, // 1 month
     sameSite: true,
@@ -59,17 +58,22 @@ const Home: React.FC = () => {
     }
   }, []);
 
-  useEffect(() => {
-    setCookie("lang", lang, cookiesOptions);
-  }, [lang]);
+  useEffect(
+    () => {
+      setCookie('lang', lang, cookiesOptions);
+    },
+    [lang]
+  );
 
-  useEffect(() => {
-    setCookie("favorites", JSON.stringify(favorites), cookiesOptions);
-  }, [favorites]);
+  useEffect(
+    () => {
+      setCookie('favorites', JSON.stringify(favorites), cookiesOptions);
+    },
+    [favorites]
+  );
 
   return (
     <div className={classes.root}>
-      <SEO />
       <Navbar />
       <Container>
         <NewsCards />
