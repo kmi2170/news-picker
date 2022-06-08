@@ -1,16 +1,15 @@
-import { Action, configureStore, ThunkAction } from "@reduxjs/toolkit";
-import { setupListeners } from "@reduxjs/toolkit/query";
+import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit';
+import { setupListeners } from '@reduxjs/toolkit/query';
 
-import newsSlice from "../features/newsSlice";
-import { newsApi } from "../services/newsApi";
-// import { weatherOnecallApi } from "../services/weatherOnecallApi";
+import newsSlice from '../features/newsSlice';
+import { newsApi } from '../services/newsApi';
 
 export const store = configureStore({
   reducer: {
     news: newsSlice,
     [newsApi.reducerPath]: newsApi.reducer,
   },
-  middleware: (gDM) =>
+  middleware: gDM =>
     gDM({ serializableCheck: false }).concat(newsApi.middleware),
 });
 

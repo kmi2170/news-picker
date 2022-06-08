@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { useCookies } from 'react-cookie';
 import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -8,6 +7,11 @@ import { selectNews, setLang, setFavorites } from '../features/newsSlice';
 import Navbar from '../components/Navbar/Navbar';
 import NewsCards from '../components/NewsCards';
 import Footer from '../components/Footer';
+import { useCustomeCookies } from '../hooks/useCustomCookies';
+import {
+  isFavoritesCookieValid,
+  isLangCookieValid,
+} from '../utils/cookiesValidator';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -26,45 +30,27 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const Home: React.FC = () => {
+const Home = () => {
   const classes = useStyles();
 
   const { lang, favorites } = useAppSelector(selectNews);
   const dispatch = useAppDispatch();
 
-  const [cookies, setCookie] = useCookies(['lang', 'favorites']);
-
-  const cookiesOptions = {
-    path: '/',
-    maxAge: 31536000, // 1 year
-    // maxAge: 2600000, // 1 month
-    sameSite: true,
-  };
+  const { cookies, setLangCookie, setFavoritesCookie } = useCustomeCookies();
 
   useEffect(() => {
-    if (cookies.lang) {
-      dispatch(setLang(cookies.lang));
+    if (isLangCookieValid(cookies.news_lang)) {
+      dispatch(setLang(cookies.news_lang));
     }
 
-    if (cookies.favorites && cookies.favorites.length) {
-      console.log(cookies.favorites);
-      dispatch(setFavorites(cookies.favorites));
+    if (isFavoritesCookieValid(cookies.news_favorites)) {
+      dispatch(setFavorites(cookies.news_favorites));
     }
   }, []);
 
-  useEffect(
-    () => {
-      setCookie('lang', lang, cookiesOptions);
-    },
-    [lang]
-  );
+  useEffect(() => setLangCookie(lang), [lang]);
 
-  useEffect(
-    () => {
-      setCookie('favorites', JSON.stringify(favorites), cookiesOptions);
-    },
-    [favorites]
-  );
+  useEffect(() => setFavoritesCookie(favorites), [favorites]);
 
   return (
     <div className={classes.root}>
