@@ -1,13 +1,13 @@
-import React from "react";
+import React from 'react';
 import Document, {
   Html,
   Head,
   Main,
   NextScript,
   DocumentContext,
-} from "next/document";
-import { ServerStyleSheets } from "@material-ui/core/styles";
-import theme from "../theme/theme";
+} from 'next/document';
+import { ServerStyleSheets } from '@material-ui/core/styles';
+import theme from '../theme/theme';
 
 export default class MyDocument extends Document {
   render() {
@@ -21,14 +21,14 @@ export default class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Condensed&display=swap"
             rel="stylesheet"
           />
-          <link
-            href="https://fonts.googleapis.com/css2?family=Raleway&display=swap"
-            rel="stylesheet"
-          />
-          <link
-            href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600&family=Noto+Serif+JP:wght@400;500;600&display=swap"
-            rel="stylesheet"
-          />
+          {/* <link */}
+          {/*   href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" */}
+          {/*   rel="stylesheet" */}
+          {/* /> */}
+          {/* <link */}
+          {/*   href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600&family=Noto+Serif+JP:wght@400;500;600&display=swap" */}
+          {/*   rel="stylesheet" */}
+          {/* /> */}
           <link
             href="https://fonts.googleapis.com/css2?family=Tourney:wght@400;500;600&display=swap"
             rel="stylesheet"
@@ -74,7 +74,7 @@ MyDocument.getInitialProps = async (ctx: DocumentContext) => {
 
   ctx.renderPage = () =>
     originalRenderPage({
-      enhanceApp: (App) => (props) => sheets.collect(<App {...props} />),
+      enhanceApp: App => props => sheets.collect(<App {...props} />),
     });
 
   const initialProps = await Document.getInitialProps(ctx);
