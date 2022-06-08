@@ -1,13 +1,13 @@
-import { makeStyles, createStyles } from "@material-ui/core/styles";
-import Pagination from "@material-ui/lab/Pagination";
+import { makeStyles, createStyles } from '@material-ui/core/styles';
+import Pagination from '@material-ui/lab/Pagination';
 
-import { selectNews, setPage } from "../../features/newsSlice";
-import { useAppSelector, useAppDispatch } from "../../app/hooks";
+import { selectNews, setPage } from '../../features/newsSlice';
+import { useAppSelector, useAppDispatch } from '../../app/hooks';
 
-const useStyles = makeStyles((theme) =>
+const useStyles = makeStyles(theme =>
   createStyles({
     root: {
-      "& > *": {
+      '& > *': {
         marginTop: theme.spacing(2),
       },
     },
@@ -18,9 +18,7 @@ interface PaginationComponentProps {
   totalPages: number;
 }
 
-const PaginationComponent: React.FC<PaginationComponentProps> = ({
-  totalPages,
-}) => {
+const PaginationComponent = ({ totalPages }: PaginationComponentProps) => {
   const classes = useStyles();
 
   const dispatch = useAppDispatch();

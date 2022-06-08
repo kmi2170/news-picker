@@ -6,15 +6,12 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useAppSelector, useAppDispatch } from '../app/hooks';
 import { selectNews, setLang, setFavorites } from '../features/newsSlice';
 import Navbar from '../components/Navbar/Navbar';
-import NewsCards from '../components/NewsCards/NewsCards';
+import NewsCards from '../components/NewsCards';
 import Footer from '../components/Footer';
 
 const useStyles = makeStyles(() => ({
   root: {
     flexGrow: 1,
-    // backgroundImage:
-    //   'linear-gradient(to bottom, rgb(102,255,255,0.15), rgba(218,165,32,0.25))',
-
     minHeight: '100vh',
   },
   buttonsLang: {

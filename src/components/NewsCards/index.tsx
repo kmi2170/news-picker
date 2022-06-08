@@ -1,14 +1,13 @@
-import { Grid, Typography } from "@material-ui/core";
+import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-
-import NewsCard from "./NewsCard";
-import LoadingSkelton from "./LoadingSkelton";
-import Pagination from "./Pagination";
 
 import { useAppSelector } from "../../app/hooks";
 import { selectNews } from "../../features/newsSlice";
 import { useGetNewsApiQuery } from "../../services/newsApi";
-
+import NewsCard from "./NewsCard";
+import LoadingSkelton from "./LoadingSkelton";
+import Pagination from "./Pagination";
 import { ArticleDataType } from "../../api/type_settngs";
 import { sortData } from "../../utils/sort";
 
@@ -18,7 +17,7 @@ const useStyles = makeStyles(() => ({
     padding: "1rem",
     height: "100vh",
   },
-  paginationContainer: {
+  pagination: {
     marginBottom: "1rem",
     display: "flex",
     justifyContent: "center",
@@ -28,7 +27,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const NewsCards: React.FC = () => {
+const NewsCards = () => {
   const classes = useStyles();
 
   const { q, lang, topic, page, from, to, sources } =
@@ -70,7 +69,7 @@ const NewsCards: React.FC = () => {
           : news?.status}
       </Typography>
 
-      <div className={classes.paginationContainer}>
+      <div className={classes.pagination}>
         <Pagination totalPages={news?.total_pages} />
       </div>
 
@@ -89,7 +88,7 @@ const NewsCards: React.FC = () => {
         </Grid>
       )}
 
-      <div className={classes.paginationContainer}>
+      <div className={classes.pagination}>
         <Pagination totalPages={news?.total_pages} />
       </div>
     </article>

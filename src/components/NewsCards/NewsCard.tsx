@@ -82,7 +82,7 @@ interface NewsCardProps {
   lang: string;
 }
 
-const NesCard: React.FC<NewsCardProps> = ({ article, lang }) => {
+const NesCard = ({ article, lang }: NewsCardProps) => {
   const classes = useStyles();
   const articleRef = useRef<HTMLHeadElement>();
 
@@ -119,7 +119,7 @@ const NesCard: React.FC<NewsCardProps> = ({ article, lang }) => {
             paddingBottom: 0,
           }}
         >
-          <Tooltip title={lang === "ja" ? "元の記事へ" : "View Source"}>
+          <Tooltip title={lang === "ja" ? "元の記事を読む" : "View Source"}>
             <ButtonBase onClick={handleClick}>
               <Typography variant="h6" className={classes.textTitle}>
                 {title}
