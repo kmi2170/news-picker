@@ -1,15 +1,16 @@
-import { Grid, Typography } from "@material-ui/core";
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import { memo } from 'react';
 
 const Footer = () => {
-  const dt = new Date();
-  const year = dt.getFullYear();
+  const year = new Date().getFullYear();
 
   return (
     <footer>
       <Grid container>
         <Grid item xs={12}>
           <Typography variant="body2">
-            Copyrihgt &copy; kmi {year}. All rights reserved. | Powerd by{" "}
+            Copyrihgt &copy; kmi {year}. All rights reserved. | Powerd by{' '}
             {
               <a
                 href="https://newscatcherapi.com/"
@@ -27,4 +28,4 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export default memo(Footer);

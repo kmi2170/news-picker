@@ -1,13 +1,10 @@
 import { useEffect } from 'react';
-
 import { useCookies } from 'react-cookie';
-
-import { Container } from '@material-ui/core';
+import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 
 import { useAppSelector, useAppDispatch } from '../app/hooks';
 import { selectNews, setLang, setFavorites } from '../features/newsSlice';
-
 import Navbar from '../components/Navbar/Navbar';
 import NewsCards from '../components/NewsCards/NewsCards';
 import Footer from '../components/Footer';
