@@ -1,24 +1,20 @@
 import { useState, useRef } from "react";
-
-import {
-  Card,
-  CardContent,
-  CardMedia,
-  Typography,
-  IconButton,
-  Grid,
-  ButtonBase,
-  Tooltip,
-} from "@material-ui/core";
+import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+import CardMedia from "@material-ui/core/CardMedia";
+import ButtonBase from "@material-ui/core/ButtonBase";
+import IconButton from "@material-ui/core/IconButton";
+import Tooltip from "@material-ui/core/Tooltip";
 import { grey } from "@material-ui/core/colors";
 import { makeStyles } from "@material-ui/core/styles";
 import { ExpandMore, ExpandLess } from "@material-ui/icons";
-
 import clsx from "clsx";
 import moment from "moment";
 
 import { ArticleDataType } from "../../api/type_settngs";
-// import { utcToLocalTime } from '../utils/utcToLocalTime';
+import { timeFromNow } from "../../utils/time";
 
 const useStyles = makeStyles(() => ({
   cardContainer: {
@@ -170,7 +166,7 @@ const NesCard = ({ article, lang }: NewsCardProps) => {
                 align="right"
               >
                 {moment.utc(published_date).fromNow()}
-                {/* {moment(utcToLocalTime(published_date)).fromNow()} */}
+                {timeFromNow(published_date)}
               </Typography>
             </Grid>
           </Grid>

@@ -9,9 +9,10 @@ const cookiesOptions = {
 export const useCustomeCookies = () => {
   const [cookies, setCookie] = useCookies(['news_lang', 'news_favorites']);
 
-  const setLangCookie = lang => setCookie('news_lang', lang, cookiesOptions);
+  const setLangCookie = (lang: string) =>
+    setCookie('news_lang', lang, cookiesOptions);
 
-  const setFavoritesCookie = favorites =>
+  const setFavoritesCookie = (favorites: string[]) =>
     setCookie('news_favorites', favorites, cookiesOptions);
 
   return { cookies, setLangCookie, setFavoritesCookie };

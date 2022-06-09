@@ -24,7 +24,7 @@ const PaginationComponent = ({ totalPages }: PaginationComponentProps) => {
   const dispatch = useAppDispatch();
   const { page } = useAppSelector(selectNews);
 
-  const handleClick = (_, page: number) => {
+  const handleClick = (page: number) => {
     dispatch(setPage(page));
   };
 
