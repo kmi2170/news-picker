@@ -1,8 +1,8 @@
 import Pagination from '@material-ui/lab/Pagination';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 
-import { selectNews, setPage } from '../../features/newsSlice';
-import { useAppSelector, useAppDispatch } from '../../app/hooks';
+import { selectNews, setPage } from '../../../features/newsSlice';
+import { useAppSelector, useAppDispatch } from '../../../app/hooks';
 
 const useStyles = makeStyles(theme =>
   createStyles({
