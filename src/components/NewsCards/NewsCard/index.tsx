@@ -10,11 +10,9 @@ import Tooltip from "@material-ui/core/Tooltip";
 import { grey } from "@material-ui/core/colors";
 import { makeStyles } from "@material-ui/core/styles";
 import { ExpandMore, ExpandLess } from "@material-ui/icons";
-import clsx from "clsx";
-import moment from "moment";
 
-import { ArticleDataType } from "../../api/type_settngs";
-import { timeFromNow } from "../../utils/time";
+import { ArticleDataType } from "../../../api/type_settngs";
+import { timeFromNow } from "../../../utils/time";
 
 const useStyles = makeStyles(() => ({
   cardContainer: {
@@ -51,7 +49,6 @@ const useStyles = makeStyles(() => ({
     marginTop: "1rem",
     height: 80,
     overflow: "hidden",
-    // border: '1px solid blue',
   },
   summaryExpand: {
     width: "100%",
@@ -131,7 +128,7 @@ const NesCard = ({ article, lang }: NewsCardProps) => {
           </div>
 
           <div className={showMore ? classes.summaryExpand : classes.summary}>
-            <Typography variant="body1" className={clsx(classes.textSummary)}>
+            <Typography variant="body1" className={classes.textSummary}>
               {summary}
             </Typography>
           </div>
@@ -165,7 +162,6 @@ const NesCard = ({ article, lang }: NewsCardProps) => {
                 color="textSecondary"
                 align="right"
               >
-                {moment.utc(published_date).fromNow()}
                 {timeFromNow(published_date)}
               </Typography>
             </Grid>

@@ -1,5 +1,5 @@
-import { makeStyles, createStyles } from '@material-ui/core/styles';
 import Pagination from '@material-ui/lab/Pagination';
+import { makeStyles, createStyles } from '@material-ui/core/styles';
 
 import { selectNews, setPage } from '../../features/newsSlice';
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
@@ -24,7 +24,7 @@ const PaginationComponent = ({ totalPages }: PaginationComponentProps) => {
   const dispatch = useAppDispatch();
   const { page } = useAppSelector(selectNews);
 
-  const handleClick = (page: number) => {
+  const handleClick = (_: React.ChangeEvent<unknown>, page: number) => {
     dispatch(setPage(page));
   };
 
