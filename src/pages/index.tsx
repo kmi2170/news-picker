@@ -38,6 +38,7 @@ const Home = () => {
 
   const { cookies, setLangCookie, setFavoritesCookie } = useCustomeCookies();
 
+  /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     if (isLangCookieValid(cookies.news_lang)) {
       dispatch(setLang(cookies.news_lang));
@@ -51,6 +52,7 @@ const Home = () => {
   useEffect(() => setLangCookie(lang), [lang]);
 
   useEffect(() => setFavoritesCookie(favorites), [favorites]);
+  /* eslint-enable react-hooks/exhaustive-deps */
 
   return (
     <div className={classes.root}>
