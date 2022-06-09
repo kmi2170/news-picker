@@ -1,9 +1,13 @@
-import { Grid, Button, Typography, Chip, Tooltip } from '@material-ui/core';
+import { memo } from 'react';
+import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
+import Chip from '@material-ui/core/Chip';
+import Tooltip from '@material-ui/core/Tooltip';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import purple from '@material-ui/core/colors/purple';
 
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
-import { selectNews, setQ, setFavorites } from '../../features/newsSlice';
+import { setQ, setFavorites } from '../../features/newsSlice';
 
 const useStyles = makeStyles((theme: Theme) => ({
   text: { color: 'black' },
@@ -12,7 +16,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     textTransform: 'capitalize',
     color: '#fff',
     background: purple[500],
-    // color: theme.palette.info.dark,
   },
   chips: {
     display: 'flex',
@@ -24,40 +27,37 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const Favorite: React.FC = () => {
+const Favorite = () => {
   const classes = useStyles();
 
-  const { q, favorites } = useAppSelector(selectNews);
+  const q = useAppSelector(state => state.news.q);
+  const favorites = useAppSelector(state => state.news.favorites);
   const dispatch = useAppDispatch();
 
   const addFavorite = () => {
     if (q) {
-      const newFavorites = [...favorites, q];
-      dispatch(setFavorites(newFavorites));
+      dispatch(setFavorites([...favorites, q]));
     }
   };
 
   const handleClick = (q: string) => {
-    console.log({ q });
     dispatch(setQ(q));
   };
 
   const handleDelete = (q: string) => {
-    const res = confirm(`Delete this query, ${q}?`);
+    if (confirm(`Delete this query, ${q}?`)) {
+      const newFavorites = favorites.filter(favorite => favorite !== q);
 
-    if (res) {
-      const newFavorites = favorites.filter((favorite) => favorite !== q);
       dispatch(setFavorites(newFavorites));
     }
   };
 
   return (
-    <Grid container justifyContent='center' alignItems='center'>
+    <Grid container justifyContent="center" alignItems="center">
       <Grid item xs={3}>
-        <Tooltip title='Register the keywords (cookie required)'>
+        <Tooltip title="Register the keywords (cookie required)">
           <Button
-            variant='contained'
-            // color="default"
+            variant="contained"
             onClick={addFavorite}
             className={classes.button}
           >
@@ -70,7 +70,7 @@ const Favorite: React.FC = () => {
           {favorites.map((favorite, i) => (
             <Chip
               key={i}
-              size='small'
+              size="small"
               label={favorite}
               onClick={() => handleClick(favorite)}
               onDelete={() => handleDelete(favorite)}
@@ -82,4 +82,4 @@ const Favorite: React.FC = () => {
   );
 };
 
-export default Favorite;
+export default memo(Favorite);
