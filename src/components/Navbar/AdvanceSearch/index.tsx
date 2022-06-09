@@ -1,8 +1,10 @@
-import { Grid, TextField, Button } from '@material-ui/core';
+import Grid from '@material-ui/core/Grid';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import teal from '@material-ui/core/colors/teal';
 
-import { useAppSelector, useAppDispatch } from '../../app/hooks';
+import { useAppSelector, useAppDispatch } from '../../../app/hooks';
 import {
   selectNews,
   setFrom,
@@ -10,10 +12,10 @@ import {
   setTopic,
   setSources,
   setSearchSources,
-} from '../../features/newsSlice';
+} from '../../../features/newsSlice';
 
 import DateFromTo from './DateFromTo';
-import { localToUTCString } from '../../utils/localToUTCString';
+import { localToUTCString } from '../../../utils/localToUTCString';
 
 const useStyles = makeStyles(() => ({
   text: {},
@@ -28,11 +30,12 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const AdvanceSearch: React.FC = () => {
+const AdvanceSearch = () => {
   const classes = useStyles();
 
-  const { searchSources, pickerDateFrom, pickerDateTo } =
-    useAppSelector(selectNews);
+  const { searchSources, pickerDateFrom, pickerDateTo } = useAppSelector(
+    selectNews
+  );
 
   const dispatch = useAppDispatch();
 
@@ -50,19 +53,19 @@ const AdvanceSearch: React.FC = () => {
 
   return (
     <>
-      <form onSubmit={handleSubmit} autoComplete='off'>
+      <form onSubmit={handleSubmit} autoComplete="off">
         <Grid
           container
-          justifyContent='space-between'
-          alignItems='center'
+          justifyContent="space-between"
+          alignItems="center"
           spacing={3}
         >
           <Grid item xs={12} sm={6}>
             <TextField
-              label='Source'
-              type='text'
-              placeholder='e.g. nytimes.com'
-              margin='none'
+              label="Source"
+              type="text"
+              placeholder="e.g. nytimes.com"
+              margin="none"
               InputLabelProps={{ shrink: true }}
               fullWidth
               value={searchSources}
@@ -75,9 +78,9 @@ const AdvanceSearch: React.FC = () => {
           </Grid>
           <Grid item xs={12} sm={12}>
             <Button
-              type='submit'
-              variant='contained'
-              size='small'
+              type="submit"
+              variant="contained"
+              size="small"
               className={classes.button}
             >
               Apply This Options

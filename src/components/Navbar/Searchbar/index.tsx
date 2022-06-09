@@ -5,8 +5,8 @@ import { Search, Cancel } from '@material-ui/icons';
 import { grey } from '@material-ui/core/colors';
 import { makeStyles } from '@material-ui/core/styles';
 
-import { useAppSelector, useAppDispatch } from '../../app/hooks';
-import { setQ } from '../../features/newsSlice';
+import { useAppSelector, useAppDispatch } from '../../../app/hooks';
+import { setQ } from '../../../features/newsSlice';
 
 const useStyles = makeStyles(() => ({
   searchContainer: {

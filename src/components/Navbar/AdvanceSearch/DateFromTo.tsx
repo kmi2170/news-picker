@@ -1,31 +1,32 @@
-import { Grid } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { memo } from 'react';
+import Grid from '@material-ui/core/Grid';
+import { makeStyles } from '@material-ui/core/styles';
 
-import "date-fns";
-import DateFnsUtils from "@date-io/date-fns";
+import 'date-fns';
+import DateFnsUtils from '@date-io/date-fns';
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
-} from "@material-ui/pickers";
+} from '@material-ui/pickers';
 
-import { useAppSelector, useAppDispatch } from "../../app/hooks";
+import { useAppSelector, useAppDispatch } from '../../../app/hooks';
 import {
-  selectNews,
   setPickerDateFrom,
   setPickerDateTo,
-} from "../../features/newsSlice";
+} from '../../../features/newsSlice';
 
 const useStyles = makeStyles(() => ({
   text: {},
   dateContainer: {
-    width: "9rem",
+    width: '9rem',
   },
 }));
 
-const DateFromTo: React.FC = () => {
+const DateFromTo = () => {
   const classes = useStyles();
 
-  const { pickerDateFrom, pickerDateTo } = useAppSelector(selectNews);
+  const pickerDateFrom = useAppSelector(state => state.news.pickerDateFrom);
+  const pickerDateTo = useAppSelector(state => state.news.pickerDateTo);
   const dispatch = useAppDispatch();
 
   const minDate = new Date();
@@ -33,12 +34,10 @@ const DateFromTo: React.FC = () => {
 
   const handleDateFromChange = (date: Date) => {
     dispatch(setPickerDateFrom(date));
-    // console.log("data from", date);
   };
 
   const handleDateToChange = (date: Date) => {
     dispatch(setPickerDateTo(date));
-    // console.log("data to", date);
   };
 
   return (
@@ -57,7 +56,7 @@ const DateFromTo: React.FC = () => {
                 value={pickerDateFrom}
                 onChange={handleDateFromChange}
                 KeyboardButtonProps={{
-                  "aria-label": "change date",
+                  'aria-label': 'change date',
                 }}
                 disableFuture
                 minDate={minDate}
@@ -77,7 +76,7 @@ const DateFromTo: React.FC = () => {
                 value={pickerDateTo}
                 onChange={handleDateToChange}
                 KeyboardButtonProps={{
-                  "aria-label": "change date",
+                  'aria-label': 'change date',
                 }}
                 disableFuture
                 minDate={minDate}
@@ -90,4 +89,4 @@ const DateFromTo: React.FC = () => {
   );
 };
 
-export default DateFromTo;
+export default memo(DateFromTo);
