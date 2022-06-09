@@ -1,44 +1,42 @@
-// import { useState, useEffect } from 'react';
+import { memo } from 'react';
+import Button from '@material-ui/core/Button';
+import { makeStyles } from '@material-ui/core/styles';
 
-import { Button } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
-
-import { useAppSelector, useAppDispatch } from "../../app/hooks";
-import { selectNews, setLang } from "../../features/newsSlice";
-
-import { LangType } from "../../api/type_settngs";
+import { useAppSelector, useAppDispatch } from '../../app/hooks';
+import { setLang } from '../../features/newsSlice';
+import { LangType } from '../../api/type_settngs';
 
 const useStyles = makeStyles(() => ({
   button: {
-    borderRadius: "15px",
-    textTransform: "capitalize",
-    marginRight: "0.25rem",
-    hight: "1rem",
+    borderRadius: '15px',
+    textTransform: 'capitalize',
+    marginRight: '0.25rem',
+    hight: '1rem',
   },
 }));
 
 const buttons = [
-  { id: 1, code: "en", name: "English" },
-  { id: 2, code: "ja", name: "Japanese" },
+  { id: 1, code: 'en', name: 'English' },
+  { id: 2, code: 'ja', name: 'Japanese' },
 ];
 
-const ButtonsLanguage: React.FC = () => {
+const ButtonsLanguage = () => {
   const classes = useStyles();
 
-  const { lang } = useAppSelector(selectNews);
+  const lang = useAppSelector(state => state.news.lang);
   const dispatch = useAppDispatch();
 
-  const clickHandlerLang = (lang: LangType) => dispatch(setLang(lang));
+  const handleClickLang = (lang: LangType) => dispatch(setLang(lang));
 
   return (
     <>
       {buttons.map(({ id, code, name }) => (
         <Button
           key={id}
-          variant={code === lang ? "contained" : "outlined"}
+          variant={code === lang ? 'contained' : 'outlined'}
           color="secondary"
           size="small"
-          onClick={() => clickHandlerLang(code as LangType)}
+          onClick={() => handleClickLang(code as LangType)}
           className={classes.button}
         >
           {name}
@@ -48,4 +46,4 @@ const ButtonsLanguage: React.FC = () => {
   );
 };
 
-export default ButtonsLanguage;
+export default memo(ButtonsLanguage);
