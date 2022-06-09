@@ -11,15 +11,15 @@ import { grey } from '@material-ui/core/colors';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 
 import Searchbar from './Searchbar';
-import ButtonsLanguage from './ButtonsLanguage';
-import ButtonsTopic from './ButtonsTopic';
-import Favorites from './Favorites';
+import ButtonsLanguage from './Buttons/ButtonsLanguage';
+import ButtonsTopic from './Buttons/ButtonsTopic';
+import Favorites from './Buttons/Favorites';
 import AdvanceSearch from './AdvanceSearch';
 
-import { useAppSelector, useAppDispatch } from '../../app/hooks';
-import { selectNews, reset } from '../../features/newsSlice';
+import { useAppDispatch } from '../../app/hooks';
+import { reset } from '../../features/newsSlice';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles(() => ({
   appBar: {
     background: 'white',
   },
@@ -48,19 +48,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 const Navbar = () => {
   const classes = useStyles();
 
-  // const { favorites } = useAppSelector(selectNews);
-  const favorites = useAppSelector(state => state.news.favorites);
   const dispatch = useAppDispatch();
-
-  // const [reset, setReset] = useState<boolean>(false);
-  // const [searchInput, setSearchInput] = useState<string>("");
-
-  // const [sources, setSources] = useState<string>("");
-
-  // const initDateFrom = new Date();
-  // initDateFrom.setDate(initDateFrom.getDate() - 7);
-  // const [dateFrom, setDateFrom] = useState<Date | null>(initDateFrom);
-  // const [dateTo, setDateTo] = useState<Date | null>(new Date());
 
   const [isOpen, setIsOpen] = useState<boolean>(true);
   const [isOpenAO, setIsOpenAO] = useState<boolean>(false);

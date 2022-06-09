@@ -2,9 +2,9 @@ import { memo } from 'react';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 
-import { useAppSelector, useAppDispatch } from '../../app/hooks';
-import { setLang } from '../../features/newsSlice';
-import { LangType } from '../../api/type_settngs';
+import { useAppSelector, useAppDispatch } from '../../../app/hooks';
+import { setLang } from '../../../features/newsSlice';
+import { LangType } from '../../../api/type_settngs';
 
 const useStyles = makeStyles(() => ({
   button: {

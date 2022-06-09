@@ -6,8 +6,8 @@ import Tooltip from '@material-ui/core/Tooltip';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import purple from '@material-ui/core/colors/purple';
 
-import { useAppSelector, useAppDispatch } from '../../app/hooks';
-import { setQ, setFavorites } from '../../features/newsSlice';
+import { useAppSelector, useAppDispatch } from '../../../app/hooks';
+import { setQ, setFavorites } from '../../../features/newsSlice';
 
 const useStyles = makeStyles((theme: Theme) => ({
   text: { color: 'black' },
