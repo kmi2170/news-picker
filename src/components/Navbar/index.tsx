@@ -1,57 +1,55 @@
-import { useState } from "react";
+import { useState } from 'react';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import AppBar from '@material-ui/core/AppBar';
+import Tooltip from '@material-ui/core/Tooltip';
+import Toolbar from '@material-ui/core/Toolbar';
+import ButtonBase from '@material-ui/core/ButtonBase';
+import Button from '@material-ui/core/Button';
+import { ExpandMore, ExpandLess } from '@material-ui/icons';
+import { grey } from '@material-ui/core/colors';
+import { makeStyles, Theme } from '@material-ui/core/styles';
 
-import {
-  Grid,
-  Typography,
-  AppBar,
-  Toolbar,
-  ButtonBase,
-  Tooltip,
-  Button,
-} from "@material-ui/core";
-import { ExpandMore, ExpandLess } from "@material-ui/icons";
-import { grey } from "@material-ui/core/colors";
-import { makeStyles, Theme } from "@material-ui/core/styles";
+import Searchbar from './Searchbar';
+import ButtonsLanguage from './ButtonsLanguage';
+import ButtonsTopic from './ButtonsTopic';
+import Favorites from './Favorites';
+import AdvanceSearch from './AdvanceSearch';
 
-import Searchbar from "./Searchbar";
-import ButtonsLanguage from "./ButtonsLanguage";
-import ButtonsTopic from "./ButtonsTopic";
-import Favorites from "./Favorites";
-import AdvanceSearch from "./AdvanceSearch";
-
-import { useAppSelector, useAppDispatch } from "../../app/hooks";
-import { selectNews, reset } from "../../features/newsSlice";
+import { useAppSelector, useAppDispatch } from '../../app/hooks';
+import { selectNews, reset } from '../../features/newsSlice';
 
 const useStyles = makeStyles((theme: Theme) => ({
   appBar: {
-    background: "white",
+    background: 'white',
   },
   text: {
-    fontFamily: "Tourney",
+    fontFamily: 'Tourney',
     fontWeight: 500,
-    color: "black",
+    color: 'black',
   },
   icon: {
     color: grey[600],
   },
   expand: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    margin: "0.3rem",
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: '0.3rem',
   },
 
   resetButton: {
-    borderRadius: "15px",
-    textTransform: "capitalize",
-    marginLeft: "4rem",
+    borderRadius: '15px',
+    textTransform: 'capitalize',
+    marginLeft: '4rem',
   },
 }));
 
-const Navbar: React.FC = () => {
+const Navbar = () => {
   const classes = useStyles();
 
-  const { favorites } = useAppSelector(selectNews);
+  // const { favorites } = useAppSelector(selectNews);
+  const favorites = useAppSelector(state => state.news.favorites);
   const dispatch = useAppDispatch();
 
   // const [reset, setReset] = useState<boolean>(false);
@@ -68,12 +66,12 @@ const Navbar: React.FC = () => {
   const [isOpenAO, setIsOpenAO] = useState<boolean>(false);
 
   const handleExpandClick = () => {
-    setIsOpen((prev) => !prev);
+    setIsOpen(prev => !prev);
     setIsOpenAO(false);
   };
 
   const handleExpandClickAO = () => {
-    setIsOpenAO((prev) => !prev);
+    setIsOpenAO(prev => !prev);
   };
 
   const handleReset = () => dispatch(reset());
@@ -95,7 +93,7 @@ const Navbar: React.FC = () => {
         </Grid>
       </Toolbar>
       <div className={classes.expand}>
-        <Tooltip title={isOpen ? "Close Panel" : "Open Panel"}>
+        <Tooltip title={isOpen ? 'Close Panel' : 'Open Panel'}>
           <ButtonBase onClick={handleExpandClick}>
             {isOpen ? (
               <ExpandLess className={classes.icon} />
@@ -135,7 +133,7 @@ const Navbar: React.FC = () => {
               <ButtonsTopic />
             </Grid>
             <Grid item xs={12}>
-              <div style={{ marginTop: "0.5rem" }}>
+              <div style={{ marginTop: '0.5rem' }}>
                 <Favorites />
               </div>
             </Grid>
@@ -144,7 +142,7 @@ const Navbar: React.FC = () => {
 
         <div className={classes.expand}>
           <Tooltip
-            title={isOpenAO ? "Close More Options" : "Open More Options"}
+            title={isOpenAO ? 'Close More Options' : 'Open More Options'}
           >
             <ButtonBase onClick={handleExpandClickAO}>
               {isOpenAO && isOpen ? (

@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import { useAppSelector, useAppDispatch } from '../app/hooks';
 import { selectNews, setLang, setFavorites } from '../features/newsSlice';
-import Navbar from '../components/Navbar/Navbar';
+import Navbar from '../components/Navbar';
 import NewsCards from '../components/NewsCards';
 import Footer from '../components/Footer';
 import { useCustomeCookies } from '../hooks/useCustomCookies';

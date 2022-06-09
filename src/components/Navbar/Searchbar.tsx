@@ -1,17 +1,16 @@
-import { useState } from 'react';
-
-import { IconButton, InputBase } from '@material-ui/core';
+import { memo, useState } from 'react';
+import IconButton from '@material-ui/core/IconButton';
+import InputBase from '@material-ui/core/InputBase';
 import { Search, Cancel } from '@material-ui/icons';
 import { grey } from '@material-ui/core/colors';
 import { makeStyles } from '@material-ui/core/styles';
 
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
-import { selectNews, setQ } from '../../features/newsSlice';
+import { setQ } from '../../features/newsSlice';
 
 const useStyles = makeStyles(() => ({
   searchContainer: {
     marginTop: 5,
-    // justifyContent: 'space-between',
     border: `1px solid ${grey[400]}`,
     borderRadius: 30,
   },
@@ -23,19 +22,15 @@ const useStyles = makeStyles(() => ({
     '&:hover': {
       cursor: 'pointer',
     },
-    // paddingRight: '1.0rem',
-    // [theme.breakpoints.down('sm')]: {
-    //   paddingRight: '2.0rem',
-    // },
   },
 }));
 
-const Searchbar: React.FC = () => {
+const Searchbar = () => {
   const classes = useStyles();
 
   const [searchTerm, setSearchTerm] = useState<string>('');
 
-  const { q } = useAppSelector(selectNews);
+  const q = useAppSelector(state => state.news.q);
   const dispatch = useAppDispatch();
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) =>
@@ -75,4 +70,4 @@ const Searchbar: React.FC = () => {
   );
 };
 
-export default Searchbar;
+export default memo(Searchbar);
