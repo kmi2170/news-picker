@@ -8,7 +8,7 @@ import ButtonBase from '@material-ui/core/ButtonBase';
 import Button from '@material-ui/core/Button';
 import { ExpandMore, ExpandLess } from '@material-ui/icons';
 import { grey } from '@material-ui/core/colors';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 
 import Searchbar from './Searchbar';
 import ButtonsLanguage from './Buttons/ButtonsLanguage';

@@ -79,7 +79,7 @@ const NesCard = ({ article, lang }: NewsCardProps) => {
   const classes = useStyles();
   const articleRef = useRef<HTMLHeadElement>();
 
-  const { title, published_date, link, summary, media } = article;
+  const { title, published_date, link, summary, media, clean_url } = article;
 
   const [showMore, setShowMore] = useState(false);
 
@@ -134,15 +134,23 @@ const NesCard = ({ article, lang }: NewsCardProps) => {
           </div>
           <div className={classes.overlay} hidden={showMore} />
 
+          {showMore && (
+            <ButtonBase onClick={handleClick}>
+              <Typography variant="subtitle2" color="primary" style={{ marginTop: '5px' }}>
+                {lang === "ja" ? "元の記事を読む" : "View Source"}
+              </Typography>
+            </ButtonBase>
+          )}
+
           <Grid container justifyContent="center" alignItems="center">
             <Grid item xs={4}>
-              {showMore && (
-                <ButtonBase onClick={handleClick}>
-                  <Typography variant="subtitle2" color="primary" align="left">
-                    {lang === "ja" ? "元の記事へ" : "View Source"}
-                  </Typography>
-                </ButtonBase>
-              )}
+              <Typography
+                variant="subtitle2"
+                color="textSecondary"
+                align="left"
+              >
+                {clean_url}
+              </Typography>
             </Grid>
 
             <Grid item xs={4}>
