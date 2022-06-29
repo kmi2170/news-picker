@@ -12,6 +12,7 @@ import {
   isFavoritesCookieValid,
   isLangCookieValid,
 } from '../utils/cookiesValidator';
+import { LangType } from '../api/type_settngs';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -41,11 +42,11 @@ const Home = () => {
   /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     if (isLangCookieValid(cookies.news_lang)) {
-      dispatch(setLang(cookies.news_lang));
+      dispatch(setLang(cookies.news_lang as LangType));
     }
 
     if (isFavoritesCookieValid(cookies.news_favorites)) {
-      dispatch(setFavorites(cookies.news_favorites));
+      dispatch(setFavorites(cookies.news_favorites as string[]));
     }
   }, []);
 
