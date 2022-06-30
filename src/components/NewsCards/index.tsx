@@ -47,7 +47,6 @@ const NewsCards = () => {
     sources,
   });
 
-  console.log(news);
   if (isError)
     return (
       <Typography

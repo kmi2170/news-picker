@@ -19,14 +19,13 @@ const useStyles = makeStyles(() => ({
 const ButtonsTopic = () => {
   const classes = useStyles();
 
-  const lang = useAppSelector(state => state.news.lang);
-  const topic = useAppSelector(state => state.news.topic);
+  const lang = useAppSelector((state) => state.news.lang);
+  const topic = useAppSelector((state) => state.news.topic);
   const dispatch = useAppDispatch();
 
   const handleClick = (topic: TopicType) => {
     dispatch(setTopic(topic));
   };
-  console.log('topic button');
 
   return (
     <>

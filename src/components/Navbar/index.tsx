@@ -54,12 +54,12 @@ const Navbar = () => {
   const [isOpenAO, setIsOpenAO] = useState<boolean>(false);
 
   const handleExpandClick = () => {
-    setIsOpen(prev => !prev);
+    setIsOpen((prev) => !prev);
     setIsOpenAO(false);
   };
 
   const handleExpandClickAO = () => {
-    setIsOpenAO(prev => !prev);
+    setIsOpenAO((prev) => !prev);
   };
 
   const handleReset = () => dispatch(reset());
@@ -105,7 +105,7 @@ const Navbar = () => {
                 <ButtonsLanguage />
               </Grid>
               <Grid item xs={6}>
-                <Tooltip title="Reset Keywords, Topic, Date...">
+                <Tooltip title="Reset Keywords,  Date...">
                   <Button
                     variant="contained"
                     size="small"
@@ -117,9 +117,9 @@ const Navbar = () => {
                 </Tooltip>
               </Grid>
             </Grid>
-            <Grid item xs={12}>
-              <ButtonsTopic />
-            </Grid>
+            {/* <Grid item xs={12}> */}
+            {/*   <ButtonsTopic /> */}
+            {/* </Grid> */}
             <Grid item xs={12}>
               <div style={{ marginTop: '0.5rem' }}>
                 <Favorites />

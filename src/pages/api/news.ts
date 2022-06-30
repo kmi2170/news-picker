@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { NewsDataType } from '../../api/type_settngs';
 
 const url = 'https://free-news.p.rapidapi.com/v1/search';
@@ -10,26 +10,43 @@ const headers = {
 };
 
 export default async function news(req: NextApiRequest, res: NextApiResponse) {
-  const { q, lang, page, from, to, topics, sources } = req.query;
-
+  const { q, lang, page, from, to, topic, sources } = req.query;
   const baseParams = { q: q ? q : 'news', lang, page, from, to };
 
   let params = {};
-  if (topics && sources) {
-    params = { ...baseParams, topics, sources };
-  } else if (topics) {
-    params = { ...baseParams, topics };
+  if (topic && sources) {
+    params = { ...baseParams, topic, sources };
+  } else if (topic) {
+    params = { ...baseParams, topic };
   } else if (sources) {
     params = { ...baseParams, sources };
   } else {
     params = { ...baseParams };
   }
 
+  // let params = {};
+  // if (topic && sources) {
+  //   params =
+  //     lang === 'jp'
+  //       ? { q: q !== 'news' ? q : topic, sources, ...basePparams }
+  //       : { topic, sources, ...basePparams };
+  // } else if (topic) {
+  //   params =
+  //     lang === 'jp'
+  //       ? { q: q !== 'news' ? q : topic, ...basePparams }
+  //       : { topic, ...basePparams };
+  // } else if (sources) {
+  //   params = { sources, ...basePparams };
+  // } else {
+  //   params = { ...basePparams };
+  // }
+  // console.log(params);
+  // // }
+
   try {
     const { data } = await axios.get<NewsDataType>(url, { params, headers });
     res.status(200).json(data);
   } catch (error) {
-    console.error(error);
-    // res.status(error.response.status).json(error);
+    console.error((error as AxiosError).message);
   }
 }
