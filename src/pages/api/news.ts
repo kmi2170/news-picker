@@ -1,23 +1,23 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import axios from "axios";
+import { NextApiRequest, NextApiResponse } from 'next';
+import axios from 'axios';
 
-const url = "https://free-news.p.rapidapi.com/v1/search";
+const url = 'https://free-news.p.rapidapi.com/v1/search';
 
 const headers = {
-  "x-rapidapi-key": process.env.NEXT_PUBLIC_RAPID_API_KEY,
-  "x-rapidapi-host": process.env.NEXT_PUBLIC_RAPID_API_HOST,
+  'x-rapidapi-key': process.env.NEXT_PUBLIC_RAPID_API_KEY,
+  'x-rapidapi-host': process.env.NEXT_PUBLIC_RAPID_API_HOST,
 };
 
 export default async function news(req: NextApiRequest, res: NextApiResponse) {
-  const { q, lang, page, from, to, topics, sources } = req.query;
+  const { q, lang, page, from, to, topic, sources } = req.query;
 
-  const baseParams = { q: q ? q : "news", lang, page, from, to };
+  const baseParams = { q: q ? q : 'news', lang, page, from, to };
 
   let params = {};
-  if (topics && sources) {
-    params = { ...baseParams, topics, sources };
-  } else if (topics) {
-    params = { ...baseParams, topics };
+  if (topic && sources) {
+    params = { ...baseParams, topic, sources };
+  } else if (topic) {
+    params = { ...baseParams, topic };
   } else if (sources) {
     params = { ...baseParams, sources };
   } else {
