@@ -16,6 +16,9 @@ export const newsSlice = createSlice({
     setTopic: (state, action: PayloadAction<TopicType>) => {
       state.topic = action.payload;
     },
+    setTopicsAvailable: (state, action: PayloadAction<TopicType[]>) => {
+      state.topicsAvailable = action.payload;
+    },
     setFavorites: (state, action: PayloadAction<string[]>) => {
       state.favorites = action.payload;
     },
@@ -53,6 +56,7 @@ export const {
   setQ,
   setLang,
   setTopic,
+  setTopicsAvailable,
   setFavorites,
   setPage,
   setFrom,

@@ -1,4 +1,4 @@
-export type LangType = "en" | "ja";
+export type LangType = 'en' | 'ja';
 
 export type QueryType = {
   q: string;
@@ -32,20 +32,20 @@ export type ArticleDataType = {
 };
 
 export type TopicType =
-  | ""
-  | "news"
-  | "sport"
-  | "tech"
-  | "world"
-  | "finance"
-  | "politics"
-  | "business"
-  | "economics"
-  | "entertainment"
-  | "beauty"
-  | "gaming";
+  | ''
+  | 'news'
+  | 'sport'
+  | 'tech'
+  | 'world'
+  | 'finance'
+  | 'politics'
+  | 'business'
+  | 'economics'
+  | 'entertainment'
+  | 'beauty'
+  | 'gaming';
 
-/* export type NewsDataType = {
+export type NewsDataType = {
   status: string;
   total_hits: number;
   page: number;
@@ -60,4 +60,4 @@ export type TopicType =
     page?: number;
     size?: number;
   };
-}; */
+};
