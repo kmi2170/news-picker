@@ -117,9 +117,9 @@ const Navbar = () => {
                 </Tooltip>
               </Grid>
             </Grid>
-            {/* <Grid item xs={12}> */}
-            {/*   <ButtonsTopic /> */}
-            {/* </Grid> */}
+            <Grid item xs={12}>
+              <ButtonsTopic />
+            </Grid>
             <Grid item xs={12}>
               <div style={{ marginTop: '0.5rem' }}>
                 <Favorites />

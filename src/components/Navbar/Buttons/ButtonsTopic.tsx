@@ -21,6 +21,7 @@ const ButtonsTopic = () => {
 
   const lang = useAppSelector((state) => state.news.lang);
   const topic = useAppSelector((state) => state.news.topic);
+  const topicsAvailable = useAppSelector((state) => state.news.topicsAvailable);
   const dispatch = useAppDispatch();
 
   const handleClick = (topic: TopicType) => {
@@ -37,6 +38,7 @@ const ButtonsTopic = () => {
           size="small"
           onClick={() => handleClick(code as TopicType)}
           className={classes.button}
+          disabled={!topicsAvailable.includes(code as TopicType)}
         >
           {name[lang]}
         </Button>

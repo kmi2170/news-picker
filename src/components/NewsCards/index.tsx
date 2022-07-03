@@ -2,14 +2,15 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 
-import { useAppSelector } from '../../app/hooks';
-import { selectNews } from '../../features/newsSlice';
+import { useAppSelector, useAppDispatch } from '../../app/hooks';
+import { selectNews, setTopicsAvailable } from '../../features/newsSlice';
 import { useGetNewsApiQuery } from '../../services/newsApi';
 import NewsCard from './NewsCard';
 import LoadingSkelton from './LoadingSkelton';
 import Pagination from './Pagination';
-import { ArticleDataType } from '../../api/type_settngs';
+import { ArticleDataType, TopicType } from '../../api/type_settngs';
 import { sortData } from '../../utils/sort';
+import { useEffect } from 'react';
 
 const useStyles = makeStyles(() => ({
   display: { fontFamily: 'Roboto Condensed', marginTop: '0.5rem' },
@@ -32,6 +33,7 @@ const NewsCards = () => {
 
   const { q, lang, topic, page, from, to, sources } =
     useAppSelector(selectNews);
+  const dispatch = useAppDispatch();
 
   const {
     data: news,
@@ -46,6 +48,15 @@ const NewsCards = () => {
     to,
     sources,
   });
+
+  /* eslint-disable react-hooks/exhaustive-deps */
+  useEffect(() => {
+    if (news) {
+      const topicsFound = news.articles.map((article) => article.topic);
+      dispatch(setTopicsAvailable([...new Set(topicsFound)] as TopicType[]));
+    }
+  }, [news]);
+  /* eslint-enable react-hooks/exhaustive-deps */
 
   if (isError)
     return (
