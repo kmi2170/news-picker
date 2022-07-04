@@ -23,10 +23,21 @@ const useStyles = makeStyles(() => ({
     display: 'flex',
     justifyContent: 'center',
   },
-  error: {
+  message: {
     padding: '3rem 0',
   },
 }));
+
+const Message = ({ msg, classname }: { msg: string; classname: string }) => (
+  <Typography
+    variant="h6"
+    align="center"
+    className={classname}
+    style={{ padding: '3rem 0' }}
+  >
+    {msg}
+  </Typography>
+);
 
 const NewsCards = () => {
   const classes = useStyles();
@@ -48,10 +59,11 @@ const NewsCards = () => {
     to,
     sources,
   });
+  console.log(news);
 
   /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
-    if (news) {
+    if (news?.status === 'ok') {
       const topicsFound = news.articles.map((article) => article.topic);
       dispatch(setTopicsAvailable([...new Set(topicsFound)] as TopicType[]));
     }
@@ -59,17 +71,10 @@ const NewsCards = () => {
   /* eslint-enable react-hooks/exhaustive-deps */
 
   if (isError)
-    return (
-      <Typography
-        variant="h6"
-        // color="error"
-        align="center"
-        className={classes.error}
-      >
-        Service is temporally unavailable due to the server problem. Please try
-        again later.
-      </Typography>
-    );
+    <Message
+      msg="Something went wrong. Please try again."
+      classname={classes.message}
+    />;
 
   return (
     <article>

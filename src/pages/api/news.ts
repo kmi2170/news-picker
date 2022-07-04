@@ -24,25 +24,6 @@ export default async function news(req: NextApiRequest, res: NextApiResponse) {
     params = { ...baseParams };
   }
 
-  // let params = {};
-  // if (topic && sources) {
-  //   params =
-  //     lang === 'jp'
-  //       ? { q: q !== 'news' ? q : topic, sources, ...basePparams }
-  //       : { topic, sources, ...basePparams };
-  // } else if (topic) {
-  //   params =
-  //     lang === 'jp'
-  //       ? { q: q !== 'news' ? q : topic, ...basePparams }
-  //       : { topic, ...basePparams };
-  // } else if (sources) {
-  //   params = { sources, ...basePparams };
-  // } else {
-  //   params = { ...basePparams };
-  // }
-  // console.log(params);
-  // // }
-
   try {
     const { data } = await axios.get<NewsDataType>(url, { params, headers });
     res.status(200).json(data);

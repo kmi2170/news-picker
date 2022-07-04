@@ -24,32 +24,36 @@ afterAll(() => server.close());
 const user = userEvent.setup();
 const setup = () => render(<SearchBar />);
 
-describe('SearchLocationBar', () => {
-  const testSearchTerm = 'seattle, wa';
-  it(`type in "${testSearchTerm}", then the value has "${testSearchTerm}"`, async () => {
-    setup();
-    await user.type(getTextbox(), testSearchTerm);
-    expect(getTextbox()).toHaveValue(testSearchTerm);
-  });
+const searchTerms = ['ethereum', 'formula one', 'earth enviroment'];
 
-  it(`type in "${testSearchTerm}", then click clear icon and the value has "" `, async () => {
-    setup();
-    await user.type(getTextbox(), testSearchTerm);
-    await user.click(getIcon(/clear button/i));
-    expect(getTextbox()).toHaveValue('');
-  });
+describe('SearchBar', () => {
+  it.each(searchTerms)(
+    'type in %s, then the value has %s',
+    async (searchTerm) => {
+      setup();
+      await user.type(getTextbox(), searchTerm);
+      expect(getTextbox()).toHaveValue(searchTerm);
+    }
+  );
 
-  it(`type in random text "abc123ABC", then click search icon and displays examples for search terms`, async () => {
-    setup();
-    await user.type(getTextbox(), 'abc123ABC');
-    await user.click(getIcon(/search button/i));
-    expect(await screen.findByText(/no place found/i)).toBeInTheDocument();
-  });
+  // it(`type in "${testSearchTerm}", then click clear icon and the value has "" `, async () => {
+  //   setup();
+  //   await user.type(getTextbox(), testSearchTerm);
+  //   await user.click(getIcon(/clear button/i));
+  //   expect(getTextbox()).toHaveValue('');
+  // });
+
+  // it(`type in random text "abc123ABC", then click search icon and displays examples for search terms`, async () => {
+  //   setup();
+  //   await user.type(getTextbox(), 'abc123ABC');
+  //   await user.click(getIcon(/search button/i));
+  //   expect(await screen.findByText(/no place found/i)).toBeInTheDocument();
+  // });
 });
 
 const getTextbox = () => screen.getByRole('textbox');
 
-const getIcon = (icon_name: RegExp) =>
-  screen.getByRole('img', {
-    name: icon_name,
-  });
+// const getIcon = (icon_name: RegExp) =>
+//   screen.getByRole('img', {
+//     name: icon_name,
+//   });
