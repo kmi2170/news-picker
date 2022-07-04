@@ -8,7 +8,6 @@
     "export": "next export",
     "start": "next start",
     "lint": "next lint --dir src",
-    "test": "jest",
     "test": "jest --coverage --silent --ci"
   },
   "dependencies": {
@@ -47,6 +46,7 @@
     "eslint-plugin-testing-library": "^5.5.1",
     "jest": "^28.1.2",
     "jest-environment-jsdom": "^28.1.2",
+    "msw": "^0.43.0",
     "ts-jest": "^28.0.5",
     "typescript": "^4.3.5"
   }
