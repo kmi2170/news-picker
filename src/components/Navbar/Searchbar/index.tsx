@@ -30,7 +30,7 @@ const Searchbar = () => {
 
   const [searchTerm, setSearchTerm] = useState<string>('');
 
-  const q = useAppSelector(state => state.news.q);
+  const q = useAppSelector((state) => state.news.q);
   const dispatch = useAppDispatch();
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) =>
@@ -61,7 +61,12 @@ const Searchbar = () => {
             onChange={handleInput}
             className={classes.input}
           />
-          <IconButton onClick={handleClear} className={classes.iconContainer}>
+          <IconButton
+            aria-label="clear button"
+            type="button"
+            onClick={handleClear}
+            className={classes.iconContainer}
+          >
             <Cancel className={classes.icon} />
           </IconButton>
         </div>

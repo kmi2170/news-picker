@@ -25,23 +25,28 @@ const user = userEvent.setup();
 const setup = () => render(<SearchBar />);
 
 const searchTerms = ['ethereum', 'formula one', 'earth enviroment'];
+const searchTerm = 'test search term';
 
 describe('SearchBar', () => {
-  it.each(searchTerms)(
-    'type in %s, then the value has %s',
-    async (searchTerm) => {
+  describe('Input', () => {
+    it.each(searchTerms)(
+      'type in %s, then the value has %s',
+      async (searchTerm) => {
+        setup();
+        await user.type(getTextbox(), searchTerm);
+        expect(getTextbox()).toHaveValue(searchTerm);
+      }
+    );
+  });
+
+  describe('Input and clear', () => {
+    it(`type in "${searchTerm}", then click clear icon and the value has "" `, async () => {
       setup();
       await user.type(getTextbox(), searchTerm);
-      expect(getTextbox()).toHaveValue(searchTerm);
-    }
-  );
-
-  // it(`type in "${testSearchTerm}", then click clear icon and the value has "" `, async () => {
-  //   setup();
-  //   await user.type(getTextbox(), testSearchTerm);
-  //   await user.click(getIcon(/clear button/i));
-  //   expect(getTextbox()).toHaveValue('');
-  // });
+      await user.click(getButton(/clear button/i));
+      expect(getTextbox()).toHaveValue('');
+    });
+  });
 
   // it(`type in random text "abc123ABC", then click search icon and displays examples for search terms`, async () => {
   //   setup();
@@ -53,7 +58,7 @@ describe('SearchBar', () => {
 
 const getTextbox = () => screen.getByRole('textbox');
 
-// const getIcon = (icon_name: RegExp) =>
-//   screen.getByRole('img', {
-//     name: icon_name,
-//   });
+const getButton = (icon_name: RegExp) =>
+  screen.getByRole('button', {
+    name: icon_name,
+  });

@@ -79,6 +79,8 @@ const NewsCards = () => {
   return (
     <article>
       <Typography variant="subtitle1" className={classes.display}>
+        {topic && <span>Topic &apos{topic}&apos. </span>}
+        {q && <span>Search by &apos{q}&apos. </span>}
         {news?.status === 'ok'
           ? `Found ${news.total_hits} articles`
           : news?.status}
