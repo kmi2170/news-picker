@@ -43,10 +43,13 @@ export const newsSlice = createSlice({
     setPickerDateTo: (state, action: PayloadAction<Date>) => {
       state.pickerDateTo = action.payload;
     },
+    reset: (state) => {
+      const lang = state.lang;
+      return { ...initialState, lang };
+    },
     // setSearchTerm: (state, action: PayloadAction<string>) => {
     //   state.searchTerm = action.payload;
     // },
-    reset: () => initialState,
   },
 });
 

@@ -50,7 +50,11 @@ const Searchbar = () => {
     <div className={classes.searchContainer}>
       <form onSubmit={handleSubmit}>
         <div style={{ display: 'flex' }}>
-          <IconButton type="submit" className={classes.iconContainer}>
+          <IconButton
+            aria-label="submit button"
+            type="submit"
+            className={classes.iconContainer}
+          >
             <Search className={classes.icon} />
           </IconButton>
           <InputBase

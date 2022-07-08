@@ -27,6 +27,7 @@ const ButtonsTopic = () => {
   const handleClick = (topic: TopicType) => {
     dispatch(setTopic(topic));
   };
+  console.log(topicsAvailable);
 
   return (
     <>

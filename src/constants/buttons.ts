@@ -5,7 +5,7 @@ export const topicButtons = [
   { id: 4, code: 'economics', name: { en: 'Economics', ja: '経済' } },
   { id: 5, code: 'politics', name: { en: 'Politics', ja: '政治' } },
   { id: 6, code: 'business', name: { en: 'Business', ja: 'ビジネス' } },
-  { id: 7, code: 'sport', name: { en: 'Sports', ja: 'スポーツ' } },
+  { id: 7, code: 'sport', name: { en: 'Sport', ja: 'スポーツ' } },
   { id: 8, code: 'tech', name: { en: 'Tech', ja: 'テック' } },
   {
     id: 9,

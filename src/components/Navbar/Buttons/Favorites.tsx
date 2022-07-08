@@ -12,7 +12,7 @@ import { setQ, setFavorites } from '../../../features/newsSlice';
 const useStyles = makeStyles((theme: Theme) => ({
   text: { color: 'black' },
   button: {
-    borderRadius: '15px',
+    borderRadius: '14px',
     textTransform: 'capitalize',
     color: '#fff',
     background: purple[500],
@@ -30,8 +30,8 @@ const useStyles = makeStyles((theme: Theme) => ({
 const Favorite = () => {
   const classes = useStyles();
 
-  const q = useAppSelector(state => state.news.q);
-  const favorites = useAppSelector(state => state.news.favorites);
+  const q = useAppSelector((state) => state.news.q);
+  const favorites = useAppSelector((state) => state.news.favorites);
   const dispatch = useAppDispatch();
 
   const addFavorite = () => {
@@ -46,7 +46,7 @@ const Favorite = () => {
 
   const handleDelete = (q: string) => {
     if (confirm(`Delete this query, ${q}?`)) {
-      const newFavorites = favorites.filter(favorite => favorite !== q);
+      const newFavorites = favorites.filter((favorite) => favorite !== q);
 
       dispatch(setFavorites(newFavorites));
     }

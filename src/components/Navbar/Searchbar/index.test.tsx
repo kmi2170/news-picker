@@ -8,7 +8,7 @@ import { render, screen } from '../../../utils/test-utils';
 import SearchBar from './index';
 
 const handlers = [
-  rest.get('/api/geolocation', (req, res, ctx) => {
+  rest.get('/api/news', (req, res, ctx) => {
     return res(ctx.json([]), ctx.delay(150));
   }),
 ];
@@ -27,12 +27,17 @@ const setup = () => render(<SearchBar />);
 const searchTerms = ['ethereum', 'formula one', 'earth enviroment'];
 const searchTerm = 'test search term';
 
+beforeEach(() => {
+  /* eslint-disable testing-library/no-render-in-setup */
+  setup();
+  /* eslint-enable testing-library/no-render-in-setup */
+});
+
 describe('SearchBar', () => {
   describe('Input', () => {
     it.each(searchTerms)(
       'type in %s, then the value has %s',
       async (searchTerm) => {
-        setup();
         await user.type(getTextbox(), searchTerm);
         expect(getTextbox()).toHaveValue(searchTerm);
       }
@@ -41,7 +46,6 @@ describe('SearchBar', () => {
 
   describe('Input and clear', () => {
     it(`type in "${searchTerm}", then click clear icon and the value has "" `, async () => {
-      setup();
       await user.type(getTextbox(), searchTerm);
       await user.click(getButton(/clear button/i));
       expect(getTextbox()).toHaveValue('');

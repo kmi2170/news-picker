@@ -79,11 +79,13 @@ const NewsCards = () => {
   return (
     <article>
       <Typography variant="subtitle1" className={classes.display}>
-        {topic && <span>Topic &apos{topic}&apos. </span>}
-        {q && <span>Search by &apos{q}&apos. </span>}
-        {news?.status === 'ok'
-          ? `Found ${news.total_hits} articles`
-          : news?.status}
+        {isFetching && <span>Loading...</span>}
+        {!isFetching && topic && <span>Topic &apos;{topic}&apos;. </span>}
+        {!isFetching && q && <span>Search by &apos;{q}&apos;. </span>}
+        {!isFetching &&
+          (news?.status === 'ok'
+            ? `Found ${news.total_hits} articles`
+            : news?.status)}
       </Typography>
 
       <div className={classes.pagination}>
