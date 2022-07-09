@@ -5,8 +5,12 @@ import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 
 // import { render, screen, waitFor } from '@testing-library/react';
-import { render, screen, waitForElementToBeRemoved } from '../utils/test-utils';
-import Home from './index';
+import {
+  render,
+  screen,
+  waitForElementToBeRemoved,
+} from '../../utils/test-utils';
+import Home from '../../pages/index';
 
 const data = {
   status: 'ok',

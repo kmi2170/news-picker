@@ -59,6 +59,7 @@ const NewsCards = () => {
     to,
     sources,
   });
+
   console.log(news);
 
   /* eslint-disable react-hooks/exhaustive-deps */
@@ -70,11 +71,14 @@ const NewsCards = () => {
   }, [news]);
   /* eslint-enable react-hooks/exhaustive-deps */
 
-  if (isError)
-    <Message
-      msg="Something went wrong. Please try again."
-      classname={classes.message}
-    />;
+  if (isError) {
+    return (
+      <Message
+        msg="Something went wrong. Please try again."
+        classname={classes.message}
+      />
+    );
+  }
 
   return (
     <article>

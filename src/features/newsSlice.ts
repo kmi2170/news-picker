@@ -45,7 +45,8 @@ export const newsSlice = createSlice({
     },
     reset: (state) => {
       const lang = state.lang;
-      return { ...initialState, lang };
+      const topicsAvailable = state.topicsAvailable;
+      return { ...initialState, lang, topicsAvailable };
     },
     // setSearchTerm: (state, action: PayloadAction<string>) => {
     //   state.searchTerm = action.payload;
