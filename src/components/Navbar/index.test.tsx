@@ -109,17 +109,31 @@ describe('Close & open basic-options', () => {
   });
 });
 
-describe('Open & close more-options', () => {
-  it('more-options is not visible by default', () => {
-    expect(screen.getByTestId('more-options')).not.toBeVisible();
+describe('Open & close advance-options', () => {
+  it('advance-options is not visible by default', () => {
+    expect(screen.getByTestId('advance-options')).not.toBeVisible();
   });
-  it('open more-options, then it is visible', async () => {
-    await user.click(getButton('more options'));
-    expect(screen.getByTestId('more-options')).toBeVisible();
+  it('open advance-options, then it is visible', async () => {
+    await user.click(getButton('advance options'));
+    expect(screen.getByTestId('advance-options')).toBeVisible();
   });
-  it('close more-options, then it is not visible', async () => {
-    await user.click(getButton('more options'));
-    expect(screen.getByTestId('more-options')).not.toBeVisible();
+  it('close advance-options, then it is not visible', async () => {
+    const button = getButton('advance options');
+    await user.click(button);
+    await user.click(button);
+    expect(screen.getByTestId('advance-options')).not.toBeVisible();
+  });
+});
+
+describe('Open advance-options and type in source,', () => {
+  it('open advance-options, typ in "nytimes.com" and click "Apply Advance Options"', async () => {
+    await user.click(getButton('advance options'));
+    await user.type(
+      screen.getByPlaceholderText(/e\.g\. nytimes\.com, cnn\.com, wsj\.com/i),
+      'nytimes.com'
+    );
+    await user.click(getButton('apply advance options'));
+    expect(await screen.findByText(/nytimes.com/i)).toBeInTheDocument();
   });
 });
 

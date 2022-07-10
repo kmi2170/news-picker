@@ -33,9 +33,8 @@ const useStyles = makeStyles(() => ({
 const AdvanceSearch = () => {
   const classes = useStyles();
 
-  const { searchSources, pickerDateFrom, pickerDateTo } = useAppSelector(
-    selectNews
-  );
+  const { searchSources, pickerDateFrom, pickerDateTo } =
+    useAppSelector(selectNews);
 
   const dispatch = useAppDispatch();
 
@@ -64,7 +63,7 @@ const AdvanceSearch = () => {
             <TextField
               label="Source"
               type="text"
-              placeholder="e.g. nytimes.com"
+              placeholder="e.g. nytimes.com, cnn.com, wsj.com"
               margin="none"
               InputLabelProps={{ shrink: true }}
               fullWidth
@@ -73,6 +72,7 @@ const AdvanceSearch = () => {
               // className={classes.input}
             />
           </Grid>
+
           <Grid item xs={12} sm={6}>
             <DateFromTo />
           </Grid>
@@ -83,7 +83,7 @@ const AdvanceSearch = () => {
               size="small"
               className={classes.button}
             >
-              Apply This Options
+              Apply Advance Options
             </Button>
           </Grid>
         </Grid>

@@ -86,6 +86,7 @@ const NewsCards = () => {
         {isFetching && <span>Loading...</span>}
         {!isFetching && topic && <span>Topic &apos;{topic}&apos;. </span>}
         {!isFetching && q && <span>Search by &apos;{q}&apos;. </span>}
+        {!isFetching && sources && <span>Source &apos;{sources}&apos;. </span>}
         {!isFetching &&
           (news?.status === 'ok'
             ? `Found ${news.total_hits} articles`

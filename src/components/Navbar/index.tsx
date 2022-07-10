@@ -136,9 +136,11 @@ const Navbar = () => {
         </Toolbar>
 
         <div className={classes.expand}>
-          <Tooltip title={isOpenAO ? 'More Options' : 'Close More Options'}>
+          <Tooltip
+            title={isOpenAO ? 'Close Advance Options' : 'Advance Options'}
+          >
             <IconButton
-              aria-label="more options"
+              aria-label="advance options"
               className={classes.optionButton}
               onClick={handleExpandClickAO}
             >
@@ -152,7 +154,7 @@ const Navbar = () => {
         </div>
       </div>
 
-      <div data-testid="more-options" hidden={!isOpenAO}>
+      <div data-testid="advance-options" hidden={!isOpenAO}>
         <Toolbar>
           <AdvanceSearch />
         </Toolbar>
