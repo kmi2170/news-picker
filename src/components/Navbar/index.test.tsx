@@ -85,6 +85,44 @@ describe('SearchBar', () => {
   });
 });
 
+describe('Add Favorite', () => {
+  it('type in "bitcoin" and click "Add Favorite", then "bitcoin" chip appears', async () => {
+    await user.type(getTextbox(), 'bitcoin');
+    await user.click(getButton('submit button'));
+    await user.click(screen.getByText(/add favorite/i));
+    expect(await screen.findByText('bitcoin')).toBeInTheDocument();
+  });
+});
+
+describe('Close & open basic-options', () => {
+  it('basic-options is visible by default', () => {
+    expect(screen.getByTestId('basic-options')).toBeVisible();
+  });
+  it('close basic-options, then it is not visible', async () => {
+    await user.click(getButton('basic options'));
+    expect(screen.getByTestId('basic-options')).not.toBeVisible();
+  });
+  it('close basic-options and open it, then it is visible', async () => {
+    await user.click(getButton('basic options'));
+    await user.click(getButton('basic options'));
+    expect(screen.getByTestId('basic-options')).toBeVisible();
+  });
+});
+
+describe('Open & close more-options', () => {
+  it('more-options is not visible by default', () => {
+    expect(screen.getByTestId('more-options')).not.toBeVisible();
+  });
+  it('open more-options, then it is visible', async () => {
+    await user.click(getButton('more options'));
+    expect(screen.getByTestId('more-options')).toBeVisible();
+  });
+  it('close more-options, then it is not visible', async () => {
+    await user.click(getButton('more options'));
+    expect(screen.getByTestId('more-options')).not.toBeVisible();
+  });
+});
+
 const getTextbox = () => screen.getByRole('textbox');
 
 // const getButton = (icon_name: RegExp | string) =>

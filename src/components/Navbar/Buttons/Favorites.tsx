@@ -57,6 +57,7 @@ const Favorite = () => {
       <Grid item xs={3}>
         <Tooltip title="Register the keywords (cookie required)">
           <Button
+            aria-label="add favorite"
             variant="contained"
             onClick={addFavorite}
             className={classes.button}

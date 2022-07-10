@@ -4,7 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import AppBar from '@material-ui/core/AppBar';
 import Tooltip from '@material-ui/core/Tooltip';
 import Toolbar from '@material-ui/core/Toolbar';
-import ButtonBase from '@material-ui/core/ButtonBase';
+import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
 import { ExpandMore, ExpandLess } from '@material-ui/icons';
 import { grey } from '@material-ui/core/colors';
@@ -42,6 +42,9 @@ const useStyles = makeStyles(() => ({
     borderRadius: '15px',
     textTransform: 'capitalize',
     marginLeft: '4rem',
+  },
+  optionButton: {
+    padding: 3,
   },
 }));
 
@@ -81,18 +84,22 @@ const Navbar = () => {
         </Grid>
       </Toolbar>
       <div className={classes.expand}>
-        <Tooltip title={isOpen ? 'Close Panel' : 'Open Panel'}>
-          <ButtonBase onClick={handleExpandClick}>
+        <Tooltip title={isOpen ? 'Close Options' : 'Open Options'}>
+          <IconButton
+            aria-label="basic options"
+            className={classes.optionButton}
+            onClick={handleExpandClick}
+          >
             {isOpen ? (
               <ExpandLess className={classes.icon} />
             ) : (
               <ExpandMore className={classes.icon} />
             )}
-          </ButtonBase>
+          </IconButton>
         </Tooltip>
       </div>
 
-      <div hidden={!isOpen}>
+      <div data-testid="basic-options" hidden={!isOpen}>
         <Toolbar>
           <Grid
             container
@@ -129,21 +136,23 @@ const Navbar = () => {
         </Toolbar>
 
         <div className={classes.expand}>
-          <Tooltip
-            title={isOpenAO ? 'Close More Options' : 'Open More Options'}
-          >
-            <ButtonBase onClick={handleExpandClickAO}>
+          <Tooltip title={isOpenAO ? 'More Options' : 'Close More Options'}>
+            <IconButton
+              aria-label="more options"
+              className={classes.optionButton}
+              onClick={handleExpandClickAO}
+            >
               {isOpenAO && isOpen ? (
                 <ExpandLess className={classes.icon} />
               ) : (
                 <ExpandMore className={classes.icon} />
               )}
-            </ButtonBase>
+            </IconButton>
           </Tooltip>
         </div>
       </div>
 
-      <div hidden={!isOpenAO}>
+      <div data-testid="more-options" hidden={!isOpenAO}>
         <Toolbar>
           <AdvanceSearch />
         </Toolbar>

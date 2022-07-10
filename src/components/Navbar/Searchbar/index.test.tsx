@@ -24,7 +24,7 @@ afterAll(() => server.close());
 const user = userEvent.setup();
 const setup = () => render(<SearchBar />);
 
-const searchTerms = ['ethereum', 'formula one', 'earth enviroment'];
+const searchTerms = ['ethereum', 'formulaone', 'earthenviroment'];
 const searchTerm = 'test search term';
 
 beforeEach(() => {
@@ -51,13 +51,6 @@ describe('SearchBar', () => {
       expect(getTextbox()).toHaveValue('');
     });
   });
-
-  // it(`type in random text "abc123ABC", then click search icon and displays examples for search terms`, async () => {
-  //   setup();
-  //   await user.type(getTextbox(), 'abc123ABC');
-  //   await user.click(getIcon(/search button/i));
-  //   expect(await screen.findByText(/no place found/i)).toBeInTheDocument();
-  // });
 });
 
 const getTextbox = () => screen.getByRole('textbox');
