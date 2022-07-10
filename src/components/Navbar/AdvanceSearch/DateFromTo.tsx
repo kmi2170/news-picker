@@ -44,7 +44,7 @@ const DateFromTo = () => {
             value={pickerDateFrom}
             onChange={handleDateFromChange}
             KeyboardButtonProps={{
-              'aria-label': 'change date',
+              'aria-label': 'date from',
             }}
             disableFuture
             minDate={minDate}
@@ -62,7 +62,7 @@ const DateFromTo = () => {
             value={pickerDateTo}
             onChange={handleDateToChange}
             KeyboardButtonProps={{
-              'aria-label': 'change date',
+              'aria-label': 'date to',
             }}
             disableFuture
             minDate={minDate}
