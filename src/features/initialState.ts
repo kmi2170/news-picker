@@ -1,5 +1,5 @@
 import { LangType, TopicType } from '../api/type_settngs';
-import { localToUTCString } from '../utils/localToUTCString';
+import { localToUTCString, localString } from '../utils/localToUTCString';
 
 const initDateFrom = new Date();
 initDateFrom.setDate(initDateFrom.getDate() - 7);
@@ -13,6 +13,8 @@ export const initialState: StateType = {
   page: 1,
   from: localToUTCString(initDateFrom),
   to: localToUTCString(new Date()),
+  fromLocal: localString(initDateFrom),
+  toLocal: localString(new Date()),
   sources: '',
   searchTerm: '',
   searchSources: '',
@@ -29,6 +31,8 @@ export type StateType = {
   page: number;
   from: string;
   to: string;
+  fromLocal: string;
+  toLocal: string;
   sources: string;
   searchTerm: string;
   searchSources: string;

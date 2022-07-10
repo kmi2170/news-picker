@@ -9,13 +9,15 @@ import {
   selectNews,
   setFrom,
   setTo,
+  setFromLocal,
+  setToLocal,
   setTopic,
   setSources,
   setSearchSources,
 } from '../../../features/newsSlice';
 
 import DateFromTo from './DateFromTo';
-import { localToUTCString } from '../../../utils/localToUTCString';
+import { localString, localToUTCString } from '../../../utils/localToUTCString';
 
 const useStyles = makeStyles(() => ({
   text: {},
@@ -44,6 +46,8 @@ const AdvanceSearch = () => {
     dispatch(setTopic(''));
     dispatch(setFrom(localToUTCString(pickerDateFrom)));
     dispatch(setTo(localToUTCString(pickerDateTo)));
+    dispatch(setFromLocal(localString(pickerDateFrom)));
+    dispatch(setToLocal(localString(pickerDateTo)));
     dispatch(setSources(searchSources));
   };
 

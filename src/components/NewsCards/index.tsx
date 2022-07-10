@@ -1,6 +1,8 @@
+import { useEffect } from 'react';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import { grey } from '@material-ui/core/colors';
 
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import { selectNews, setTopicsAvailable } from '../../features/newsSlice';
@@ -10,7 +12,6 @@ import LoadingSkelton from './LoadingSkelton';
 import Pagination from './Pagination';
 import { ArticleDataType, TopicType } from '../../api/type_settngs';
 import { sortData } from '../../utils/sort';
-import { useEffect } from 'react';
 
 const useStyles = makeStyles(() => ({
   display: { fontFamily: 'Roboto Condensed', marginTop: '0.5rem' },
@@ -25,6 +26,9 @@ const useStyles = makeStyles(() => ({
   },
   message: {
     padding: '3rem 0',
+  },
+  fromto: {
+    color: grey[600],
   },
 }));
 
@@ -42,7 +46,7 @@ const Message = ({ msg, classname }: { msg: string; classname: string }) => (
 const NewsCards = () => {
   const classes = useStyles();
 
-  const { q, lang, topic, page, from, to, sources } =
+  const { q, lang, topic, page, from, to, fromLocal, toLocal, sources } =
     useAppSelector(selectNews);
   const dispatch = useAppDispatch();
 
@@ -91,6 +95,12 @@ const NewsCards = () => {
           (news?.status === 'ok'
             ? `Found ${news.total_hits} articles`
             : news?.status)}
+        {!isFetching && (
+          <span className={classes.fromto}>
+            {' '}
+            (from {fromLocal} to {toLocal})
+          </span>
+        )}
       </Typography>
 
       <div className={classes.pagination}>

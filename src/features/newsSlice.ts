@@ -31,6 +31,12 @@ export const newsSlice = createSlice({
     setTo: (state, action: PayloadAction<string>) => {
       state.to = action.payload;
     },
+    setFromLocal: (state, action: PayloadAction<string>) => {
+      state.fromLocal = action.payload;
+    },
+    setToLocal: (state, action: PayloadAction<string>) => {
+      state.toLocal = action.payload;
+    },
     setSources: (state, action: PayloadAction<string>) => {
       state.sources = action.payload;
     },
@@ -65,6 +71,8 @@ export const {
   setPage,
   setFrom,
   setTo,
+  setFromLocal,
+  setToLocal,
   setSources,
   reset,
   setSearchSources,
