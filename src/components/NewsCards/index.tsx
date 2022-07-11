@@ -98,7 +98,7 @@ const NewsCards = () => {
         {!isFetching && (
           <span className={classes.fromto}>
             {' '}
-            (from {fromLocal} to {toLocal})
+            from {fromLocal} to {toLocal}
           </span>
         )}
       </Typography>

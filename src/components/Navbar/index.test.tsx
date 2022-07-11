@@ -137,7 +137,32 @@ describe('Open advance-options and type in source,', () => {
   });
 });
 
-const getTextbox = () => screen.getByRole('textbox');
+describe('date from to,', () => {
+  it('type in "06/25/2022" in from, "07/04/2022" in to and click "Apply Advance Options", then displays "from 06/25/2022 to 07/04/2022"', async () => {
+    await user.click(getButton('advance options'));
+
+    const textbox_dateFrom = getTextbox('date from');
+    await user.clear(textbox_dateFrom);
+    await user.type(textbox_dateFrom, '06/25/2022');
+
+    const textbox_dateTo = getTextbox('date to');
+    await user.clear(textbox_dateTo);
+    await user.type(textbox_dateTo, '07/04/2022');
+
+    await user.click(getButton('apply advance options'));
+    expect(
+      await screen.findByText(/from 2022\/06\/25 to 2022\/07\/04/i)
+    ).toBeInTheDocument();
+  });
+});
+
+const getTextbox = (name?: string) => {
+  if (!name) return screen.getByRole('textbox');
+
+  return screen.getByRole('textbox', {
+    name: new RegExp(name, 'i'),
+  });
+};
 
 // const getButton = (icon_name: RegExp | string) =>
 const getButton = (icon_name: string) =>

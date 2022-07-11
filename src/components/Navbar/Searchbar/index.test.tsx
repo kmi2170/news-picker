@@ -1,3 +1,4 @@
+import 'whatwg-fetch';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 import { rest } from 'msw';

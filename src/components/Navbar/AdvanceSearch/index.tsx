@@ -44,10 +44,13 @@ const AdvanceSearch = () => {
     e.preventDefault();
 
     dispatch(setTopic(''));
+
     dispatch(setFrom(localToUTCString(pickerDateFrom)));
     dispatch(setTo(localToUTCString(pickerDateTo)));
+
     dispatch(setFromLocal(localString(pickerDateFrom)));
     dispatch(setToLocal(localString(pickerDateTo)));
+
     dispatch(setSources(searchSources));
   };
 
