@@ -17,24 +17,18 @@ It is built with [Next.js](https://nextjs.org/), TypeScript, [Redux-Toolkit](htt
 Also, [Redux-Toolkit Query](https://redux-toolkit.js.org/rtk-query/overview) is used for fetching and state management of news data.
 
 ### Authentication
-You need to create a [Rapid API](https://rapidapi.com/) account and get an API KEY for [Basic Plan](https://rapidapi.com/newscatcher-api-newscatcher-api-default/api/free-news/pricing) (free for non-commercial use).
+~~You need to create a [Rapid API](https://rapidapi.com/) account and get an API KEY for [Basic Plan](https://rapidapi.com/newscatcher-api-newscatcher-api-default/api/free-news/pricing) (free for non-commercial use).
 See this [Link](https://free-docs.newscatcherapi.com/#authentication) for details.
 You can also apply for 
 [Contributor Plan](https://free-docs.newscatcherapi.com/#contributors)
-that gives more access to the Free News API.
+that gives more access to the Free News API.~~ (*API version 1 seems to be deprecated.)
 
 Create .env.local file in the root folder and define the key there as enviromental variables to protect it.
 
 ```bash
 // .env.local file
-NEXT_PUBLIC_RAPID_API_KEY='<YOUR API KEY>'
-NEXT_PUBLIC_RAPID_API_HOST=free-news.p.rapidapi.com
-```
-
-If you want to use [Google Analysis](https://analytics.google.com/), store the Ttracking ID in .env.local file as well.
-
-```bash
-GA_TRACKING_ID=xxxxxxxx
+NEXT_PUBLIC_API_KEY='<API KEY>'
+NEXT_PUBLIC_API_HOST='<API HOSAT>'
 ```
 
 ### API End Points
