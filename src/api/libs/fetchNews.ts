@@ -5,10 +5,9 @@ import { NewsDataType } from "../../api/type_settngs";
 const url = "https://v3-api.newscatcherapi.com/api/search";
 const headers = {
   "x-api-token": process.env.NEXT_API_KEY,
-  // 'x-rapidapi-host': process.env.NEXT_PUBLIC_RAPID_API_HOST,
 };
 
-export default async function news(req: NextApiRequest, res: NextApiResponse) {
+export async function fetchNews() {
   // const { q, lang, page, from, to, topic, sources } = req.query;
   // // const baseParams = { q: q ? q : "bitcoin", lang, page, from, to };
   // const baseParams = {
@@ -37,13 +36,12 @@ export default async function news(req: NextApiRequest, res: NextApiResponse) {
       "x-api-token": process.env.NEXT_API_KEY,
     },
   };
-  console.log(options);
 
   try {
     // const { data } = await axios.get<NewsDataType>(url, { params, headers });
     const { data } = await axios.request(options);
     console.log(">>>>>>>>>", data);
-    res.status(200).json(data);
+    return {};
   } catch (error) {
     console.error((error as AxiosError).message);
   }

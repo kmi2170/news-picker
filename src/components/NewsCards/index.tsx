@@ -1,31 +1,32 @@
-import { useEffect } from 'react';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import { grey } from '@material-ui/core/colors';
+import { useEffect } from "react";
+import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+import { grey } from "@material-ui/core/colors";
 
-import { useAppSelector, useAppDispatch } from '../../app/hooks';
-import { selectNews, setTopicsAvailable } from '../../features/newsSlice';
-import { useGetNewsApiQuery } from '../../services/newsApi';
-import NewsCard from './NewsCard';
-import LoadingSkelton from './LoadingSkelton';
-import Pagination from './Pagination';
-import { ArticleDataType, TopicType } from '../../api/type_settngs';
-import { sortData } from '../../utils/sort';
+import { useAppSelector, useAppDispatch } from "../../app/hooks";
+import { selectNews, setTopicsAvailable } from "../../features/newsSlice";
+import { useGetNewsApiQuery } from "../../services/newsApi";
+import NewsCard from "./NewsCard";
+import LoadingSkelton from "./LoadingSkelton";
+import Pagination from "./Pagination";
+import { ArticleDataType, TopicType } from "../../api/type_settngs";
+import { sortData } from "../../utils/sort";
+import { fetchNews } from "../../api/libs/fetchNews";
 
 const useStyles = makeStyles(() => ({
-  display: { fontFamily: 'Roboto Condensed', marginTop: '0.5rem' },
+  display: { fontFamily: "Roboto Condensed", marginTop: "0.5rem" },
   loading: {
-    padding: '1rem',
-    height: '100vh',
+    padding: "1rem",
+    height: "100vh",
   },
   pagination: {
-    marginBottom: '1rem',
-    display: 'flex',
-    justifyContent: 'center',
+    marginBottom: "1rem",
+    display: "flex",
+    justifyContent: "center",
   },
   message: {
-    padding: '3rem 0',
+    padding: "3rem 0",
   },
   fromto: {
     color: grey[600],
@@ -37,7 +38,7 @@ const Message = ({ msg, classname }: { msg: string; classname: string }) => (
     variant="h6"
     align="center"
     className={classname}
-    style={{ padding: '3rem 0' }}
+    style={{ padding: "3rem 0" }}
   >
     {msg}
   </Typography>
@@ -49,6 +50,16 @@ const NewsCards = () => {
   const { q, lang, topic, page, from, to, fromLocal, toLocal, sources } =
     useAppSelector(selectNews);
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    (async () => {
+      const data = await fetchNews();
+
+      console.log("====================");
+      console.log(data);
+      console.log("====================");
+    })();
+  }, []);
 
   const {
     data: news,
@@ -68,7 +79,7 @@ const NewsCards = () => {
 
   /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
-    if (news?.status === 'ok') {
+    if (news?.status === "ok") {
       const topicsFound = news.articles.map((article) => article.topic);
       dispatch(setTopicsAvailable([...new Set(topicsFound)] as TopicType[]));
     }
@@ -92,12 +103,12 @@ const NewsCards = () => {
         {!isFetching && q && <span>Search by &apos;{q}&apos;. </span>}
         {!isFetching && sources && <span>Source &apos;{sources}&apos;. </span>}
         {!isFetching &&
-          (news?.status === 'ok'
+          (news?.status === "ok"
             ? `Found ${news.total_hits} articles`
             : news?.status)}
         {!isFetching && (
           <span className={classes.fromto}>
-            {' '}
+            {" "}
             from {fromLocal} to {toLocal}
           </span>
         )}
@@ -112,7 +123,7 @@ const NewsCards = () => {
       ) : (
         <Grid container justifyContent="space-between" spacing={2}>
           {news?.articles &&
-            sortData(news.articles, 'published_date').map(
+            sortData(news.articles, "published_date").map(
               (article: ArticleDataType) => (
                 <Grid item key={article._id} xs={12} sm={6} md={4}>
                   <NewsCard article={article} lang={lang} />
