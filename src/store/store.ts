@@ -4,11 +4,11 @@ import {
   configureStore,
   PreloadedState,
   ThunkAction,
-} from '@reduxjs/toolkit';
-import { setupListeners } from '@reduxjs/toolkit/query';
+} from "@reduxjs/toolkit";
+import { setupListeners } from "@reduxjs/toolkit/query";
 
-import newsSlice from '../features/newsSlice';
-import { newsApi } from '../services/newsApi';
+import newsSlice from "../slice/newsSlice";
+import { newsApi } from "../services/newsApi";
 
 const rootReducer = combineReducers({
   news: newsSlice,
@@ -30,7 +30,7 @@ setupListeners(store.dispatch);
 
 export type RootState = ReturnType<typeof rootReducer>;
 export type AppStore = ReturnType<typeof setupStore>;
-export type AppDispatch = AppStore['dispatch'];
+export type AppDispatch = AppStore["dispatch"];
 
 export type AppThunk<ReturnType = void> = ThunkAction<
   ReturnType,

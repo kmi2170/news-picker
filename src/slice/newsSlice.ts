@@ -1,10 +1,10 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from '../app/store';
-import { initialState } from './initialState';
-import { LangType, TopicType } from '../api/type_settngs';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { RootState } from "../store/store";
+import { initialState } from "./initialState";
+import { LangType, TopicType } from "../api/type_settngs";
 
 export const newsSlice = createSlice({
-  name: 'news',
+  name: "news",
   initialState,
   reducers: {
     setQ: (state, action: PayloadAction<string>) => {
