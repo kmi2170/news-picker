@@ -1,12 +1,12 @@
-import { memo, useState } from 'react';
-import IconButton from '@material-ui/core/IconButton';
-import InputBase from '@material-ui/core/InputBase';
-import { Search, Cancel } from '@material-ui/icons';
-import { grey } from '@material-ui/core/colors';
-import { makeStyles } from '@material-ui/core/styles';
+import { memo, useState } from "react";
+import IconButton from "@mui/material/IconButton";
+import InputBase from "@mui/material/InputBase";
+import { Search, Cancel } from "@mui/icons-material";
+import { grey } from "@mui/material/colors";
+import makeStyles from "@mui/styles/makeStyles";
 
-import { useAppSelector, useAppDispatch } from '../../../app/hooks';
-import { setQ } from '../../../features/newsSlice';
+import { useAppSelector, useAppDispatch } from "../../../store/hooks";
+import { setQ } from "../../../slice/newsSlice";
 
 const useStyles = makeStyles(() => ({
   searchContainer: {
@@ -19,8 +19,8 @@ const useStyles = makeStyles(() => ({
     color: grey[600],
   },
   iconContainer: {
-    '&:hover': {
-      cursor: 'pointer',
+    "&:hover": {
+      cursor: "pointer",
     },
   },
 }));
@@ -28,7 +28,7 @@ const useStyles = makeStyles(() => ({
 const Searchbar = () => {
   const classes = useStyles();
 
-  const [searchTerm, setSearchTerm] = useState<string>('');
+  const [searchTerm, setSearchTerm] = useState<string>("");
 
   const q = useAppSelector((state) => state.news.q);
   const dispatch = useAppDispatch();
@@ -37,8 +37,8 @@ const Searchbar = () => {
     setSearchTerm(e.target.value);
 
   const handleClear = () => {
-    setSearchTerm('');
-    if (q) dispatch(setQ(''));
+    setSearchTerm("");
+    if (q) dispatch(setQ(""));
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -49,11 +49,12 @@ const Searchbar = () => {
   return (
     <div className={classes.searchContainer}>
       <form onSubmit={handleSubmit}>
-        <div style={{ display: 'flex' }}>
+        <div style={{ display: "flex" }}>
           <IconButton
             aria-label="submit button"
             type="submit"
             className={classes.iconContainer}
+            size="large"
           >
             <Search className={classes.icon} />
           </IconButton>
@@ -70,6 +71,7 @@ const Searchbar = () => {
             type="button"
             onClick={handleClear}
             className={classes.iconContainer}
+            size="large"
           >
             <Cancel className={classes.icon} />
           </IconButton>

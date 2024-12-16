@@ -1,27 +1,28 @@
-import { memo } from 'react';
-import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
-import Chip from '@material-ui/core/Chip';
-import Tooltip from '@material-ui/core/Tooltip';
-import { makeStyles, Theme } from '@material-ui/core/styles';
-import purple from '@material-ui/core/colors/purple';
+import { memo } from "react";
+import Grid from "@mui/material/Grid";
+import Button from "@mui/material/Button";
+import Chip from "@mui/material/Chip";
+import Tooltip from "@mui/material/Tooltip";
+import { Theme } from "@mui/material/styles";
+import makeStyles from "@mui/styles/makeStyles";
+import { useAppSelector, useAppDispatch } from "../../../store/hooks";
 
-import { useAppSelector, useAppDispatch } from '../../../app/hooks';
-import { setQ, setFavorites } from '../../../features/newsSlice';
+import { setQ, setFavorites } from "../../../slice/newsSlice";
+import { purple } from "@mui/material/colors";
 
 const useStyles = makeStyles((theme: Theme) => ({
-  text: { color: 'black' },
+  text: { color: "black" },
   button: {
-    borderRadius: '14px',
-    textTransform: 'capitalize',
-    color: '#fff',
+    borderRadius: "14px",
+    textTransform: "capitalize",
+    color: "#fff",
     background: purple[500],
   },
   chips: {
-    display: 'flex',
-    justifyContent: 'start',
-    flexWrap: 'wrap',
-    '& > *': {
+    display: "flex",
+    justifyContent: "start",
+    flexWrap: "wrap",
+    "& > *": {
       margin: theme.spacing(0.5),
     },
   },

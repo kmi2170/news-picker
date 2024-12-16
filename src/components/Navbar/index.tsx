@@ -1,47 +1,47 @@
-import { useState } from 'react';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import AppBar from '@material-ui/core/AppBar';
-import Tooltip from '@material-ui/core/Tooltip';
-import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import Button from '@material-ui/core/Button';
-import { ExpandMore, ExpandLess } from '@material-ui/icons';
-import { grey } from '@material-ui/core/colors';
-import { makeStyles } from '@material-ui/core/styles';
+import { useState } from "react";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
+import AppBar from "@mui/material/AppBar";
+import Tooltip from "@mui/material/Tooltip";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import Button from "@mui/material/Button";
+import { ExpandMore, ExpandLess } from "@mui/icons-material";
+import { grey } from "@mui/material/colors";
+import makeStyles from "@mui/styles/makeStyles";
 
-import Searchbar from './Searchbar';
-import ButtonsLanguage from './Buttons/ButtonsLanguage';
-import ButtonsTopic from './Buttons/ButtonsTopic';
-import Favorites from './Buttons/Favorites';
-import AdvanceSearch from './AdvanceSearch';
+import Searchbar from "./Searchbar";
+import ButtonsLanguage from "./Buttons/ButtonsLanguage";
+import ButtonsTopic from "./Buttons/ButtonsTopic";
+import Favorites from "./Buttons/Favorites";
+import AdvanceSearch from "./AdvanceSearch";
 
-import { useAppDispatch } from '../../app/hooks';
-import { reset } from '../../features/newsSlice';
+import { useAppDispatch } from "../../store/hooks";
+import { reset } from "../../slice/newsSlice";
 
 const useStyles = makeStyles(() => ({
   appBar: {
-    background: 'white',
+    background: "white",
   },
   text: {
-    fontFamily: 'Tourney',
+    fontFamily: "Tourney",
     fontWeight: 500,
-    color: 'black',
+    color: "black",
   },
   icon: {
     color: grey[600],
   },
   expand: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    margin: '0.3rem',
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    margin: "0.3rem",
   },
 
   resetButton: {
-    borderRadius: '15px',
-    textTransform: 'capitalize',
-    marginLeft: '4rem',
+    borderRadius: "15px",
+    textTransform: "capitalize",
+    marginLeft: "4rem",
   },
   optionButton: {
     padding: 3,
@@ -84,11 +84,12 @@ const Navbar = () => {
         </Grid>
       </Toolbar>
       <div className={classes.expand}>
-        <Tooltip title={isOpen ? 'Close Options' : 'Open Options'}>
+        <Tooltip title={isOpen ? "Close Options" : "Open Options"}>
           <IconButton
             aria-label="basic options"
             className={classes.optionButton}
             onClick={handleExpandClick}
+            size="large"
           >
             {isOpen ? (
               <ExpandLess className={classes.icon} />
@@ -98,7 +99,6 @@ const Navbar = () => {
           </IconButton>
         </Tooltip>
       </div>
-
       <div data-testid="basic-options" hidden={!isOpen}>
         <Toolbar>
           <Grid
@@ -128,7 +128,7 @@ const Navbar = () => {
               <ButtonsTopic />
             </Grid>
             <Grid item xs={12}>
-              <div style={{ marginTop: '0.5rem' }}>
+              <div style={{ marginTop: "0.5rem" }}>
                 <Favorites />
               </div>
             </Grid>
@@ -137,12 +137,13 @@ const Navbar = () => {
 
         <div className={classes.expand}>
           <Tooltip
-            title={isOpenAO ? 'Close Advance Options' : 'Advance Options'}
+            title={isOpenAO ? "Close Advance Options" : "Advance Options"}
           >
             <IconButton
               aria-label="advance options"
               className={classes.optionButton}
               onClick={handleExpandClickAO}
+              size="large"
             >
               {isOpenAO && isOpen ? (
                 <ExpandLess className={classes.icon} />
@@ -153,7 +154,6 @@ const Navbar = () => {
           </Tooltip>
         </div>
       </div>
-
       <div data-testid="advance-options" hidden={!isOpenAO}>
         <Toolbar>
           <AdvanceSearch />

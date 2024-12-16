@@ -1,18 +1,18 @@
-import { memo } from 'react';
-import Button from '@material-ui/core/Button';
-import { makeStyles } from '@material-ui/core/styles';
+import { memo } from "react";
+import Button from "@mui/material/Button";
+import makeStyles from "@mui/styles/makeStyles";
 
-import { useAppSelector, useAppDispatch } from '../../../app/hooks';
-import { setTopic } from '../../../features/newsSlice';
-import { TopicType } from '../../../api/type_settngs';
-import { topicButtons } from '../../../constants/buttons';
+import { useAppSelector, useAppDispatch } from "../../../store/hooks";
+import { setTopic } from "../../../slice/newsSlice";
+import { TopicType } from "../../../api/type_settngs";
+import { topicButtons } from "../../../constants/buttons";
 
 const useStyles = makeStyles(() => ({
   button: {
-    borderRadius: '15px',
-    textTransform: 'capitalize',
-    marginTop: '0.50rem',
-    marginRight: '0.25rem',
+    borderRadius: "15px",
+    textTransform: "capitalize",
+    marginTop: "0.50rem",
+    marginRight: "0.25rem",
   },
 }));
 
@@ -34,7 +34,7 @@ const ButtonsTopic = () => {
       {topicButtons.map(({ id, code, name }) => (
         <Button
           key={id}
-          variant={code === topic ? 'contained' : 'outlined'}
+          variant={code === topic ? "contained" : "outlined"}
           color="primary"
           size="small"
           onClick={() => handleClick(code as TopicType)}

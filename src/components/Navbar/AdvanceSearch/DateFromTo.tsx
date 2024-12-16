@@ -1,18 +1,15 @@
-import { memo } from 'react';
-import Grid from '@material-ui/core/Grid';
+import { memo } from "react";
+import Grid from "@mui/material/Grid";
 
-import 'date-fns';
-import DateFnsUtils from '@date-io/date-fns';
+import "date-fns";
+import DateFnsUtils from "@date-io/date-fns";
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
-} from '@material-ui/pickers';
+} from "@material-ui/pickers";
 
-import { useAppSelector, useAppDispatch } from '../../../app/hooks';
-import {
-  setPickerDateFrom,
-  setPickerDateTo,
-} from '../../../features/newsSlice';
+import { useAppSelector, useAppDispatch } from "../../../store/hooks";
+import { setPickerDateFrom, setPickerDateTo } from "../../../slice/newsSlice";
 
 const DateFromTo = () => {
   const pickerDateFrom = useAppSelector((state) => state.news.pickerDateFrom);
@@ -44,7 +41,7 @@ const DateFromTo = () => {
             value={pickerDateFrom}
             onChange={handleDateFromChange}
             KeyboardButtonProps={{
-              'aria-label': 'date from',
+              "aria-label": "date from",
             }}
             disableFuture
             minDate={minDate}
@@ -62,7 +59,7 @@ const DateFromTo = () => {
             value={pickerDateTo}
             onChange={handleDateToChange}
             KeyboardButtonProps={{
-              'aria-label': 'date to',
+              "aria-label": "date to",
             }}
             disableFuture
             minDate={minDate}

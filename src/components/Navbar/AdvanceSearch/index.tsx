@@ -1,10 +1,9 @@
-import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import { makeStyles } from '@material-ui/core/styles';
-import teal from '@material-ui/core/colors/teal';
+import Grid from "@mui/material/Grid";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import makeStyles from "@mui/styles/makeStyles";
+import { useAppSelector, useAppDispatch } from "../../../store/hooks";
 
-import { useAppSelector, useAppDispatch } from '../../../app/hooks';
 import {
   selectNews,
   setFrom,
@@ -14,20 +13,21 @@ import {
   setTopic,
   setSources,
   setSearchSources,
-} from '../../../features/newsSlice';
+} from "../../../slice/newsSlice";
+import DateFromTo from "./DateFromTo";
 
-import DateFromTo from './DateFromTo';
-import { localString, localToUTCString } from '../../../utils/localToUTCString';
+import { localString, localToUTCString } from "../../../utils/localToUTCString";
+import { teal } from "@mui/material/colors";
 
 const useStyles = makeStyles(() => ({
   text: {},
   button: {
-    borderRadius: '15px',
-    textTransform: 'capitalize',
+    borderRadius: "15px",
+    textTransform: "capitalize",
     // marginTop: '0.5rem',
     marginTop: 0,
-    marginBottom: '1.0rem',
-    color: '#fff',
+    marginBottom: "1.0rem",
+    color: "#fff",
     background: teal[500],
   },
 }));
@@ -43,7 +43,7 @@ const AdvanceSearch = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    dispatch(setTopic(''));
+    dispatch(setTopic(""));
 
     dispatch(setFrom(localToUTCString(pickerDateFrom)));
     dispatch(setTo(localToUTCString(pickerDateTo)));
