@@ -4,11 +4,14 @@ import { ThemeProvider } from "@mui/material/styles";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 import CssBaseline from "@mui/material/CssBaseline";
 
-import theme from "../theme/theme";
+import theme from "../styles/theme/theme";
+import Footer from "../components/Footer";
+
+import "../styles/global.css";
 
 export const metadata: Metadata = {
   title: "News Picker",
-  description: "latest news, search topics",
+  description: "News top headlines, news by category, search news by keyword",
 };
 
 export default function RootLayout({
@@ -21,7 +24,10 @@ export default function RootLayout({
       <body>
         <AppRouterCacheProvider>
           <CssBaseline />
-          <ThemeProvider theme={theme}>{children}</ThemeProvider>
+          <ThemeProvider theme={theme}>
+            {children}
+            <Footer />
+          </ThemeProvider>
         </AppRouterCacheProvider>
       </body>
     </html>
