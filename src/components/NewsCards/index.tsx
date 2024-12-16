@@ -1,11 +1,11 @@
 import { useEffect } from "react";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
-import { grey } from "@material-ui/core/colors";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
+import makeStyles from "@mui/styles/makeStyles";
+import { grey } from "@mui/material/colors";
 
-import { useAppSelector, useAppDispatch } from "../../app/hooks";
-import { selectNews, setTopicsAvailable } from "../../features/newsSlice";
+import { useAppSelector, useAppDispatch } from "../../store/hooks";
+import { selectNews, setTopicsAvailable } from "../../slice/newsSlice";
 import { useGetNewsApiQuery } from "../../services/newsApi";
 import NewsCard from "./NewsCard";
 import LoadingSkelton from "./LoadingSkelton";

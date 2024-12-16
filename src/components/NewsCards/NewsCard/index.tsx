@@ -1,15 +1,15 @@
 import { useState, useRef } from 'react';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import ButtonBase from '@material-ui/core/ButtonBase';
-import IconButton from '@material-ui/core/IconButton';
-import Tooltip from '@material-ui/core/Tooltip';
-import { grey } from '@material-ui/core/colors';
-import { makeStyles } from '@material-ui/core/styles';
-import { ExpandMore, ExpandLess } from '@material-ui/icons';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import ButtonBase from '@mui/material/ButtonBase';
+import IconButton from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
+import { grey } from '@mui/material/colors';
+import makeStyles from '@mui/styles/makeStyles';
+import { ExpandMore, ExpandLess } from '@mui/icons-material';
 
 import { ArticleDataType } from '../../../api/type_settngs';
 import { timeFromNow } from '../../../utils/time';
@@ -97,7 +97,7 @@ const NesCard = ({ article, lang }: NewsCardProps) => {
   };
 
   return (
-    <div className={classes.cardContainer}>
+    (<div className={classes.cardContainer}>
       <Card ref={articleRef} className={classes.root}>
         <CardMedia
           component="img"
@@ -121,7 +121,7 @@ const NesCard = ({ article, lang }: NewsCardProps) => {
           </Tooltip>
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             {showMore && (
-              <IconButton onClick={handleExpandClick}>
+              <IconButton onClick={handleExpandClick} size="large">
                 <ExpandLess />
               </IconButton>
             )}
@@ -162,7 +162,7 @@ const NesCard = ({ article, lang }: NewsCardProps) => {
                 <IconButton
                   onClick={handleExpandClick}
                   style={{ display: 'flex', justifyContent: 'center' }}
-                >
+                  size="large">
                   {showMore ? <ExpandLess /> : <ExpandMore />}
                 </IconButton>
               </div>
@@ -180,7 +180,7 @@ const NesCard = ({ article, lang }: NewsCardProps) => {
           </Grid>
         </CardContent>
       </Card>
-    </div>
+    </div>)
   );
 };
 

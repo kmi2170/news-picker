@@ -1,33 +1,33 @@
-import { useEffect } from 'react';
-import Container from '@material-ui/core/Container';
-import { makeStyles } from '@material-ui/core/styles';
+import { useEffect } from "react";
+import Container from "@material-ui/core/Container";
+import { makeStyles } from "@material-ui/core/styles";
 
-import { useAppSelector, useAppDispatch } from '../app/hooks';
-import { selectNews, setLang, setFavorites } from '../features/newsSlice';
-import Navbar from '../components/Navbar';
-import NewsCards from '../components/NewsCards';
-import Footer from '../components/Footer';
-import { useCustomeCookies } from '../hooks/useCustomCookies';
+import { useAppSelector, useAppDispatch } from "../store/hooks";
+import { selectNews, setLang, setFavorites } from "../slice/newsSlice";
+import Navbar from "../components/Navbar";
+import NewsCards from "../components/NewsCards";
+import Footer from "../components/Footer";
+import { useCustomeCookies } from "../hooks/useCustomCookies";
 import {
   isFavoritesCookieValid,
   isLangCookieValid,
-} from '../utils/cookiesValidator';
-import { LangType } from '../api/type_settngs';
+} from "../utils/cookiesValidator";
+import { LangType } from "../api/type_settngs";
 
 const useStyles = makeStyles(() => ({
   root: {
     flexGrow: 1,
-    minHeight: '100vh',
+    minHeight: "100vh",
   },
   buttonsLang: {
-    marginTop: '1.0rem',
+    marginTop: "1.0rem",
   },
   buttonsCategory: {
-    marginTop: '0.5rem',
-    marginBottom: '1.0rem',
+    marginTop: "0.5rem",
+    marginBottom: "1.0rem",
   },
   error: {
-    padding: '3rem 0',
+    padding: "3rem 0",
   },
 }));
 

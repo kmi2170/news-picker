@@ -1,13 +1,14 @@
-import Pagination from '@material-ui/lab/Pagination';
-import { makeStyles, createStyles } from '@material-ui/core/styles';
+import Pagination from "@mui/material/Pagination";
+import makeStyles from "@mui/styles/makeStyles";
+import createStyles from "@mui/styles/createStyles";
 
-import { selectNews, setPage } from '../../../features/newsSlice';
-import { useAppSelector, useAppDispatch } from '../../../app/hooks';
+import { selectNews, setPage } from "../../../slice/newsSlice";
+import { useAppSelector, useAppDispatch } from "../../../store/hooks";
 
-const useStyles = makeStyles(theme =>
+const useStyles = makeStyles((theme) =>
   createStyles({
     root: {
-      '& > *': {
+      "& > *": {
         marginTop: theme.spacing(2),
       },
     },
