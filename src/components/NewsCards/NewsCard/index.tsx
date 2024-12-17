@@ -12,7 +12,7 @@ import makeStyles from "@mui/styles/makeStyles";
 import { ExpandMore, ExpandLess } from "@mui/icons-material";
 
 import { ArticleDataType } from "../../../api/types";
-import { timeFromNow } from "../../../utils/time";
+import { timePeriodFromNow } from "../../../utils/time";
 
 const useStyles = makeStyles(() => ({
   cardContainer: {
@@ -175,7 +175,7 @@ const NesCard = ({ article, lang }: NewsCardProps) => {
                 color="textSecondary"
                 align="right"
               >
-                {timeFromNow(published_date)}
+                {timePeriodFromNow(published_date)}
               </Typography>
             </Grid>
           </Grid>
