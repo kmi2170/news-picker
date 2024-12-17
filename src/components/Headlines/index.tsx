@@ -1,18 +1,13 @@
-import Image from "next/image";
-
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import CardMedia from "@mui/material/CardMedia";
 
 import { getTopHeadlines } from "../../app/lib/news/get-top-headlines";
 import { getDummyTopHeadlines } from "../../lib/fetchDummyData/get-dummy-headlines";
 import { transformHeadlines } from "../../lib/fetchDummyData/transformData/transformHeadlines";
-import { he } from "date-fns/locale";
-import { timeFromNow } from "../../utils/time";
+import { timePeriodFromNow, convertToLocalTime } from "../../utils/time";
 
 const Headlines = async () => {
   // const data = await getTopHeadlines();
@@ -29,17 +24,17 @@ const Headlines = async () => {
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
-          gap: "0.25rem",
+          gap: "0.5rem",
         }}
       >
         {headlines.map((headline, i) => {
-          console.log(headline.imgUrl);
           return (
             <Card
               key={i}
               sx={{
                 width: "100%",
               }}
+              elevation={4}
             >
               <a href={headline.url} target="_blank" rel="noopener noreferrer">
                 <CardContent
@@ -49,9 +44,12 @@ const Headlines = async () => {
                     justifyContent: "flex-start",
                     alignItems: "space-between",
                     gap: "2rem",
+                    "&:hover": {
+                      background: "rgba(224,255,255, 0.2)",
+                    },
                   }}
                 >
-                  <CardImage imgUrl={headline.imgUrl} />
+                  <CardImage imgUrl={headline.imgUrl} size="85px" />
                   <Box
                     sx={{
                       width: "100%",
@@ -61,29 +59,11 @@ const Headlines = async () => {
                       alignItems: "space-between",
                     }}
                   >
-                    <Box sx={{}}>
-                      <Typography
-                        variant="h5"
-                        gutterBottom
-                        sx={{ fontWeight: "bold" }}
-                      >
-                        {headline?.title}
-                      </Typography>
-                      <Typography
-                        variant="subtitle1"
-                        gutterBottom
-                        sx={{ width: "100%" }}
-                      >
-                        {headline?.description}
-                      </Typography>
-                    </Box>
-                    <Typography
-                      variant="body2"
-                      align="right"
-                      sx={{ color: "grey" }}
-                    >
-                      {timeFromNow(headline.publishedAt)}
-                    </Typography>
+                    <Title title={headline.title} />
+                    <PublishedTime
+                      publishedAt={headline.publishedAt}
+                      withTime
+                    />
                   </Box>
                 </CardContent>
               </a>
@@ -97,25 +77,81 @@ const Headlines = async () => {
 
 export default Headlines;
 
-const CardImage = ({ imgUrl }: { imgUrl: string }) => {
+const CardImage = ({
+  imgUrl,
+  size = "100px",
+}: {
+  imgUrl: string;
+  size?: string;
+}) => {
   return (
-    <Box sx={{ width: "120px" }}>
+    <Box sx={{ width: `calc(${size} + 20px)` }}>
       {imgUrl ? (
         <CardMedia
           component="img"
           src={imgUrl}
           alt={`headline ${imgUrl}`}
-          sx={{ width: "100px", height: "100px" }}
+          sx={{ width: size, height: size }}
         />
       ) : (
         <Box
           sx={{
-            width: "100px",
-            height: "100px",
+            width: size,
+            height: size,
             background: "lightgrey",
           }}
         />
       )}
     </Box>
+  );
+};
+
+const Title = ({
+  title,
+  description,
+}: {
+  title: string;
+  description?: string;
+}) => {
+  return (
+    <>
+      <Typography
+        variant="h5"
+        gutterBottom={!!description}
+        sx={{ fontWeight: "bold" }}
+      >
+        {title}
+      </Typography>
+      {description && (
+        <Typography variant="subtitle1" sx={{ width: "100%" }}>
+          {description}
+        </Typography>
+      )}
+    </>
+  );
+};
+
+const PublishedTime = ({
+  publishedAt,
+  withFromNow = false,
+  withTime = false,
+}: {
+  publishedAt: string;
+  withFromNow?: boolean;
+  withTime?: boolean;
+}) => {
+  return (
+    <>
+      {withFromNow && (
+        <Typography variant="body2" align="right" sx={{ color: "grey" }}>
+          {timePeriodFromNow(publishedAt)}
+        </Typography>
+      )}
+      {withTime && (
+        <Typography variant="body2" align="right" sx={{ color: "grey" }}>
+          {convertToLocalTime(publishedAt)}
+        </Typography>
+      )}
+    </>
   );
 };

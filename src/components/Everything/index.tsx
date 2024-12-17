@@ -11,7 +11,7 @@ import CardMedia from "@mui/material/CardMedia";
 import { getTopHeadlines } from "../../app/lib/news/get-top-headlines";
 import { getDummyTopHeadlines } from "../../lib/fetchDummyData/get-dummy-headlines";
 import { transformHeadlines } from "../../lib/fetchDummyData/transformData/transformHeadlines";
-import { timeFromNow } from "../../utils/time";
+import { timePeriodFromNow } from "../../utils/time";
 import { getEverything } from "../../app/lib/news/get-everything";
 import { transformEverything } from "../../lib/fetchDummyData/transformData/transformEverything";
 import { da } from "date-fns/locale";
@@ -84,7 +84,7 @@ const Everything = async () => {
                       align="right"
                       sx={{ color: "grey" }}
                     >
-                      {timeFromNow(headline.publishedAt)}
+                      {timePeriodFromNow(headline.publishedAt)}
                     </Typography>
                   </Box>
                 </CardContent>
