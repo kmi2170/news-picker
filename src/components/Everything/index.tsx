@@ -11,18 +11,20 @@ import CardMedia from "@mui/material/CardMedia";
 import { getTopHeadlines } from "../../app/lib/news/get-top-headlines";
 import { getDummyTopHeadlines } from "../../lib/fetchDummyData/get-dummy-headlines";
 import { transformHeadlines } from "../../lib/fetchDummyData/transformData/transformHeadlines";
-import { he } from "date-fns/locale";
 import { timeFromNow } from "../../utils/time";
+import { getEverything } from "../../app/lib/news/get-everything";
+import { transformEverything } from "../../lib/fetchDummyData/transformData/transformEverything";
+import { da } from "date-fns/locale";
+import { getDummyEverything } from "../../lib/fetchDummyData/get-dummy-everything";
 
-const Headlines = async () => {
-  // const data = await getTopHeadlines();
-  const data = await getDummyTopHeadlines();
-  const headlines = transformHeadlines(data);
-  console.log("headlines >>>");
+const Everything = async () => {
+  // const data = await getEverything();
+  const data = await getDummyEverything();
+  const headlines = transformEverything(data);
 
   return (
     <Box>
-      <Typography variant="h2">Top Headlines</Typography>
+      <Typography variant="h2">Everything</Typography>
       <Box
         sx={{
           display: "flex",
@@ -95,7 +97,7 @@ const Headlines = async () => {
   );
 };
 
-export default Headlines;
+export default Everything;
 
 const CardImage = ({ imgUrl }: { imgUrl: string }) => {
   return (
