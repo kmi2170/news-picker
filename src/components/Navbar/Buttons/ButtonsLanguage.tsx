@@ -4,7 +4,7 @@ import makeStyles from "@mui/styles/makeStyles";
 
 import { useAppSelector, useAppDispatch } from "../../../store/hooks";
 import { setLang } from "../../../slice/newsSlice";
-import { LangType } from "../../../api/type_settngs";
+import { LangType } from "../../../api/types";
 
 const useStyles = makeStyles(() => ({
   button: {

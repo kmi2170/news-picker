@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import axios, { AxiosError } from "axios";
-import { NewsDataType } from "../../api/type_settngs";
+import { NewsDataType } from "../types";
 
 const url = "https://v3-api.newscatcherapi.com/api/search";
 const headers = {

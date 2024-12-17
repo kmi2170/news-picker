@@ -12,7 +12,7 @@ import {
   isFavoritesCookieValid,
   isLangCookieValid,
 } from "../utils/cookiesValidator";
-import { LangType } from "../api/type_settngs";
+import { LangType } from "../api/types";
 
 const useStyles = makeStyles(() => ({
   root: {

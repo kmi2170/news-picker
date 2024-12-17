@@ -1,9 +1,9 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { NewsDataType, QueryType } from '../api/type_settngs';
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { NewsDataType, QueryType } from "../api/types";
 
 export const newsApi = createApi({
-  reducerPath: 'newsApi',
-  baseQuery: fetchBaseQuery({ baseUrl: '/api' }),
+  reducerPath: "newsApi",
+  baseQuery: fetchBaseQuery({ baseUrl: "/api" }),
   // keepUnusedDataFor: 30,
   // refetchOnMountOrArgChange: 30,
   // refetchOnFocus: true,

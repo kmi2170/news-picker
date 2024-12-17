@@ -1,23 +1,23 @@
-import { useState, useRef } from 'react';
-import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import ButtonBase from '@mui/material/ButtonBase';
-import IconButton from '@mui/material/IconButton';
-import Tooltip from '@mui/material/Tooltip';
-import { grey } from '@mui/material/colors';
-import makeStyles from '@mui/styles/makeStyles';
-import { ExpandMore, ExpandLess } from '@mui/icons-material';
+import { useState, useRef } from "react";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import ButtonBase from "@mui/material/ButtonBase";
+import IconButton from "@mui/material/IconButton";
+import Tooltip from "@mui/material/Tooltip";
+import { grey } from "@mui/material/colors";
+import makeStyles from "@mui/styles/makeStyles";
+import { ExpandMore, ExpandLess } from "@mui/icons-material";
 
-import { ArticleDataType } from '../../../api/type_settngs';
-import { timeFromNow } from '../../../utils/time';
+import { ArticleDataType } from "../../../api/types";
+import { timeFromNow } from "../../../utils/time";
 
 const useStyles = makeStyles(() => ({
   cardContainer: {
-    display: 'flex',
-    justifyContent: 'center',
+    display: "flex",
+    justifyContent: "center",
   },
   root: {
     width: 345,
@@ -25,48 +25,48 @@ const useStyles = makeStyles(() => ({
   },
   textTitle: {
     ///fontFamily: 'Noto Sans JP',
-    fontFamily: 'Roboto Condensed',
+    fontFamily: "Roboto Condensed",
     fontWeight: 400,
-    '&:hover': {
+    "&:hover": {
       background: grey[900],
     },
   },
   textSummary: {
     ///fontFamily: 'Noto Sans JP',
-    fontFamily: 'Roboto Condensed',
+    fontFamily: "Roboto Condensed",
     fontWeight: 400,
   },
   imgPlace: {
     width: 345,
     height: 100,
-    color: 'white',
+    color: "white",
     background: `linear-gradient(45deg, ${grey[700]}, ${grey[400]})`,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
   },
   summary: {
-    marginTop: '1rem',
+    marginTop: "1rem",
     height: 80,
-    overflow: 'hidden',
+    overflow: "hidden",
   },
   summaryExpand: {
-    width: '100%',
+    width: "100%",
   },
   overlay: {
     height: 35,
-    width: '100%',
+    width: "100%",
     backgroundImage:
-      'linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 1))',
+      "linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 1))",
     bottom: 35,
-    position: 'relative',
+    position: "relative",
     // border: '1px solid red',
     // zIndex: 1010,
     marginBottom: -35,
   },
   buttonBase: {
-    display: 'flex',
-    flexDirection: 'column',
+    display: "flex",
+    flexDirection: "column",
   },
 }));
 
@@ -93,11 +93,11 @@ const NesCard = ({ article, lang }: NewsCardProps) => {
   };
 
   const handleClick = () => {
-    window.open(link, '_blank', 'noreferrer');
+    window.open(link, "_blank", "noreferrer");
   };
 
   return (
-    (<div className={classes.cardContainer}>
+    <div className={classes.cardContainer}>
       <Card ref={articleRef} className={classes.root}>
         <CardMedia
           component="img"
@@ -112,14 +112,14 @@ const NesCard = ({ article, lang }: NewsCardProps) => {
             paddingBottom: 0,
           }}
         >
-          <Tooltip title={lang === 'ja' ? '元の記事を読む' : 'View Source'}>
+          <Tooltip title={lang === "ja" ? "元の記事を読む" : "View Source"}>
             <ButtonBase onClick={handleClick}>
               <Typography variant="h6" className={classes.textTitle}>
                 {title}
               </Typography>
             </ButtonBase>
           </Tooltip>
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <div style={{ display: "flex", justifyContent: "center" }}>
             {showMore && (
               <IconButton onClick={handleExpandClick} size="large">
                 <ExpandLess />
@@ -139,9 +139,9 @@ const NesCard = ({ article, lang }: NewsCardProps) => {
               <Typography
                 variant="subtitle2"
                 color="primary"
-                style={{ marginTop: '5px' }}
+                style={{ marginTop: "5px" }}
               >
-                {lang === 'ja' ? '元の記事を読む' : 'View Source'}
+                {lang === "ja" ? "元の記事を読む" : "View Source"}
               </Typography>
             </ButtonBase>
           )}
@@ -158,11 +158,12 @@ const NesCard = ({ article, lang }: NewsCardProps) => {
             </Grid>
 
             <Grid item xs={4}>
-              <div style={{ display: 'flex', justifyContent: 'center' }}>
+              <div style={{ display: "flex", justifyContent: "center" }}>
                 <IconButton
                   onClick={handleExpandClick}
-                  style={{ display: 'flex', justifyContent: 'center' }}
-                  size="large">
+                  style={{ display: "flex", justifyContent: "center" }}
+                  size="large"
+                >
                   {showMore ? <ExpandLess /> : <ExpandMore />}
                 </IconButton>
               </div>
@@ -180,7 +181,7 @@ const NesCard = ({ article, lang }: NewsCardProps) => {
           </Grid>
         </CardContent>
       </Card>
-    </div>)
+    </div>
   );
 };
 

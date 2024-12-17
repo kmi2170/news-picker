@@ -1,5 +1,15 @@
-const Home = () => {
-  return <div>Test</div>;
-};
+import { Suspense } from "react";
 
-export default Home;
+import Container from "@mui/material/Container";
+
+import Headlines from "../components/Headlines";
+
+export default async function Page() {
+  return (
+    <Container maxWidth="lg">
+      <Suspense fallback={<div>Loading Headlines ....</div>}>
+        <Headlines />
+      </Suspense>
+    </Container>
+  );
+}
