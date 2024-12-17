@@ -86,3 +86,28 @@ export type HeadlineArticle = {
   content: string;
   source: string;
 };
+
+export type EverythingReturnType = {
+  status: string;
+  totalResults: number;
+  articles: {
+    source: { id: string; name: string };
+    author: string;
+    title: string;
+    description: string;
+    url: string;
+    urlToImage: string;
+    publishedAt: string;
+    content: string;
+  }[];
+};
+
+export type EverythingArticle = {
+  title: string;
+  description: string;
+  url: string;
+  imgUrl: string;
+  publishedAt: string;
+  content: string;
+  source: string;
+};
