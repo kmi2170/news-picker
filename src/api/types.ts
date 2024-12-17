@@ -1,4 +1,4 @@
-export type LangType = 'en' | 'ja';
+export type LangType = "en" | "ja";
 
 export type QueryType = {
   q: string;
@@ -32,18 +32,18 @@ export type ArticleDataType = {
 };
 
 export type TopicType =
-  | ''
-  | 'news'
-  | 'sport'
-  | 'tech'
-  | 'world'
-  | 'finance'
-  | 'politics'
-  | 'business'
-  | 'economics'
-  | 'entertainment'
-  | 'beauty'
-  | 'gaming';
+  | ""
+  | "news"
+  | "sport"
+  | "tech"
+  | "world"
+  | "finance"
+  | "politics"
+  | "business"
+  | "economics"
+  | "entertainment"
+  | "beauty"
+  | "gaming";
 
 export type NewsDataType = {
   status: string;
@@ -60,4 +60,29 @@ export type NewsDataType = {
     page?: number;
     size?: number;
   };
+};
+
+export type HeadlinesReturnType = {
+  status: string;
+  totalResults: number;
+  articles: {
+    source: { id: string; name: string };
+    author: string;
+    title: string;
+    description: string;
+    url: string;
+    urlToImage: string;
+    publishedAt: string;
+    content: string;
+  }[];
+};
+
+export type HeadlineArticle = {
+  title: string;
+  description: string;
+  url: string;
+  imgUrl: string;
+  publishedAt: string;
+  content: string;
+  source: string;
 };

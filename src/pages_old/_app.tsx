@@ -9,7 +9,7 @@ import { ThemeProvider } from "@material-ui/core/styles";
 import { CssBaseline } from "@material-ui/core";
 import SEO from "../components/SEO";
 
-import theme from "../theme/theme";
+import theme from "../styles/theme/theme";
 import "../styles/globals.css";
 
 const MyApp = ({ Component, pageProps }: AppProps) => {

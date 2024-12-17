@@ -4,7 +4,7 @@ import makeStyles from "@mui/styles/makeStyles";
 
 import { useAppSelector, useAppDispatch } from "../../../store/hooks";
 import { setTopic } from "../../../slice/newsSlice";
-import { TopicType } from "../../../api/type_settngs";
+import { TopicType } from "../../../api/types";
 import { topicButtons } from "../../../constants/buttons";
 
 const useStyles = makeStyles(() => ({

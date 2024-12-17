@@ -1,13 +1,13 @@
-import { LangType, TopicType } from '../api/type_settngs';
-import { localToUTCString, localString } from '../utils/localToUTCString';
+import { LangType, TopicType } from "../api/types";
+import { localToUTCString, localString } from "../utils/localToUTCString";
 
 const initDateFrom = new Date();
 initDateFrom.setDate(initDateFrom.getDate() - 7);
 
 export const initialState: StateType = {
-  q: '',
-  lang: 'en',
-  topic: '',
+  q: "",
+  lang: "en",
+  topic: "",
   topicsAvailable: [],
   favorites: [],
   page: 1,
@@ -15,9 +15,9 @@ export const initialState: StateType = {
   to: localToUTCString(new Date()),
   fromLocal: localString(initDateFrom),
   toLocal: localString(new Date()),
-  sources: '',
-  searchTerm: '',
-  searchSources: '',
+  sources: "",
+  searchTerm: "",
+  searchSources: "",
   pickerDateFrom: initDateFrom,
   pickerDateTo: new Date(),
 };

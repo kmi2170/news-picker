@@ -7,7 +7,11 @@ const Footer = () => {
     <Typography component="footer" variant="body2">
       &copy; {year} Kemmei H.| Powered by{" "}
       {
-        <a href="https://newsapi.org/" rel="noreferrer" target="_blank">
+        <a
+          href="https://newsapi.org/"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
           News API
         </a>
       }

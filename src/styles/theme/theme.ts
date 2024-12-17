@@ -3,8 +3,6 @@
 import { createTheme, responsiveFontSizes } from "@mui/material/styles";
 import { Inter } from "next/font/google";
 
-import { red } from "@mui/material/colors";
-
 const inter = Inter({ subsets: ["latin"] });
 
 // Create a theme instance.
@@ -21,9 +19,9 @@ let theme = createTheme({
       main: "#2196f3",
       light: "#2196f3",
     },
-    error: {
-      main: red.A400,
-    },
+    // error: {
+    //   main: red.A400,
+    // },
     background: {
       default: "#fff",
     },

@@ -10,7 +10,7 @@ import { useGetNewsApiQuery } from "../../services/newsApi";
 import NewsCard from "./NewsCard";
 import LoadingSkelton from "./LoadingSkelton";
 import Pagination from "./Pagination";
-import { ArticleDataType, TopicType } from "../../api/type_settngs";
+import { ArticleDataType, TopicType } from "../../api/types";
 import { sortData } from "../../utils/sort";
 import { fetchNews } from "../../api/libs/fetchNews";
 

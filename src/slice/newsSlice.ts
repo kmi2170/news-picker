@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store/store";
 import { initialState } from "./initialState";
-import { LangType, TopicType } from "../api/type_settngs";
+import { LangType, TopicType } from "../api/types";
 
 export const newsSlice = createSlice({
   name: "news",
