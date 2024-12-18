@@ -11,7 +11,7 @@ const CardImage = ({
   height: string;
 }) => {
   return (
-    <Box>
+    <>
       {imgUrl ? (
         <CardMedia
           component="img"
@@ -28,7 +28,7 @@ const CardImage = ({
           }}
         />
       )}
-    </Box>
+    </>
   );
 };
 

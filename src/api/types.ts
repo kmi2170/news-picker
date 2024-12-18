@@ -62,6 +62,9 @@ export type NewsDataType = {
   };
 };
 
+///////////////
+export type Language = "en" | "jp";
+
 export type HeadlinesReturnType = {
   status: string;
   totalResults: number;

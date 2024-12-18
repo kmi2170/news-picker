@@ -1,13 +1,14 @@
 "use server";
 
-import { EverythingReturnType } from "../../../api/types";
+import { EverythingReturnType, Language } from "../../../api/types";
 
 const baseUrl = "https://newsapi.org/v2/everything";
 const apiKey = process.env.NEWS_API_KEY as string;
 
-export const getEverything = async (): Promise<
-  EverythingReturnType | Error
-> => {
+export const fetchNewsByQuery = async (
+  q: string,
+  language: Language
+): Promise<EverythingReturnType | Error> => {
   const searchParamsObj = {
     q: "us election",
     apiKey,
@@ -24,7 +25,6 @@ export const getEverything = async (): Promise<
       throw Error("Failed to fetch Headlines");
     }
     const data = await response.json();
-    console.log(data);
     return data;
   } catch (error) {
     console.error(error);

@@ -7,7 +7,7 @@ import CardImage from "../common/card-media";
 import PublishedTime from "../common/published-time";
 import { getTopHeadlines } from "../../app/lib/news/get-top-headlines";
 import { getDummyTopHeadlines } from "../../lib/fetchDummyData/get-dummy-headlines";
-import { transformHeadlines } from "../../lib/fetchDummyData/transformData/transformHeadlines";
+import { transformHeadlines } from "../../usecases/transformHeadlines";
 
 const Headlines = async () => {
   // const data = await getTopHeadlines();
