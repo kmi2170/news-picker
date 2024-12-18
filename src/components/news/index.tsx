@@ -7,6 +7,7 @@ import Typography from "@mui/material/Typography";
 
 import CardImage from "../common/card-media";
 import PublishedTime from "../common/published-time";
+import BottomPagination from "../common/bottom-pagination";
 import { getNewsByQuery } from "../../usecases/get-news-by-query";
 import { EverythingArticle } from "../../api/types";
 import OverlayImage from "../common/overlay-image";
@@ -14,17 +15,31 @@ import OverlayImage from "../common/overlay-image";
 type NewsProps = {
   q?: string;
   language?: string;
+  page?: number;
 };
 
-const News = async ({ q, language }: NewsProps) => {
+const per_page = process.env.PAGINATION_PER_PAGE || 20;
+
+const News = async ({ q, language, page }: NewsProps) => {
   const news = await getNewsByQuery("test", "en");
 
   if (!news) return;
 
+  const totalNumOfPages = Math.ceil(news.length / per_page);
+
+  const slicedNews = news.slice((page - 1) * per_page, page * per_page);
+
   return (
     <Box>
-      <Grid container spacing={2}>
-        {news?.map((headline, i) => {
+      <Grid
+        container
+        spacing={2}
+        sx={{
+          height: "70vh",
+          overflow: "auto",
+        }}
+      >
+        {slicedNews?.map((headline, i) => {
           return (
             <Grid size={{ xs: 12, sm: 6, md: 6, lg: 4, xl: 4 }}>
               <Card
@@ -76,6 +91,15 @@ const News = async ({ q, language }: NewsProps) => {
           );
         })}
       </Grid>
+      <Box
+        sx={{
+          mt: "1rem",
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <BottomPagination count={totalNumOfPages} page={page} />
+      </Box>
     </Box>
   );
 };
