@@ -2,23 +2,20 @@ import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import CardMedia from "@mui/material/CardMedia";
 
 import CardImage from "../common/card-media";
 import PublishedTime from "../common/published-time";
 import { getTopHeadlines } from "../../app/lib/news/get-top-headlines";
 import { getDummyTopHeadlines } from "../../lib/fetchDummyData/get-dummy-headlines";
 import { transformHeadlines } from "../../lib/fetchDummyData/transformData/transformHeadlines";
-import { timePeriodFromNow, convertToLocalTime } from "../../utils/time";
 
 const Headlines = async () => {
   // const data = await getTopHeadlines();
   const data = await getDummyTopHeadlines();
   const headlines = transformHeadlines(data);
-  console.log("headlines >>>");
 
   return (
-    <Box>
+    <>
       <Typography variant="h2">Top Headlines</Typography>
       <Box
         sx={{
@@ -77,7 +74,7 @@ const Headlines = async () => {
           );
         })}
       </Box>
-    </Box>
+    </>
   );
 };
 
