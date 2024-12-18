@@ -1,20 +1,15 @@
-import Image from "next/image";
-
 import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid2";
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
+import CardHeader from "@mui/material/CardHeader";
 import CardContent from "@mui/material/CardContent";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import CardMedia from "@mui/material/CardMedia";
 
-import { getTopHeadlines } from "../../app/lib/news/get-top-headlines";
-import { getDummyTopHeadlines } from "../../lib/fetchDummyData/get-dummy-headlines";
-import { transformHeadlines } from "../../lib/fetchDummyData/transformData/transformHeadlines";
-import { timePeriodFromNow } from "../../utils/time";
+import CardImage from "../common/card-media";
+import GradientBackdrop from "../common/gradient-backdrop";
+import PublishedTime from "../common/published-time";
 import { getEverything } from "../../app/lib/news/get-everything";
 import { transformEverything } from "../../lib/fetchDummyData/transformData/transformEverything";
-import { da } from "date-fns/locale";
 import { getDummyEverything } from "../../lib/fetchDummyData/get-dummy-everything";
 
 const Everything = async () => {
@@ -25,99 +20,61 @@ const Everything = async () => {
   return (
     <Box>
       <Typography variant="h2">Everything</Typography>
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          gap: "0.25rem",
-        }}
-      >
+
+      <Grid container spacing={2}>
         {headlines.map((headline, i) => {
           console.log(headline.imgUrl);
           return (
-            <Card
-              key={i}
-              sx={{
-                width: "100%",
-              }}
-            >
-              <a href={headline.url} target="_blank" rel="noopener noreferrer">
-                <CardContent
-                  sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "flex-start",
-                    alignItems: "space-between",
-                    gap: "2rem",
-                  }}
+            <Grid size={{ xs: 12, sm: 6, md: 6, lg: 4, xl: 4 }}>
+              <Card
+                key={i}
+                raised
+                sx={{ position: "relative", height: "375px" }}
+              >
+                <a
+                  href={headline.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
-                  <CardImage imgUrl={headline.imgUrl} />
-                  <Box
+                  <CardImage imgUrl={headline.imgUrl} height="200px" />
+                  <GradientBackdrop height="200px" />
+                  <CardHeader
+                    title={headline.title}
                     sx={{
-                      width: "100%",
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "space-between",
-                      alignItems: "space-between",
+                      color: "white",
+                      fontWeight: "bold",
+                      position: "absolute",
+                      top: 0,
+                      zIndex: 20,
                     }}
-                  >
-                    <Box sx={{}}>
-                      <Typography
-                        variant="h5"
-                        gutterBottom
-                        sx={{ fontWeight: "bold" }}
-                      >
-                        {headline?.title}
-                      </Typography>
-                      <Typography
-                        variant="subtitle1"
-                        gutterBottom
-                        sx={{ width: "100%" }}
-                      >
-                        {headline?.description}
-                      </Typography>
-                    </Box>
-                    <Typography
-                      variant="body2"
-                      align="right"
-                      sx={{ color: "grey" }}
-                    >
-                      {timePeriodFromNow(headline.publishedAt)}
+                  />
+
+                  <CardContent>
+                    <Typography variant="subtitle1" sx={{ width: "100%" }}>
+                      {headline?.description}
                     </Typography>
-                  </Box>
-                </CardContent>
-              </a>
-            </Card>
+
+                    <Box
+                      sx={{
+                        position: "absolute",
+                        bottom: 5,
+                        right: 10,
+                      }}
+                    >
+                      <PublishedTime
+                        publishedAt={headline.publishedAt}
+                        withFromNow
+                      />
+                    </Box>
+                  </CardContent>
+                </a>
+              </Card>
+            </Grid>
           );
         })}
-      </Box>
+      </Grid>
     </Box>
   );
 };
 
 export default Everything;
-
-const CardImage = ({ imgUrl }: { imgUrl: string }) => {
-  return (
-    <Box sx={{ width: "120px" }}>
-      {imgUrl ? (
-        <CardMedia
-          component="img"
-          src={imgUrl}
-          alt={`headline ${imgUrl}`}
-          sx={{ width: "100px", height: "100px" }}
-        />
-      ) : (
-        <Box
-          sx={{
-            width: "100px",
-            height: "100px",
-            background: "lightgrey",
-          }}
-        />
-      )}
-    </Box>
-  );
-};

@@ -4,6 +4,8 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import CardMedia from "@mui/material/CardMedia";
 
+import CardImage from "../common/card-media";
+import PublishedTime from "../common/published-time";
 import { getTopHeadlines } from "../../app/lib/news/get-top-headlines";
 import { getDummyTopHeadlines } from "../../lib/fetchDummyData/get-dummy-headlines";
 import { transformHeadlines } from "../../lib/fetchDummyData/transformData/transformHeadlines";
@@ -37,6 +39,11 @@ const Headlines = async () => {
               elevation={4}
             >
               <a href={headline.url} target="_blank" rel="noopener noreferrer">
+                <CardImage
+                  imgUrl={headline.imgUrl}
+                  width="85px"
+                  height="85px"
+                />
                 <CardContent
                   sx={{
                     display: "flex",
@@ -49,7 +56,6 @@ const Headlines = async () => {
                     },
                   }}
                 >
-                  <CardImage imgUrl={headline.imgUrl} size="85px" />
                   <Box
                     sx={{
                       width: "100%",
@@ -77,35 +83,6 @@ const Headlines = async () => {
 
 export default Headlines;
 
-const CardImage = ({
-  imgUrl,
-  size = "100px",
-}: {
-  imgUrl: string;
-  size?: string;
-}) => {
-  return (
-    <Box sx={{ width: `calc(${size} + 20px)` }}>
-      {imgUrl ? (
-        <CardMedia
-          component="img"
-          src={imgUrl}
-          alt={`headline ${imgUrl}`}
-          sx={{ width: size, height: size }}
-        />
-      ) : (
-        <Box
-          sx={{
-            width: size,
-            height: size,
-            background: "lightgrey",
-          }}
-        />
-      )}
-    </Box>
-  );
-};
-
 const Title = ({
   title,
   description,
@@ -125,31 +102,6 @@ const Title = ({
       {description && (
         <Typography variant="subtitle1" sx={{ width: "100%" }}>
           {description}
-        </Typography>
-      )}
-    </>
-  );
-};
-
-const PublishedTime = ({
-  publishedAt,
-  withFromNow = false,
-  withTime = false,
-}: {
-  publishedAt: string;
-  withFromNow?: boolean;
-  withTime?: boolean;
-}) => {
-  return (
-    <>
-      {withFromNow && (
-        <Typography variant="body2" align="right" sx={{ color: "grey" }}>
-          {timePeriodFromNow(publishedAt)}
-        </Typography>
-      )}
-      {withTime && (
-        <Typography variant="body2" align="right" sx={{ color: "grey" }}>
-          {convertToLocalTime(publishedAt)}
         </Typography>
       )}
     </>

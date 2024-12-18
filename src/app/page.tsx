@@ -7,13 +7,13 @@ import Headlines from "../components/Headlines";
 
 export default async function Page() {
   return (
-    <Container maxWidth="lg">
-      <Suspense fallback={<div>Loading Headlines ....</div>}>
+    <Container maxWidth="xl">
+      {/* <Suspense fallback={<div>Loading Headlines ....</div>}>
         <Headlines />
-      </Suspense>
-      {/* <Suspense fallback={<div>Loading Everything ....</div>}>
-        <Everything />
       </Suspense> */}
+      <Suspense fallback={<div>Loading Everything ....</div>}>
+        <Everything />
+      </Suspense>
     </Container>
   );
 }
