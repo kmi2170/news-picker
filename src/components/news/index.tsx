@@ -6,24 +6,25 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 
 import CardImage from "../common/card-media";
-import GradientBackdrop from "../common/gradient-backdrop";
 import PublishedTime from "../common/published-time";
-import { getEverything } from "../../app/lib/news/get-everything";
-import { transformEverything } from "../../lib/fetchDummyData/transformData/transformEverything";
-import { getDummyEverything } from "../../lib/fetchDummyData/get-dummy-everything";
+import { getNewsByQuery } from "../../usecases/get-news-by-query";
+import { EverythingArticle } from "../../api/types";
+import OverlayImage from "../common/overlay-image";
 
-const Everything = async () => {
-  // const data = await getEverything();
-  const data = await getDummyEverything();
-  const headlines = transformEverything(data);
+type NewsProps = {
+  q?: string;
+  language?: string;
+};
+
+const News = async ({ q, language }: NewsProps) => {
+  const news = await getNewsByQuery("test", "en");
+
+  if (!news) return;
 
   return (
     <Box>
-      <Typography variant="h2">Everything</Typography>
-
       <Grid container spacing={2}>
-        {headlines.map((headline, i) => {
-          console.log(headline.imgUrl);
+        {news?.map((headline, i) => {
           return (
             <Grid size={{ xs: 12, sm: 6, md: 6, lg: 4, xl: 4 }}>
               <Card
@@ -36,8 +37,10 @@ const Everything = async () => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <CardImage imgUrl={headline.imgUrl} height="200px" />
-                  <GradientBackdrop height="200px" />
+                  <OverlayImage height="200px">
+                    <CardImage imgUrl={headline.imgUrl} height="200px" />
+                  </OverlayImage>
+
                   <CardHeader
                     title={headline.title}
                     sx={{
@@ -77,4 +80,4 @@ const Everything = async () => {
   );
 };
 
-export default Everything;
+export default News;

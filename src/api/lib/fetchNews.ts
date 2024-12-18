@@ -40,7 +40,6 @@ export async function fetchNews() {
   try {
     // const { data } = await axios.get<NewsDataType>(url, { params, headers });
     const { data } = await axios.request(options);
-    console.log(">>>>>>>>>", data);
     return {};
   } catch (error) {
     console.error((error as AxiosError).message);

@@ -1,5 +1,5 @@
 import { ar } from "date-fns/locale";
-import { HeadlineArticle, HeadlinesReturnType } from "../../../api/types";
+import { HeadlineArticle, HeadlinesReturnType } from "../api/types";
 
 export const transformHeadlines = (
   returnedData: HeadlinesReturnType

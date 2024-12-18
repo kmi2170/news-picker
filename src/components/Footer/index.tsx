@@ -4,7 +4,7 @@ const Footer = () => {
   const year = new Date().getFullYear();
 
   return (
-    <Typography component="footer" variant="body2">
+    <Typography component="footer" variant="body2" align="center">
       &copy; {year} Kemmei H.| Powered by{" "}
       {
         <a
