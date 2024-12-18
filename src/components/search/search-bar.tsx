@@ -36,9 +36,9 @@ const searchNews = memo(() => {
     <Box
       component="form"
       onSubmit={handleSearchQuerySubmit}
-      sx={{ pt: "5rem" }}
+      sx={{ pt: "1rem" }}
     >
-      <Typography component="h2" variant="h4">
+      <Typography component="h2" variant="h5" gutterBottom>
         Search News by Keyword
       </Typography>
 
@@ -54,7 +54,7 @@ const searchNews = memo(() => {
 
       <Box
         sx={{
-          mt: "2rem",
+          mt: "1rem",
           display: "flex",
           flexDirection: "row",
           justifyContent: "flex-start",
@@ -63,6 +63,7 @@ const searchNews = memo(() => {
       >
         <Button
           variant="contained"
+          size="small"
           disabled={language === "en"}
           onClick={() => handleSwitchLanguage("en")}
         >
@@ -70,6 +71,7 @@ const searchNews = memo(() => {
         </Button>
         <Button
           variant="contained"
+          size="small"
           color="secondary"
           disabled={language === "jp"}
           onClick={() => handleSwitchLanguage("jp")}
