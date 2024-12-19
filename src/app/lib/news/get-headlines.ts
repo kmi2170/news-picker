@@ -5,9 +5,7 @@ import { HeadlinesReturnType } from "../../../api/types";
 const baseUrl = "https://newsapi.org/v2/top-headlines";
 const apiKey = process.env.NEWS_API_KEY as string;
 
-export const getTopHeadlines = async (): Promise<
-  HeadlinesReturnType | Error
-> => {
+export const getHeadlines = async (): Promise<HeadlinesReturnType | Error> => {
   const searchParamsObj = {
     country: "us",
     apiKey,
