@@ -18,7 +18,7 @@ type NewsProps = {
   page?: number;
 };
 
-const per_page = process.env.PAGINATION_PER_PAGE || 20;
+const per_page = process.env.NEWS_PAGINATION_PER_PAGE || 20;
 
 const News = async ({ q, language, page }: NewsProps) => {
   const news = await getNewsByQuery("test", "en");

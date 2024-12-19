@@ -5,20 +5,39 @@ import Typography from "@mui/material/Typography";
 
 import CardImage from "../common/card-media";
 import PublishedTime from "../common/published-time";
-import { getTopHeadlines } from "../../app/lib/news/get-top-headlines";
+import { getHeadlines } from "../../app/lib/news/get-top-headlines";
 import { getDummyTopHeadlines } from "../../lib/fetchDummyData/get-dummy-headlines";
 import { transformHeadlines } from "../../usecases/transformHeadlines";
+import { he } from "date-fns/locale";
+import BottomPagination from "../common/bottom-pagination";
 
-const Headlines = async () => {
+type HeadlinesProps = {
+  page: number;
+};
+
+const per_page = process.env.HEADLINES_PAGINATION_PER_PAGE || 20;
+
+const Headlines = async ({ page }: HeadlinesProps) => {
   // const data = await getTopHeadlines();
   const data = await getDummyTopHeadlines();
   const headlines = transformHeadlines(data);
 
+  const totalNumOfPages = Math.ceil(headlines.length / per_page);
+
+  const slicedHeadlines = headlines.slice(
+    (page - 1) * per_page,
+    page * per_page
+  );
+
   return (
     <>
-      <Typography variant="h2">Top Headlines</Typography>
+      <Typography component="h2" variant="h4" sx={{ mt: "1rem", mb: "1rem" }}>
+        Top Headlines
+      </Typography>
       <Box
         sx={{
+          height: "70vh",
+          overflow: "auto",
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
@@ -26,7 +45,7 @@ const Headlines = async () => {
           gap: "0.5rem",
         }}
       >
-        {headlines.map((headline, i) => {
+        {slicedHeadlines.map((headline, i) => {
           return (
             <Card
               key={i}
@@ -73,6 +92,8 @@ const Headlines = async () => {
             </Card>
           );
         })}
+
+        <BottomPagination count={totalNumOfPages} page={page} />
       </Box>
     </>
   );
