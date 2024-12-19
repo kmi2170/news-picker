@@ -4,17 +4,17 @@ import News from "../../components/news";
 import SearchNews from "../../components/search/search-bar";
 
 export default async function Page({
-  params,
+  searchParams,
 }: {
-  params: {
+  searchParams: {
     q?: Promise<string>;
     language?: Promise<string>;
     page?: Promise<string>;
   };
 }) {
-  const q = ((await params)?.q || "") as string;
-  const language = ((await params)?.language || "en") as string;
-  const page = Number((await params)?.page) || 1;
+  const q = ((await searchParams)?.q || "") as string;
+  const language = ((await searchParams)?.language || "en") as string;
+  const page = Number((await searchParams)?.page) || 1;
 
   return (
     <>

@@ -4,13 +4,13 @@ import News from "../components/news";
 import Headlines from "../components/headlines";
 
 export default async function Page({
-  params,
+  searchParams,
 }: {
-  params: {
+  searchParams: {
     page?: Promise<string>;
   };
 }) {
-  const page = Number(await params.page) || 1;
+  const page = Number((await searchParams).page) || 1;
 
   return (
     <>
