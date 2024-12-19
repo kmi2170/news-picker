@@ -9,6 +9,7 @@ import theme from "../styles/theme/theme";
 import Footer from "../components/Footer";
 
 import "../styles/global.css";
+import Navbar from "../components/navbar";
 
 export const metadata: Metadata = {
   title: "News Picker",
@@ -27,7 +28,8 @@ export default function RootLayout({
         <AppRouterCacheProvider>
           <CssBaseline />
           <ThemeProvider theme={theme}>
-            <Container maxWidth="xl" sx={{ minHeight: "96vh" }}>
+            <Navbar />
+            <Container maxWidth="xl" sx={{ minHeight: "90vh" }}>
               {children}
             </Container>
             <Footer />
