@@ -2,6 +2,7 @@
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
+import Box from "@mui/material/Box";
 import Pagination from "@mui/material/Pagination";
 
 const BottomPagination = ({
@@ -29,6 +30,7 @@ const BottomPagination = ({
       page={page}
       defaultPage={1}
       onChange={(_, page) => handlePageChange(page)}
+      sx={{ mt: "3rem" }}
     />
   );
 };
