@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 
 import Box from "@mui/material/Box";
 
-const OverlayImage = ({
+const ImageOverlay = ({
   children,
   height,
 }: {
@@ -30,4 +30,4 @@ const OverlayImage = ({
   );
 };
 
-export default OverlayImage;
+export default ImageOverlay;

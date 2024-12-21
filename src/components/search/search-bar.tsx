@@ -8,7 +8,7 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { Language } from "../../api/types";
 
-const searchNews = () => {
+const SearchNews = () => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
@@ -102,4 +102,4 @@ const searchNews = () => {
   );
 };
 
-export default searchNews;
+export default SearchNews;
