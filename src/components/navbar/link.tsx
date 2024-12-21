@@ -11,8 +11,6 @@ type LinkToPageProps = {
 const LinkToPage = ({ path, currentPath, name }: LinkToPageProps) => {
   const disabled = currentPath === path;
 
-  console.log(path, currentPath, name);
-
   return (
     <>
       {disabled ? (
