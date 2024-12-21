@@ -11,11 +11,12 @@ const Navbar = () => {
       position="sticky"
       sx={{
         p: "0.5rem 0",
-        backgroundColor: "rgba(255, 255, 255, 0.5)",
+        backgroundColor: "rgba(255, 255, 255, 0.9)",
       }}
     >
       <Toolbar
         component={Container}
+        variant="dense"
         maxWidth="xl"
         sx={{
           display: "flex",
