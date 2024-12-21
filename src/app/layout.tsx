@@ -3,13 +3,12 @@ import { Metadata } from "next";
 import { ThemeProvider } from "@mui/material/styles";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 import CssBaseline from "@mui/material/CssBaseline";
-import Container from "@mui/material/Container";
 
 import theme from "../styles/theme/theme";
-import Footer from "../components/Footer";
+import Navbar from "../components/navbar";
+import Footer from "../components/footer";
 
 import "../styles/global.css";
-import Navbar from "../components/navbar";
 
 export const metadata: Metadata = {
   title: "News Picker",
@@ -29,9 +28,7 @@ export default function RootLayout({
           <CssBaseline />
           <ThemeProvider theme={theme}>
             <Navbar />
-            <Container maxWidth="xl" sx={{ minHeight: "90vh" }}>
-              {children}
-            </Container>
+            {children}
             <Footer />
           </ThemeProvider>
         </AppRouterCacheProvider>
