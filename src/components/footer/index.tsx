@@ -4,7 +4,12 @@ const Footer = () => {
   const year = new Date().getFullYear();
 
   return (
-    <Typography component="footer" variant="body2" align="center">
+    <Typography
+      component="footer"
+      variant="body2"
+      align="center"
+      sx={{ mt: "2rem", mb: "1.5rem" }}
+    >
       &copy; {year} Kemmei H.| Powered by{" "}
       {
         <a
