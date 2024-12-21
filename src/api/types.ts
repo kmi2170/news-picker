@@ -1,3 +1,5 @@
+import { headlinesCategories } from "../assets/headlines-categories";
+
 export type LangType = "en" | "ja";
 
 export type QueryType = {
@@ -89,6 +91,10 @@ export type HeadlineArticle = {
   content: string;
   source: string;
 };
+
+type HeadlinesCategory = (typeof headlinesCategories)[number];
+
+export type HeadlineCategoryQuery = HeadlinesCategory["query"];
 
 export type EverythingReturnType = {
   status: string;

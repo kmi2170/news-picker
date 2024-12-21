@@ -8,9 +8,10 @@ import Typography from "@mui/material/Typography";
 import CardImage from "../common/card-media";
 import PublishedTime from "../common/published-time";
 import BottomPagination from "../common/bottom-pagination";
-import { getNewsByQuery } from "../../usecases/get-news-by-query";
-import { EverythingArticle } from "../../api/types";
-import OverlayImage from "../common/overlay-image";
+import { getNewsByQuery } from "../../usecases/news/get-news-by-query";
+import ImageOverlay from "../common/image-overlay";
+
+const per_page = process.env.NEWS_PAGINATION_PER_PAGE || 20;
 
 type NewsProps = {
   q?: string;
@@ -18,10 +19,8 @@ type NewsProps = {
   page?: number;
 };
 
-const per_page = process.env.NEWS_PAGINATION_PER_PAGE || 20;
-
 const News = async ({ q, language, page }: NewsProps) => {
-  const news = await getNewsByQuery("test", "en");
+  const news = await getNewsByQuery(q, language);
 
   if (!news) return;
 
@@ -41,9 +40,9 @@ const News = async ({ q, language, page }: NewsProps) => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <OverlayImage height="200px">
+                  <ImageOverlay height="200px">
                     <CardImage imgUrl={headline.imgUrl} height="200px" />
-                  </OverlayImage>
+                  </ImageOverlay>
 
                   <CardHeader
                     title={headline.title}
@@ -70,7 +69,7 @@ const News = async ({ q, language, page }: NewsProps) => {
                     >
                       <PublishedTime
                         publishedAt={headline.publishedAt}
-                        withFromNow
+                        withTime
                       />
                     </Box>
                   </CardContent>

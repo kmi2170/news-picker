@@ -5,10 +5,9 @@ import Typography from "@mui/material/Typography";
 
 import CardImage from "../common/card-media";
 import PublishedTime from "../common/published-time";
-import { getHeadlines } from "../../app/lib/news/get-headlines";
-import { getDummyTopHeadlines } from "../../lib/fetchDummyData/get-dummy-headlines";
-import { transformHeadlines } from "../../usecases/transformHeadlines";
+import { getHeadlines } from "../../usecases/headlines/get-headlines";
 import BottomPagination from "../common/bottom-pagination";
+import { getDummyTopHeadlines } from "../../lib/fetchDummyData/get-dummy-headlines";
 
 type HeadlinesProps = {
   page: number;
@@ -17,13 +16,13 @@ type HeadlinesProps = {
 const per_page = process.env.HEADLINES_PAGINATION_PER_PAGE || 20;
 
 const Headlines = async ({ page }: HeadlinesProps) => {
-  // const data = await getTopHeadlines();
-  const data = await getDummyTopHeadlines();
-  const headlines = transformHeadlines(data);
+  const headlines = await getHeadlines();
+
+  if (!headlines) return;
 
   const totalNumOfPages = Math.ceil(headlines.length / per_page);
 
-  const slicedHeadlines = headlines.slice(
+  const slicedHeadlines = headlines?.slice(
     (page - 1) * per_page,
     page * per_page
   );

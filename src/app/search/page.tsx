@@ -29,9 +29,11 @@ export default async function Page({
         Search News by Keyword
       </Typography>
       <SearchNews />;
-      <Suspense fallback={<div>Loading Everything ....</div>}>
-        <News q={q} language={language} page={page} />
-      </Suspense>
+      {q && (
+        <Suspense fallback={<div>Loading Everything ....</div>}>
+          <News q={q} language={language} page={page} />
+        </Suspense>
+      )}
     </Container>
   );
 }

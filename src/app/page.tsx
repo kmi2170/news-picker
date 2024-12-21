@@ -4,6 +4,7 @@ import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 
 import Headlines from "../components/headlines";
+import HeadlinesCategoryButtons from "../components/headlines/category-buttons";
 
 export default async function Page({
   searchParams,
@@ -23,6 +24,8 @@ export default async function Page({
       >
         Headlines
       </Typography>
+
+      <HeadlinesCategoryButtons />
 
       <Suspense fallback={<div>Loading Headlines ....</div>}>
         <Headlines page={page} />
