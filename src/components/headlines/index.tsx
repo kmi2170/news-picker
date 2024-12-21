@@ -5,10 +5,9 @@ import Typography from "@mui/material/Typography";
 
 import CardImage from "../common/card-media";
 import PublishedTime from "../common/published-time";
-import { getHeadlines } from "../../app/lib/news/get-top-headlines";
+import { getHeadlines } from "../../app/lib/news/get-headlines";
 import { getDummyTopHeadlines } from "../../lib/fetchDummyData/get-dummy-headlines";
 import { transformHeadlines } from "../../usecases/transformHeadlines";
-import { he } from "date-fns/locale";
 import BottomPagination from "../common/bottom-pagination";
 
 type HeadlinesProps = {
@@ -30,98 +29,81 @@ const Headlines = async ({ page }: HeadlinesProps) => {
   );
 
   return (
-    <>
-      <Typography component="h2" variant="h4" sx={{ mt: "1rem", mb: "1rem" }}>
-        Top Headlines
-      </Typography>
-      <Box
-        sx={{
-          height: "70vh",
-          overflow: "auto",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          gap: "0.5rem",
-        }}
-      >
-        {slicedHeadlines.map((headline, i) => {
-          return (
-            <Card
-              key={i}
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        gap: "1rem",
+      }}
+    >
+      {slicedHeadlines.map((headline, i) => {
+        return (
+          <Card
+            key={i}
+            component="a"
+            href={headline.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            elevation={4}
+            sx={{
+              width: "100%",
+              height: { xs: "150px", sm: "100px" },
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "flex-start",
+              alignItems: "center",
+            }}
+          >
+            <Box
               sx={{
-                width: "100%",
+                width: "110px",
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center",
               }}
-              elevation={4}
             >
-              <a href={headline.url} target="_blank" rel="noopener noreferrer">
-                <CardImage
-                  imgUrl={headline.imgUrl}
-                  width="85px"
-                  height="85px"
-                />
-                <CardContent
-                  sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "flex-start",
-                    alignItems: "space-between",
-                    gap: "2rem",
-                    "&:hover": {
-                      background: "rgba(224,255,255, 0.2)",
-                    },
-                  }}
-                >
-                  <Box
-                    sx={{
-                      width: "100%",
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "space-between",
-                      alignItems: "space-between",
-                    }}
-                  >
-                    <Title title={headline.title} />
-                    <PublishedTime
-                      publishedAt={headline.publishedAt}
-                      withTime
-                    />
-                  </Box>
-                </CardContent>
-              </a>
-            </Card>
-          );
-        })}
+              <CardImage imgUrl={headline.imgUrl} width="85px" height="85px" />
+            </Box>
+            <CardContent
+              sx={{
+                height: "100%",
+                width: "100%",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                alignItems: "flex-start",
+                "&:hover": {
+                  background: "rgba(224,255,255, 0.2)",
+                },
+                // pt: "0 !important",
+                pb: "0.5rem !important",
+              }}
+            >
+              <Typography
+                variant="h6"
+                sx={{
+                  fontWeight: "bold",
+                  lineHeight: "1.25rem",
+                  maxLines: 3,
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                }}
+              >
+                {headline.title}
+              </Typography>
 
-        <BottomPagination count={totalNumOfPages} page={page} />
-      </Box>
-    </>
+              <PublishedTime publishedAt={headline.publishedAt} withTime />
+            </CardContent>
+          </Card>
+        );
+      })}
+
+      <BottomPagination count={totalNumOfPages} page={page} />
+    </Box>
   );
 };
 
 export default Headlines;
-
-const Title = ({
-  title,
-  description,
-}: {
-  title: string;
-  description?: string;
-}) => {
-  return (
-    <>
-      <Typography
-        variant="h5"
-        gutterBottom={!!description}
-        sx={{ fontWeight: "bold" }}
-      >
-        {title}
-      </Typography>
-      {description && (
-        <Typography variant="subtitle1" sx={{ width: "100%" }}>
-          {description}
-        </Typography>
-      )}
-    </>
-  );
-};

@@ -30,23 +30,12 @@ const News = async ({ q, language, page }: NewsProps) => {
   const slicedNews = news.slice((page - 1) * per_page, page * per_page);
 
   return (
-    <Box>
-      <Grid
-        container
-        spacing={2}
-        sx={{
-          height: "70vh",
-          overflow: "auto",
-        }}
-      >
+    <>
+      <Grid container spacing={2}>
         {slicedNews?.map((headline, i) => {
           return (
-            <Grid size={{ xs: 12, sm: 6, md: 6, lg: 4, xl: 4 }}>
-              <Card
-                key={i}
-                raised
-                sx={{ position: "relative", height: "375px" }}
-              >
+            <Grid key={i} size={{ xs: 12, sm: 6, md: 6, lg: 4, xl: 4 }}>
+              <Card raised sx={{ position: "relative", height: "375px" }}>
                 <a
                   href={headline.url}
                   target="_blank"
@@ -93,14 +82,13 @@ const News = async ({ q, language, page }: NewsProps) => {
       </Grid>
       <Box
         sx={{
-          mt: "1rem",
           display: "flex",
           justifyContent: "center",
         }}
       >
         <BottomPagination count={totalNumOfPages} page={page} />
       </Box>
-    </Box>
+    </>
   );
 };
 
