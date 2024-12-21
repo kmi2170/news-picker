@@ -1,14 +1,14 @@
 "use client";
 
-import { memo, useRef, useState, FormEvent } from "react";
+import { useRef, useState, FormEvent, useEffect } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
-import { Button, Typography } from "@mui/material";
+import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { Language } from "../../api/types";
 
-const searchNews = memo(() => {
+const searchNews = () => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
@@ -36,55 +36,70 @@ const searchNews = memo(() => {
     <Box
       component="form"
       onSubmit={handleSearchQuerySubmit}
-      sx={{ pt: "1rem" }}
+      sx={{
+        display: "flex",
+        flexDirection: { xs: "column", md: "row" },
+        justifyContent: "flex-start",
+        alignItems: "center",
+        gap: "1rem",
+      }}
     >
-      <Typography component="h2" variant="h5" gutterBottom>
-        Search News by Keyword
-      </Typography>
-
       <TextField
+        variant="outlined"
+        size="small"
         slot="input"
         ref={inputRef}
         placeholder="Type Keyword"
-        fullWidth
         autoFocus
         autoComplete="off"
         spellCheck={false}
+        fullWidth
+        sx={{ flex: 2 }}
       />
 
       <Box
         sx={{
-          mt: "1rem",
+          flex: 1,
           display: "flex",
           flexDirection: "row",
           justifyContent: "flex-start",
           alignItems: "center",
+          gap: "3rem",
         }}
       >
-        <Button
-          variant="contained"
-          size="small"
-          disabled={language === "en"}
-          onClick={() => handleSwitchLanguage("en")}
-        >
-          English
-        </Button>
-        <Button
-          variant="contained"
-          size="small"
-          color="secondary"
-          disabled={language === "jp"}
-          onClick={() => handleSwitchLanguage("jp")}
-          sx={{ ml: "1rem" }}
-        >
-          Japanese
-        </Button>
-        <Button type="submit" variant="outlined" sx={{ ml: "5rem" }}>
+        <Button type="submit" variant="outlined">
           Search
         </Button>
+
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            gap: "1rem",
+          }}
+        >
+          <Button
+            variant="contained"
+            size="small"
+            disabled={language === "en"}
+            onClick={() => handleSwitchLanguage("en")}
+          >
+            English
+          </Button>
+          <Button
+            variant="contained"
+            size="small"
+            color="secondary"
+            disabled={language === "jp"}
+            onClick={() => handleSwitchLanguage("jp")}
+          >
+            Japanese
+          </Button>
+        </Box>
       </Box>
     </Box>
   );
-});
+};
 
 export default searchNews;
