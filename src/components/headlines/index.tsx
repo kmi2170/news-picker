@@ -8,19 +8,20 @@ import PublishedTime from "../common/published-time";
 import { getHeadlines } from "../../usecases/headlines/get-headlines";
 import BottomPagination from "../common/bottom-pagination";
 import { getDummyTopHeadlines } from "../../lib/fetchDummyData/get-dummy-headlines";
+import { HeadlineArticle } from "../../api/types";
 
 type HeadlinesProps = {
   page: number;
 };
 
-const per_page = process.env.HEADLINES_PAGINATION_PER_PAGE || 20;
+const per_page = (process.env.HEADLINES_PAGINATION_PER_PAGE || 20) as number;
 
 const Headlines = async ({ page }: HeadlinesProps) => {
   const headlines = await getHeadlines();
 
-  if (!headlines) return;
+  if (!headlines || headlines instanceof Error) return;
 
-  const totalNumOfPages = Math.ceil(headlines.length / per_page);
+  const totalNumOfPages = Math.ceil(headlines?.length / per_page);
 
   const slicedHeadlines = headlines?.slice(
     (page - 1) * per_page,

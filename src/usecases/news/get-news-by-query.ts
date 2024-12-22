@@ -46,6 +46,6 @@ export const getNewsByQuery = async (
       });
     return articles;
   } catch (error) {
-    throw Error("Failed to fetch news");
+    throw Error(error);
   }
 };

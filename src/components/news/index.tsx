@@ -11,18 +11,18 @@ import BottomPagination from "../common/bottom-pagination";
 import { getNewsByQuery } from "../../usecases/news/get-news-by-query";
 import ImageOverlay from "../common/image-overlay";
 
-const per_page = process.env.NEWS_PAGINATION_PER_PAGE || 20;
+const per_page = (process.env.NEWS_PAGINATION_PER_PAGE || 20) as number;
 
 type NewsProps = {
-  q?: string;
-  language?: string;
+  q: string;
+  language: string;
   page?: number;
 };
 
-const News = async ({ q, language, page }: NewsProps) => {
+const News = async ({ q, language, page = 1 }: NewsProps) => {
   const news = await getNewsByQuery(q, language);
 
-  if (!news) return;
+  if (!news || news instanceof Error) return;
 
   const totalNumOfPages = Math.ceil(news.length / per_page);
 

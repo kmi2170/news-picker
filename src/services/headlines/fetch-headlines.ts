@@ -9,10 +9,9 @@ export const fetchHeadlines = async (): Promise<
   HeadlinesReturnType | Error
 > => {
   const searchParamsObj = {
-    // country: "de",
+    // country: "us",
     category: "business",
     apiKey,
-    // language,
     pageSize: "100",
   };
 
@@ -27,7 +26,6 @@ export const fetchHeadlines = async (): Promise<
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error(error);
     throw Error(error);
   }
 };
