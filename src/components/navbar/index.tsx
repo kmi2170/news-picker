@@ -27,9 +27,7 @@ const Navbar = () => {
           alignItems: "center",
         }}
       >
-        <Box>
-          <SideMenuDrawer />
-        </Box>
+        <SideMenuDrawer />
 
         <Typography
           component="h1"
