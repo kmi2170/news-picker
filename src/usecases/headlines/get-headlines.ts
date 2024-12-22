@@ -8,6 +8,8 @@ export const getHeadlines = async (): Promise<HeadlineArticle[] | Error> => {
     // const returnedData = (await fetchHeadlines()) as HeadlinesReturnType;
     const returnedData = (await getDummyTopHeadlines()) as HeadlinesReturnType;
 
+    throw Error("test error");
+
     const articles = returnedData?.articles
       ?.filter((article) => !article.title.includes("Removed"))
       .map((article) => {
@@ -35,6 +37,6 @@ export const getHeadlines = async (): Promise<HeadlineArticle[] | Error> => {
 
     return articles;
   } catch (error) {
-    throw Error("Failed to fetch headlines");
+    throw Error(error);
   }
 };

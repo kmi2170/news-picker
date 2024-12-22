@@ -12,7 +12,7 @@ export const fetchNewsByQuery = async (
   const searchParamsObj = {
     q,
     language,
-    // pageSize: "20",
+    pageSize: "100",
     apiKey,
   };
 
@@ -21,16 +21,13 @@ export const fetchNewsByQuery = async (
   const url = `${baseUrl}?${searchParams.toString()}`;
 
   try {
-    // const response = await fetch(url, { cache: "force-cache" });
-    const response = await fetch(url);
+    const response = await fetch(url, { cache: "force-cache" });
     if (!response.ok) {
       throw Error("Failed to fetch Headlines");
     }
     const data = await response.json();
-    console.log(data);
     return data;
   } catch (error) {
-    console.error(error);
     throw Error(error);
   }
 };
