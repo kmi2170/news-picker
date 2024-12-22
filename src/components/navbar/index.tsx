@@ -19,7 +19,7 @@ const Navbar = () => {
       <Toolbar
         component={Container}
         variant="dense"
-        maxWidth="xl"
+        maxWidth="lg"
         sx={{
           display: "flex",
           flexDirection: "row",
@@ -32,12 +32,12 @@ const Navbar = () => {
         <Typography
           component="h1"
           variant="h3"
-          sx={{ flex: 1.5, color: "black", fontWeight: "bold" }}
+          sx={{ color: "black", fontWeight: "bold" }}
         >
           News Picker
         </Typography>
 
-        <Box sx={{ flex: 2 }}>
+        <Box sx={{ m: "auto" }}>
           <Links />
         </Box>
       </Toolbar>
