@@ -28,7 +28,15 @@ const SideMenuDrawer = () => {
 
   return (
     <div>
-      <Button onClick={toggleDrawer(true)} sx={{ color: "black" }}>
+      <Button
+        onClick={toggleDrawer(true)}
+        sx={(theme) => ({
+          color: "black",
+          [theme.breakpoints.up("sm")]: {
+            display: "none",
+          },
+        })}
+      >
         <MenuIcon fontSize="large" />
       </Button>
       <Drawer open={open} onClose={toggleDrawer(false)}>
