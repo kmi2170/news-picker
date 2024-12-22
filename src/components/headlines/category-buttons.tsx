@@ -41,17 +41,20 @@ const HeadlinesCategoryButtons = ({
 
   return (
     <Box
-      sx={{
+      sx={(theme) => ({
         mt: sideMenuModeOn ? "1rem" : 0,
         mb: "2rem",
         p: "1rem",
         display: "flex",
+        [theme.breakpoints.down("sm")]: {
+          display: "none",
+        },
         flexDirection: sideMenuModeOn ? "column" : "row",
         justifyContent: "flex-start",
         alignItems: "center",
         gap: "0.5rem",
         flexWrap: "wrap",
-      }}
+      })}
     >
       <Typography
         component="h3"
