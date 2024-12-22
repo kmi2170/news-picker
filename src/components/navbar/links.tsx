@@ -5,16 +5,22 @@ import { usePathname } from "next/navigation";
 import Box from "@mui/material/Box";
 import LinkToPage from "./link";
 
-const Links = () => {
+type LinksProps = {
+  sideMenuModeOn?: boolean;
+};
+
+const Links = ({ sideMenuModeOn = false }: LinksProps) => {
   const pathName = usePathname();
 
   return (
     <Box
       sx={{
+        mt: sideMenuModeOn ? "3rem" : 0,
+        mb: sideMenuModeOn ? "2rem" : 0,
         display: "flex",
-        flexDirection: "row",
+        flexDirection: sideMenuModeOn ? "column" : "row",
         justifyContent: "flex-start",
-        alignItems: "center",
+        alignItems: sideMenuModeOn ? "center" : "center",
         gap: "3rem",
       }}
     >

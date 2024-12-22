@@ -3,7 +3,9 @@ import Typography from "@mui/material/Typography";
 import AppBar from "@mui/material/AppBar";
 import Container from "@mui/material/Container";
 import Toolbar from "@mui/material/Toolbar";
+
 import Links from "./links";
+import SideMenuDrawer from "./side-menu-drawer";
 
 const Navbar = () => {
   return (
@@ -25,6 +27,10 @@ const Navbar = () => {
           alignItems: "center",
         }}
       >
+        <Box>
+          <SideMenuDrawer />
+        </Box>
+
         <Typography
           component="h1"
           variant="h3"
