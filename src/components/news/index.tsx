@@ -10,12 +10,13 @@ import PublishedTime from "../common/published-time";
 import BottomPagination from "../common/bottom-pagination";
 import { getNewsByQuery } from "../../usecases/news/get-news-by-query";
 import ImageOverlay from "../common/image-overlay";
+import { Language } from "../../api/types";
 
 const per_page = (process.env.NEWS_PAGINATION_PER_PAGE || 20) as number;
 
 type NewsProps = {
   q: string;
-  language: string;
+  language: Language;
   page?: number;
 };
 
