@@ -67,7 +67,15 @@ const SearchNews = () => {
           gap: "3rem",
         }}
       >
-        <Button type="submit" variant="outlined">
+        <Button
+          type="submit"
+          variant="contained"
+          sx={{
+            color: "black",
+            background: "white",
+            border: "2px solid black",
+          }}
+        >
           Search
         </Button>
 
@@ -84,15 +92,30 @@ const SearchNews = () => {
             size="small"
             disabled={language === "en"}
             onClick={() => handleSwitchLanguage("en")}
+            sx={{
+              color: "black",
+              background: "white",
+              ":disabled": {
+                color: "white",
+                background: "black",
+              },
+            }}
           >
             English
           </Button>
           <Button
             variant="contained"
             size="small"
-            color="secondary"
             disabled={language === "jp"}
             onClick={() => handleSwitchLanguage("jp")}
+            sx={{
+              color: "black",
+              background: "white",
+              ":disabled": {
+                color: "white",
+                background: "black",
+              },
+            }}
           >
             Japanese
           </Button>

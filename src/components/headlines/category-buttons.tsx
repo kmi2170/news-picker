@@ -35,7 +35,6 @@ const HeadlinesCategoryButtons = ({
   const handleSwitchCategory = (category: HeadlineCategoryQuery) => {
     setCategory(category);
     const params = new URLSearchParams(searchParams.toString());
-    params.set("category", category);
     replace(`${pathname}?${params.toString()}`);
   };
 
@@ -47,37 +46,59 @@ const HeadlinesCategoryButtons = ({
         p: "1rem",
         display: "flex",
         [theme.breakpoints.down("sm")]: {
-          display: "none",
+          display: sideMenuModeOn ? " block" : "none",
         },
-        flexDirection: sideMenuModeOn ? "column" : "row",
+        flexDirection: "column",
         justifyContent: "flex-start",
-        alignItems: "center",
-        gap: "0.5rem",
-        flexWrap: "wrap",
       })}
     >
       <Typography
         component="h3"
         variant="h6"
-        sx={{ fontWeight: "bold", width: "100%" }}
         align={sideMenuModeOn ? "center" : "left"}
+        sx={{
+          mb: "1rem",
+          fontWeight: "bold",
+          width: "100%",
+        }}
       >
         Categories
       </Typography>
 
-      {headlinesCategories.map(({ query, name }) => {
-        return (
-          <Button
-            key={query}
-            variant="contained"
-            disabled={category === query}
-            onClick={() => handleSwitchCategory(query)}
-            sx={{ width: "9rem" }}
-          >
-            {name}
-          </Button>
-        );
-      })}
+      <Box
+        sx={{
+          width: "100%",
+          display: "flex",
+          flexDirection: sideMenuModeOn ? "column" : "row",
+          justifyContent: "flex-start",
+          alignItems: sideMenuModeOn ? "center" : "flex-start",
+          gap: "1rem",
+          flexWrap: "wrap",
+        }}
+      >
+        {headlinesCategories.map(({ query, name }) => {
+          return (
+            <Button
+              key={query}
+              variant="contained"
+              disabled={category === query}
+              onClick={() => handleSwitchCategory(query)}
+              sx={{
+                width: "9rem",
+                color: "black",
+                background: "white",
+                border: "1px solid black",
+                ":disabled": {
+                  color: "white",
+                  background: "black",
+                },
+              }}
+            >
+              {name}
+            </Button>
+          );
+        })}
+      </Box>
     </Box>
   );
 };
