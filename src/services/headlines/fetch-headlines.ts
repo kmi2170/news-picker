@@ -9,7 +9,7 @@ export const fetchHeadlines = async (): Promise<
   HeadlinesReturnType | Error
 > => {
   const searchParamsObj = {
-    // country: "us",
+    // country: 'us',
     category: "business",
     apiKey,
     pageSize: "100",
