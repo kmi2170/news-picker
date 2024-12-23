@@ -1,4 +1,5 @@
 import Typography from "@mui/material/Typography";
+import Link from "next/link";
 
 const Footer = () => {
   const year = new Date().getFullYear();
@@ -12,13 +13,13 @@ const Footer = () => {
     >
       &copy; {year} Kemmei H.| Powered by{" "}
       {
-        <a
+        <Link
           href="https://newsapi.org/"
           rel="noopener noreferrer"
           target="_blank"
         >
           News API
-        </a>
+        </Link>
       }
     </Typography>
   );
