@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid2";
 import Card from "@mui/material/Card";
@@ -36,7 +38,7 @@ const News = async ({ q, language, page = 1 }: NewsProps) => {
           return (
             <Grid key={i} size={{ xs: 12, sm: 6, md: 6, lg: 4, xl: 4 }}>
               <Card raised sx={{ position: "relative", height: "375px" }}>
-                <a
+                <Link
                   href={headline.url}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -74,7 +76,7 @@ const News = async ({ q, language, page = 1 }: NewsProps) => {
                       />
                     </Box>
                   </CardContent>
-                </a>
+                </Link>
               </Card>
             </Grid>
           );
