@@ -1,4 +1,3 @@
-import { ar } from "date-fns/locale";
 import { HeadlineArticle, HeadlinesReturnType } from "../../api/types";
 import { fetchHeadlines } from "../../services/headlines/fetch-headlines";
 import { getDummyTopHeadlines } from "../../lib/fetchDummyData/get-dummy-headlines";
@@ -8,7 +7,7 @@ export const getHeadlines = async (): Promise<HeadlineArticle[] | Error> => {
     // const returnedData = (await fetchHeadlines()) as HeadlinesReturnType;
     const returnedData = (await getDummyTopHeadlines()) as HeadlinesReturnType;
 
-    throw Error("test error");
+    // throw Error("test error");
 
     const articles = returnedData?.articles
       ?.filter((article) => !article.title.includes("Removed"))

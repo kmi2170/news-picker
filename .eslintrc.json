@@ -21,5 +21,6 @@
   },
   "rules": {
     "@typescript-eslint/explicit-module-boundary-types": "off"
+    // "@next/next/no-html-link-for-pages": ["error", "src/api/"]
   }
 }
