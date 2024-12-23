@@ -6,14 +6,11 @@ import Typography from "@mui/material/Typography";
 import Headlines from "../components/headlines";
 import HeadlinesCategoryButtons from "../components/headlines/category-buttons";
 
-export default async function Page({
-  searchParams,
-}: {
-  searchParams: {
-    page?: Promise<string>;
-  };
-}) {
-  const page = Number((await searchParams).page) || 1;
+type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
+
+export default async function Page(props: { searchParams: SearchParams }) {
+  const searchParams = await props.searchParams;
+  const page = Number(searchParams.page) || 1;
 
   return (
     <Container maxWidth="lg">
