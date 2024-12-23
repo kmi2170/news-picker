@@ -16,7 +16,7 @@ export default function Error({
   return (
     <div
       style={{
-        height: "75vh",
+        height: "50vh",
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
