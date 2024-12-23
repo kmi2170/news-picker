@@ -1,7 +1,7 @@
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 
-import SearchNews from "../../components/search/search-bar";
+import SearchNews from "../../components/search/search-news";
 
 export default async function Layout({
   children,
