@@ -17,9 +17,7 @@ export default async function Layout({
       >
         Headlines
       </Typography>
-
       <HeadlinesCategoryButtons />
-
       {children}
     </Container>
   );
