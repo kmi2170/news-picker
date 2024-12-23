@@ -26,8 +26,6 @@ const HeadlinesCategoryButtons = ({
     categoryQuery || "all"
   );
 
-  console.log(category);
-
   useEffect(() => {
     if (category !== categoryQuery && categoryQuery != null) {
       setCategory(categoryQuery);
