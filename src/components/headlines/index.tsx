@@ -7,17 +7,17 @@ import CardImage from "../common/card-media";
 import PublishedTime from "../common/published-time";
 import { getHeadlines } from "../../usecases/headlines/get-headlines";
 import BottomPagination from "../common/bottom-pagination";
-import { getDummyTopHeadlines } from "../../lib/fetchDummyData/get-dummy-headlines";
-import { HeadlineArticle } from "../../api/types";
+import { HeadlineCategoryQuery } from "../../api/types";
 
 type HeadlinesProps = {
+  category: HeadlineCategoryQuery;
   page: number;
 };
 
 const per_page = (process.env.HEADLINES_PAGINATION_PER_PAGE || 20) as number;
 
-const Headlines = async ({ page }: HeadlinesProps) => {
-  const headlines = await getHeadlines();
+const Headlines = async ({ category, page }: HeadlinesProps) => {
+  const headlines = await getHeadlines(category);
 
   if (!headlines || headlines instanceof Error) return;
 
