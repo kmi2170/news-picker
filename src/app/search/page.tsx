@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 
 import News from "../../components/news";
+import NewsSkeleton from "../../components/skeletons/news-skeletons";
 import { Language } from "../../api/types";
 
 type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
@@ -14,7 +15,7 @@ export default async function Page(props: { searchParams: SearchParams }) {
   return (
     <>
       {q && (
-        <Suspense fallback={<div>Loading Everything ....</div>}>
+        <Suspense fallback={<NewsSkeleton />}>
           <News q={q} language={language} page={page} />
         </Suspense>
       )}
