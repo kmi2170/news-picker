@@ -16,7 +16,6 @@ export const fetchNewsByQuery = async (
     apiKey,
   };
 
-  console.log(searchParamsObj);
   const searchParams = new URLSearchParams(searchParamsObj);
   const url = `${baseUrl}?${searchParams.toString()}`;
 
