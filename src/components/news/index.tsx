@@ -13,8 +13,7 @@ import BottomPagination from "../common/bottom-pagination";
 import { getNewsByQuery } from "../../usecases/news/get-news-by-query";
 import ImageOverlay from "../common/image-overlay";
 import { Language } from "../../api/types";
-
-const per_page = (process.env.NEWS_PAGINATION_PER_PAGE || 20) as number;
+import { NEWS_PAGINATION_PER_PAGE as per_page } from "../../constants/pagination";
 
 type NewsProps = {
   q: string;
@@ -37,7 +36,7 @@ const News = async ({ q, language, page = 1 }: NewsProps) => {
         {slicedNews?.map((headline, i) => {
           return (
             <Grid key={i} size={{ xs: 12, sm: 6, md: 6, lg: 4, xl: 4 }}>
-              <Card raised sx={{ position: "relative", height: "375px" }}>
+              <Card raised sx={{ position: "relative", height: "390px" }}>
                 <Link
                   href={headline.url}
                   target="_blank"
@@ -59,7 +58,15 @@ const News = async ({ q, language, page = 1 }: NewsProps) => {
                   />
 
                   <CardContent>
-                    <Typography variant="subtitle1" sx={{ width: "100%" }}>
+                    <Typography
+                      variant="subtitle1"
+                      sx={{
+                        width: "100%",
+                        lineHeight: "1.25rem",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                      }}
+                    >
                       {headline?.description}
                     </Typography>
 
