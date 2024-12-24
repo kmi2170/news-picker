@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, FormEvent, useEffect } from "react";
+import { useRef, useState, FormEvent } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import Button from "@mui/material/Button";
