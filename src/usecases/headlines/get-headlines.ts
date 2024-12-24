@@ -1,13 +1,19 @@
-import { HeadlineArticle, HeadlinesReturnType } from "../../api/types";
+import {
+  HeadlineArticle,
+  HeadlineCategoryQuery,
+  HeadlinesReturnType,
+} from "../../api/types";
 import { fetchHeadlines } from "../../services/headlines/fetch-headlines";
-import { getDummyTopHeadlines } from "../../lib/fetchDummyData/get-dummy-headlines";
+// import { getDummyTopHeadlines } from "../../lib/fetchDummyData/get-dummy-headlines";
 
-export const getHeadlines = async (): Promise<HeadlineArticle[] | Error> => {
+export const getHeadlines = async (
+  category: HeadlineCategoryQuery
+): Promise<HeadlineArticle[] | Error> => {
   try {
-    // const returnedData = (await fetchHeadlines()) as HeadlinesReturnType;
-    const returnedData = (await getDummyTopHeadlines()) as HeadlinesReturnType;
-
-    throw Error("test error");
+    const returnedData = (await fetchHeadlines(
+      category
+    )) as HeadlinesReturnType;
+    // const returnedData = (await getDummyTopHeadlines()) as HeadlinesReturnType;
 
     const articles = returnedData?.articles
       ?.filter((article) => !article.title.includes("Removed"))

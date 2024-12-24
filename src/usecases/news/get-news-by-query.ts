@@ -6,7 +6,7 @@ import {
   Language,
 } from "../../api/types";
 import { fetchNewsByQuery } from "../../services/news/fetch-news-by-query";
-import { getDummyEverything } from "../../lib/fetchDummyData/get-dummy-everything";
+// import { getDummyEverything } from "../../lib/fetchDummyData/get-dummy-everything";
 
 export const getNewsByQuery = async (
   q: string,

@@ -5,6 +5,6 @@ import { dummyHeadlines } from "../../dummyNewsData/dummy-headline";
 import { timer } from "../../utils/timer";
 
 export const getDummyTopHeadlines = async (): Promise<HeadlinesReturnType> => {
-  timer(2000);
+  timer(5000);
   return dummyHeadlines as HeadlinesReturnType;
 };
