@@ -1,0 +1,2 @@
+export const HEADLINES_PAGINATION_PER_PAGE = 20;
+export const NEWS_PAGINATION_PER_PAGE = 20;

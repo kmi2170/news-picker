@@ -8,13 +8,12 @@ import PublishedTime from "../common/published-time";
 import { getHeadlines } from "../../usecases/headlines/get-headlines";
 import BottomPagination from "../common/bottom-pagination";
 import { HeadlineCategoryQuery } from "../../api/types";
+import { HEADLINES_PAGINATION_PER_PAGE as per_page } from "../../constants/pagination";
 
 type HeadlinesProps = {
   category: HeadlineCategoryQuery;
   page: number;
 };
-
-const per_page = (process.env.HEADLINES_PAGINATION_PER_PAGE || 20) as number;
 
 const Headlines = async ({ category, page }: HeadlinesProps) => {
   const headlines = await getHeadlines(category);
