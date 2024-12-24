@@ -1,3 +1,5 @@
+import { Suspense } from "react";
+
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import HeadlinesCategoryButtons from "../../components/headlines/category-buttons";
@@ -16,7 +18,9 @@ export default async function Layout({
       >
         Headlines
       </Typography>
-      <HeadlinesCategoryButtons />
+      <Suspense>
+        <HeadlinesCategoryButtons />
+      </Suspense>
       {children}
     </Container>
   );

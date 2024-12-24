@@ -1,3 +1,5 @@
+import { Suspense } from "react";
+
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 
@@ -17,7 +19,9 @@ export default async function Layout({
       >
         Search News by Keyword
       </Typography>
-      <SearchNews />
+      <Suspense>
+        <SearchNews />
+      </Suspense>
       {children}
     </Container>
   );
