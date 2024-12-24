@@ -37,6 +37,7 @@ const SearchNews = () => {
       component="form"
       onSubmit={handleSearchQuerySubmit}
       sx={{
+        mb: "1rem",
         display: "flex",
         flexDirection: { xs: "column", md: "row" },
         justifyContent: "flex-start",
