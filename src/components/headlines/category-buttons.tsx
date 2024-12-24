@@ -35,7 +35,9 @@ const HeadlinesCategoryButtons = ({
   const handleSwitchCategory = (category: HeadlineCategoryQuery) => {
     setCategory(category);
     const params = new URLSearchParams(searchParams.toString());
+    params.set("category", category);
     replace(`${pathname}?${params.toString()}`);
+    console.log(category);
   };
 
   return (
