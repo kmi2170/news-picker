@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
@@ -12,6 +13,7 @@ import Links from "./links";
 import HeadlinesCategoryButtons from "../headlines/category-buttons";
 
 const SideMenuDrawer = () => {
+  const pathName = usePathname();
   const [open, setOpen] = useState(false);
 
   const toggleDrawer = (newOpen: boolean) => () => {
@@ -22,7 +24,7 @@ const SideMenuDrawer = () => {
     <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
       <Links sideMenuModeOn />
       <Divider />
-      <HeadlinesCategoryButtons sideMenuModeOn />
+      {pathName !== "/search" && <HeadlinesCategoryButtons sideMenuModeOn />}
     </Box>
   );
 
@@ -39,6 +41,7 @@ const SideMenuDrawer = () => {
       >
         <MenuIcon fontSize="large" />
       </Button>
+
       <Drawer open={open} onClose={toggleDrawer(false)}>
         {DrawerList}
       </Drawer>
