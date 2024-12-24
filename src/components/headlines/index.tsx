@@ -48,7 +48,7 @@ const Headlines = async ({ category, page }: HeadlinesProps) => {
             elevation={4}
             sx={{
               width: "100%",
-              height: { xs: "150px", sm: "100px" },
+              height: { xs: "110px", sm: "100px" },
               display: "flex",
               flexDirection: "row",
               justifyContent: "flex-start",
@@ -57,6 +57,7 @@ const Headlines = async ({ category, page }: HeadlinesProps) => {
           >
             <Box
               sx={{
+                ml: { xs: "0.5rem", sm: 0 },
                 width: "110px",
                 display: "flex",
                 flexDirection: "row",
@@ -77,16 +78,14 @@ const Headlines = async ({ category, page }: HeadlinesProps) => {
                 "&:hover": {
                   background: "rgba(224,255,255, 0.2)",
                 },
-                // pt: "0 !important",
                 pb: "0.5rem !important",
               }}
             >
               <Typography
-                variant="h6"
+                variant="subtitle1"
                 sx={{
                   fontWeight: "bold",
-                  lineHeight: "1.25rem",
-                  maxLines: 3,
+                  lineHeight: "1rem",
                   overflow: "hidden",
                   textOverflow: "ellipsis",
                 }}
